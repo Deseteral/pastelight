@@ -9,21 +9,9 @@
 
 <script>window.exports = module.exports</script>
 <script type="text/tsx">
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import {AppContainer} from 'react-hot-loader';
+import Bootup from '../application/Bootup';
 
-const render = () => {
-  const App = require('../application/components/App').default;
-  ReactDOM.render(
-    <AppContainer>
-      <App />
-    </AppContainer>,
-    document.getElementById('root'),
-  );
-}
-
-render();
-if (module.hot) { module.hot.accept(render); }
+Bootup.render();
+if (module.hot) { module.hot.accept(Bootup.render); }
 </script>
 </html>
