@@ -1,0 +1,40 @@
+{
+  "env": {
+    "browser": true,
+    "node": true,
+    "jest": true,
+    "es6": true
+  },
+  "parser": "typescript-eslint-parser",
+  "extends": "airbnb",
+  "settings": {
+    "import/extensions": [
+      ".mjs",
+      ".ts",
+      ".tsx",
+      ".js",
+      ".jsx"
+    ],
+    "import/resolver": {
+      "node": {
+        "extensions": [".mjs", ".ts", ".tsx", ".js", ".json"]
+      }
+    }
+  },
+  "rules": {
+    "no-undef": "off",
+    "import/extensions": ["error", "ignorePackages", {
+      "mjs": "never",
+      "ts": "never",
+      "tsx": "never",
+      "js": "never",
+      "jsx": "never"
+    }],
+    "react/jsx-filename-extension": ["error", {
+      "extensions": [".tsx", ".jsx"]
+    }],
+    "object-curly-newline": "off",
+    "function-paren-newline": "off",
+    "import/prefer-default-export": "off"
+  }
+}

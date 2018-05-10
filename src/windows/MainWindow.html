@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+</head>
+<body>
+  <div id="root"></div>
+</body>
+
+<script>window.exports = module.exports</script>
+<script type="text/tsx">
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import {AppContainer} from 'react-hot-loader';
+
+const render = () => {
+  const App = require('../application/components/App').default;
+  ReactDOM.render(
+    <AppContainer>
+      <App />
+    </AppContainer>,
+    document.getElementById('root'),
+  );
+}
+
+render();
+if (module.hot) { module.hot.accept(render); }
+</script>
+</html>
