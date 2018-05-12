@@ -3,17 +3,16 @@ import * as ReactDOM from 'react-dom';
 import { createStore } from 'redux';
 import { Store } from 'react-redux';
 import { AppContainer } from 'react-hot-loader';
-import { libraryPathLoaded } from '../library/actions/library-path';
 import reducer, { AppState } from './reducer';
 
-const storeEnhancer = window['devToolsExtension']
-  ? window['devToolsExtension']()(createStore)
+const storeEnhancer = window['devToolsExtension'] // eslint-disable-line dot-notation
+  ? window['devToolsExtension']()(createStore) // eslint-disable-line dot-notation
   : createStore;
 
 const store: Store<AppState> = storeEnhancer(reducer);
 
 function render() {
-  const App = require('./components/App').default;
+  const App = require('./components/App').default; // eslint-disable-line global-require
 
   ReactDOM.render(
     <AppContainer>

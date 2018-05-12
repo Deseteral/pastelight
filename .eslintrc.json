@@ -23,6 +23,7 @@
   },
   "rules": {
     "no-undef": "off",
+    "no-unused-vars": "off",
     "import/extensions": ["error", "ignorePackages", {
       "mjs": "never",
       "ts": "never",
