@@ -7,7 +7,7 @@ enum LibraryPathActionType {
 
 interface LibraryPathAction {
   type: LibraryPathActionType;
-  payload?: LibraryPath;
+  payload: LibraryPath;
 }
 
 export default LibraryPathAction;

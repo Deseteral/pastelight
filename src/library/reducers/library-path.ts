@@ -3,10 +3,8 @@ import LibraryPathAction, { LibraryPathActionType } from '../domain/library-path
 
 function libraryPath(state: LibraryPath = null, action: LibraryPathAction) : LibraryPath {
   switch (action.type) {
-    case LibraryPathActionType.LIBRARY_PATH_LOADED: {
-      const newPath: LibraryPath = action.payload as LibraryPath;
-      return newPath;
-    }
+    case LibraryPathActionType.LIBRARY_PATH_LOADED:
+      return action.payload;
     default:
       return state;
   }

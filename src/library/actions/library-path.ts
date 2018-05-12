@@ -4,10 +4,11 @@ import LibraryPathAction, { LibraryPathActionType } from '../domain/library-path
 function libraryPathLoadRequest() : LibraryPathAction {
   return {
     type: LibraryPathActionType.LIBRARY_PATH_LOAD_REQUEST,
+    payload: null,
   };
 }
 
-function libraryPathLoaded(newPath: LibraryPath) {
+function libraryPathLoaded(newPath: LibraryPath) : LibraryPathAction {
   return {
     type: LibraryPathActionType.LIBRARY_PATH_LOADED,
     payload: newPath,
