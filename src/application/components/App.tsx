@@ -1,11 +1,21 @@
 import * as React from 'react';
+import { Store } from 'redux';
+import { Provider } from 'react-redux';
+import { AppState } from '../reducer';
 
-function App() : JSX.Element {
+interface AppProps {
+  store: Store<AppState>;
+}
+
+function App(props: AppProps) : JSX.Element {
   return (
-    <div>
-      <h2>Welcome to React with Typescript!</h2>
-    </div>
+    <Provider store={props.store}>
+      <h1>pastelight</h1>
+    </Provider>
   );
 }
 
 export default App;
+export {
+  AppProps,
+};

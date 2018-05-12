@@ -1,7 +1,7 @@
 import { BrowserWindow } from 'electron';
-import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
+import installExtension, { REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } from 'electron-devtools-installer';
 import { enableLiveReload } from 'electron-compile';
-import { getAppConfig } from '../application/Configuration';
+import { getAppConfig } from '../application/configuration';
 
 let mainWindow: (Electron.BrowserWindow | null) = null;
 
@@ -15,10 +15,11 @@ async function create() {
     height: 600,
   });
 
-  mainWindow.loadURL(`file://${__dirname}/MainWindow.html`);
+  mainWindow.loadURL(`file://${__dirname}/main-window.html`);
 
   if (getAppConfig().isDevMode) {
     await installExtension(REACT_DEVELOPER_TOOLS);
+    await installExtension(REDUX_DEVTOOLS);
     mainWindow.webContents.openDevTools();
   }
 
