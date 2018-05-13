@@ -7,10 +7,12 @@
   "main": "src/main.ts",
   "scripts": {
     "start": "electron-forge start",
+    "test": "npm run typechecker && npm run lint",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "lint": "eslint src --ext ts,tsx"
+    "lint": "eslint src --ext ts,tsx",
+    "typechecker": "tsc --noEmit"
   },
   "dependencies": {
     "@types/electron-devtools-installer": "2.0.3",
