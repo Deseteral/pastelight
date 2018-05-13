@@ -9,18 +9,18 @@ interface ViewRouterProps {
 
 function ViewRouter(props: ViewRouterProps) : (JSX.Element | null) {
   switch (props.currentView) {
-    case View.LIBRARY_VIEW:
+    case View.LIBRARY:
       return (<div>library view</div>);
+    case View.MAPS:
+      return (<div>maps view</div>);
     default:
       return null;
   }
 }
 
-export default connect((state: AppState) => {
-  return {
-    currentView: state.currentView,
-  };
-})(ViewRouter);
+export default connect((state: AppState) => ({
+  currentView: state.currentView,
+}))(ViewRouter);
 
 export {
   ViewRouterProps,

@@ -3,6 +3,7 @@ import { Store } from 'redux';
 import { Provider } from 'react-redux';
 import { AppState } from '../reducer';
 import ViewRouter from '../../navigation/components/ViewRouter';
+import NavigationBar from '../../navigation/components/NavigationBar';
 
 interface AppProps {
   store: Store<AppState>;
@@ -12,7 +13,7 @@ function App(props: AppProps) : JSX.Element {
   return (
     <Provider store={props.store}>
       <div>
-        <h1>pastelight</h1>
+        <NavigationBar />
         <ViewRouter />
       </div>
     </Provider>

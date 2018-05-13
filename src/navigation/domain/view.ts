@@ -1,5 +1,6 @@
 enum View {
-  LIBRARY_VIEW = 'LIBRARY_VIEW',
+  LIBRARY = 'LIBRARY',
+  MAPS = 'MAPS',
 }
 
 export default View;
