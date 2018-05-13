@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Store } from 'redux';
 import { Provider } from 'react-redux';
 import { AppState } from '../reducer';
+import ViewRouter from '../../navigation/components/ViewRouter';
 
 interface AppProps {
   store: Store<AppState>;
@@ -10,7 +11,10 @@ interface AppProps {
 function App(props: AppProps) : JSX.Element {
   return (
     <Provider store={props.store}>
-      <h1>pastelight</h1>
+      <div>
+        <h1>pastelight</h1>
+        <ViewRouter />
+      </div>
     </Provider>
   );
 }

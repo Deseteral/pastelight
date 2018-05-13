@@ -1,15 +1,19 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Store } from 'react-redux';
+import createSagaMiddleware from 'redux-saga';
 import { AppContainer } from 'react-hot-loader';
 import reducer, { AppState } from './reducer';
 
-const storeEnhancer = window['devToolsExtension'] // eslint-disable-line dot-notation
-  ? window['devToolsExtension']()(createStore) // eslint-disable-line dot-notation
-  : createStore;
+const sagaMiddleware = createSagaMiddleware();
+const store: Store<AppState> = createStore(
+  reducer,
+  window['__REDUX_DEVTOOLS_EXTENSION__'] && window['__REDUX_DEVTOOLS_EXTENSION__'](), // eslint-disable-line
+  applyMiddleware(sagaMiddleware),
+);
 
-const store: Store<AppState> = storeEnhancer(reducer);
+// sagaMiddleware.run(saga);
 
 function render() {
   const App = require('./components/App').default; // eslint-disable-line global-require
