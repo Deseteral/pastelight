@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Fragment } from 'react';
 import { Store } from 'redux';
 import { Provider } from 'react-redux';
 import { AppState } from '../reducer';
@@ -12,10 +13,10 @@ interface AppProps {
 function App(props: AppProps) : JSX.Element {
   return (
     <Provider store={props.store}>
-      <div>
+      <Fragment>
         <NavigationBar />
         <ViewRouter />
-      </div>
+      </Fragment>
     </Provider>
   );
 }

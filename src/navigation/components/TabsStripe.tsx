@@ -28,6 +28,7 @@ function TabsStripe(props: TabsStripeProps) : JSX.Element {
     <TabsStripeContainer>
       {tabs.map(tab => (
         <TabItem
+          key={tab.name}
           onClick={() => onTabChange(tab.view)}
           active={currentView === tab.view}
           shouldHide={!extended}
