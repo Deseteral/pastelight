@@ -1,6 +1,8 @@
+import ViewChangeActionTypes from '../domain/view-change-action-types';
+
 function viewChange(nextView) {
   return {
-    type: 'VIEW_CHANGE',
+    type: ViewChangeActionTypes.VIEW_CHANGE,
     payload: nextView,
   };
 }

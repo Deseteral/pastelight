@@ -1,8 +1,9 @@
 import Views from '../domain/views';
+import ViewChangeActionTypes from '../domain/view-change-action-types';
 
 function currentView(state = Views.LIBRARY, action) {
   switch (action.type) {
-    case 'VIEW_CHANGE':
+    case ViewChangeActionTypes.VIEW_CHANGE:
       return action.payload;
     default:
       return state;
