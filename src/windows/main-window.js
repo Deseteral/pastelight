@@ -1,11 +1,11 @@
 import { BrowserWindow } from 'electron';
 import installExtension, { REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } from 'electron-devtools-installer';
 import { enableLiveReload } from 'electron-compile';
-import { getAppConfig } from '../application/configuration';
+import Configuration from '../application/configuration';
 
-let mainWindow: (Electron.BrowserWindow | null) = null;
+let mainWindow = null;
 
-if (getAppConfig().isDevMode) {
+if (Configuration.isDevMode) {
   enableLiveReload({ strategy: 'react-hmr' });
 }
 
@@ -17,7 +17,7 @@ async function create() {
 
   mainWindow.loadURL(`file://${__dirname}/main-window.html`);
 
-  if (getAppConfig().isDevMode) {
+  if (Configuration.isDevMode) {
     await installExtension(REACT_DEVELOPER_TOOLS);
     await installExtension(REDUX_DEVTOOLS);
     mainWindow.webContents.openDevTools();
@@ -28,6 +28,4 @@ async function create() {
   });
 }
 
-export default {
-  create,
-};
+export { create };

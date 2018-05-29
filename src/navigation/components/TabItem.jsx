@@ -1,11 +1,5 @@
-import * as React from 'react';
-import styled, { StyledComponentClass } from 'styled-components';
+import styled, { css } from 'styled-components';
 import TabsStripeContainer from './TabsStripeContainer';
-
-interface TabItemProps {
-  active: boolean;
-  shouldHide: boolean;
-}
 
 const TabItem = styled.div`
   cursor: pointer;
@@ -13,11 +7,11 @@ const TabItem = styled.div`
   margin: 0 8px;
   text-align: center;
   text-transform: uppercase;
-  color: ${(props: TabItemProps) => props.active ? '#FFB300' : 'white'};
+  color: ${({ active }) => (active ? '#FFB300' : 'white')};
   opacity: 1;
   transition: max-width 0.4s, margin 0.4s, opacity 0.3s, color 0.4s;
   ${TabsStripeContainer}:not(:hover) & {
-    ${({ active, shouldHide }) => (!active && shouldHide) && `
+    ${({ active, shouldHide }) => (!active && shouldHide) && css`
       max-width: 0;
       margin: 0;
       opacity: 0;
@@ -27,4 +21,3 @@ const TabItem = styled.div`
 `;
 
 export default TabItem;
-export { TabItemProps };

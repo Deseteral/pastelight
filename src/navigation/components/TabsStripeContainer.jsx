@@ -1,5 +1,4 @@
-import * as React from 'react';
-import styled, { StyledComponentClass } from 'styled-components';
+import styled from 'styled-components';
 
 const TabsStripeContainer = styled.div`
   display: flex;

@@ -1,18 +1,11 @@
-import * as React from 'react';
-import { Fragment } from 'react';
-import { Store } from 'redux';
+import React, { Fragment } from 'react';
 import { Provider } from 'react-redux';
-import { AppState } from '../reducer';
 import ViewRouter from '../../navigation/components/ViewRouter';
 import NavigationBar from '../../navigation/components/NavigationBar';
 
-interface AppProps {
-  store: Store<AppState>;
-}
-
-function App(props: AppProps) : JSX.Element {
+function App({ store }) {
   return (
-    <Provider store={props.store}>
+    <Provider store={store}>
       <Fragment>
         <NavigationBar />
         <ViewRouter />
@@ -22,6 +15,3 @@ function App(props: AppProps) : JSX.Element {
 }
 
 export default App;
-export {
-  AppProps,
-};

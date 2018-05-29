@@ -4,20 +4,15 @@
   "version": "1.0.0-beta",
   "author": "deseteral@gmail.com",
   "license": "MIT",
-  "main": "src/main.ts",
+  "main": "src/main.js",
   "scripts": {
     "start": "electron-forge start",
-    "test": "npm run typechecker && npm run lint",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "lint": "eslint src --ext ts,tsx",
-    "typechecker": "tsc --noEmit"
+    "lint": "eslint --cache --color --ext .jsx,.js src"
   },
   "dependencies": {
-    "@types/electron-devtools-installer": "2.0.3",
-    "@types/react": "16.3.14",
-    "@types/react-dom": "16.0.5",
     "electron-compile": "6.4.2",
     "electron-devtools-installer": "2.2.4",
     "electron-squirrel-startup": "1.0.0",
@@ -30,17 +25,17 @@
     "styled-components": "3.2.6"
   },
   "devDependencies": {
-    "@types/react-redux": "6.0.0",
-    "@types/redux": "3.6.0",
-    "electron-forge": "5.2.1",
-    "electron-prebuilt-compile": "2.0.0",
+    "babel-plugin-transform-async-to-generator": "6.24.1",
+    "babel-plugin-transform-es2015-classes": "6.24.1",
+    "babel-preset-env": "1.7.0",
+    "babel-preset-react": "6.24.1",
+    "electron-forge": "5.2.2",
+    "electron-prebuilt-compile": "2.0.2",
     "eslint": "4.19.1",
     "eslint-config-airbnb": "16.1.0",
     "eslint-plugin-import": "2.11.0",
     "eslint-plugin-jsx-a11y": "6.0.3",
-    "eslint-plugin-react": "7.7.0",
-    "typescript": "2.8.3",
-    "typescript-eslint-parser": "15.0.0"
+    "eslint-plugin-react": "7.7.0"
   },
   "peerDependencies": {
     "electron": "*"

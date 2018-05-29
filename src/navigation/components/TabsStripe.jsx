@@ -1,26 +1,18 @@
-import * as React from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import TabsStripeContainer from './TabsStripeContainer';
 import TabItem from './TabItem';
-import { AppState } from '../../application/reducer';
-import View from '../domain/view';
+import Views from '../domain/views';
 import { viewChange } from '../actions/view-change';
 
-interface TabsStripeProps {
-  extended: boolean;
-  currentView: View;
-  onTabChange: (nextView: View) => void;
-}
-
-function TabsStripe(props: TabsStripeProps) : JSX.Element {
-  const { currentView, extended, onTabChange } = props;
+function TabsStripe({ currentView, extended, onTabChange }) {
   const tabs = [
     {
       name: 'library',
-      view: View.LIBRARY,
+      view: Views.LIBRARY,
     }, {
       name: 'maps',
-      view: View.MAPS,
+      view: Views.MAPS,
     },
   ];
 
@@ -41,13 +33,11 @@ function TabsStripe(props: TabsStripeProps) : JSX.Element {
 }
 
 export default connect(
-  (state: AppState, ownProps: TabsStripeProps) => ({
+  (state, ownProps) => ({
     currentView: state.currentView,
     extended: ownProps.extended,
   }),
-  (dispatch) => ({
-    onTabChange: (nextView: View) => dispatch(viewChange(nextView)),
+  dispatch => ({
+    onTabChange: nextView => dispatch(viewChange(nextView)),
   }),
 )(TabsStripe);
-
-export { TabsStripeProps };

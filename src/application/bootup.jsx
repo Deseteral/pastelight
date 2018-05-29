@@ -1,13 +1,12 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import React from 'react';
+import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
-import { Store } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import { AppContainer } from 'react-hot-loader';
-import reducer, { AppState } from './reducer';
+import reducer from './reducer';
 
 const sagaMiddleware = createSagaMiddleware();
-const store: Store<AppState> = createStore(
+const store = createStore(
   reducer,
   window['__REDUX_DEVTOOLS_EXTENSION__'] && window['__REDUX_DEVTOOLS_EXTENSION__'](), // eslint-disable-line
   applyMiddleware(sagaMiddleware),
@@ -26,6 +25,4 @@ function render() {
   );
 }
 
-export default {
-  render,
-};
+export { render };
