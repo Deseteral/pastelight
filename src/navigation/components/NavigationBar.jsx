@@ -13,7 +13,7 @@ const PanelContainer = styled.div`
   align-items: center;
   padding: 16px;
   box-sizing: border-box;
-  background-color: ${({ extended }) => (extended ? '#263238' : 'transparent')};
+  background-color: ${({ extended, theme }) => (extended ? theme.colors.navigationBar : 'transparent')};
   transition: background-color 0.3s ease;
 `;
 

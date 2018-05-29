@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const TabsStripeContainer = styled.div`
   display: flex;
-  background-color: #263238;
+  background-color: ${({ theme }) => theme.colors.navigationBar};
   padding: 16px;
   border-radius: 4px;
 `;

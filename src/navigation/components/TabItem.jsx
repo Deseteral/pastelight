@@ -7,7 +7,7 @@ const TabItem = styled.div`
   margin: 0 8px;
   text-align: center;
   text-transform: uppercase;
-  color: ${({ active }) => (active ? '#FFB300' : 'white')};
+  color: ${({ active, theme }) => (active ? theme.colors.active : theme.colors.text)};
   opacity: 1;
   transition: max-width 0.4s, margin 0.4s, opacity 0.3s, color 0.4s;
   ${TabsStripeContainer}:not(:hover) & {
