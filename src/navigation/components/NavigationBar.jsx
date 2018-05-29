@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import TabsStripe from './TabsStripe';
 import Views from '../domain/views';
 
@@ -26,6 +27,10 @@ function NavigationBar({ currentView }) {
     </PanelContainer>
   );
 }
+
+NavigationBar.propTypes = {
+  currentView: PropTypes.string.isRequired,
+};
 
 export default connect(state => ({
   currentView: state.currentView,

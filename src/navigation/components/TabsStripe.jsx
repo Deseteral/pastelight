@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import TabsStripeContainer from './TabsStripeContainer';
 import TabItem from './TabItem';
 import Views from '../domain/views';
@@ -31,6 +32,16 @@ function TabsStripe({ currentView, extended, onTabChange }) {
     </TabsStripeContainer>
   );
 }
+
+TabsStripe.propTypes = {
+  currentView: PropTypes.string.isRequired,
+  extended: PropTypes.bool,
+  onTabChange: PropTypes.func.isRequired,
+};
+
+TabsStripe.defaultProps = {
+  extended: false,
+};
 
 export default connect(
   (state, ownProps) => ({
