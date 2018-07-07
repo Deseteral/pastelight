@@ -19,6 +19,10 @@ function calculateExposureTime(exposureTime) {
   return `1/${denominator}`;
 }
 
+function calculateMegapixels(width, height) {
+  return ((width * height) / 1000000).toFixed(1);
+}
+
 async function getPhotoMetadata(filePath) {
   const fullPath = pathResolve(filePath);
 
@@ -26,6 +30,8 @@ async function getPhotoMetadata(filePath) {
   const exifData = await readExifData({ image: fullPath });
 
   const fileSizeBytes = stats.size;
+  const width = exifData.exif.ExifImageWidth;
+  const height = exifData.exif.ExifImageHeight;
 
   console.log(exifData);
 
@@ -33,6 +39,9 @@ async function getPhotoMetadata(filePath) {
     filePath: fullPath,
     fileSizeBytes,
     date: exifDateToIso(exifData.exif.CreateDate),
+    width,
+    height,
+    megapixels: calculateMegapixels(width, height),
     description: '',
     categoryId: null,
     tags: [],
