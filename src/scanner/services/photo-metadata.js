@@ -2,6 +2,7 @@ import fs from 'fs';
 import { resolve as pathResolve } from 'path';
 import { promisify } from 'util';
 import { ExifImage } from 'exif';
+import dms2dec from 'dms2dec';
 
 const readFileStats = promisify(fs.stat);
 const readExifData = promisify(ExifImage);
@@ -33,7 +34,19 @@ async function getPhotoMetadata(filePath) {
   const width = exifData.exif.ExifImageWidth;
   const height = exifData.exif.ExifImageHeight;
 
-  console.log(exifData);
+  const [lat, lng] = dms2dec(
+    exifData.gps.GPSLatitude,
+    exifData.gps.GPSLatitudeRef,
+    exifData.gps.GPSLongitude,
+    exifData.gps.GPSLongitudeRef,
+  );
+
+  const geo = {
+    lat,
+    lng,
+    altitude: exifData.gps.GPSAltitude,
+    // TODO: add pretty printed version
+  };
 
   return {
     filePath: fullPath,
@@ -50,6 +63,7 @@ async function getPhotoMetadata(filePath) {
     exposureTime: calculateExposureTime(exifData.exif.ExposureTime),
     focalLength: exifData.exif.FocalLength.toString(),
     iso: exifData.exif.ISO.toString(),
+    geo,
   };
 }
 

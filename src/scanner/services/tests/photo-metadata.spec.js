@@ -25,6 +25,11 @@ describe('Photo metadata service', () => {
       exposureTime: '1/1668',
       focalLength: '4.26',
       iso: '100',
+      geo: {
+        lat: 49.221336916666665,
+        lng: 20.230778305555553,
+        altitude: 1643,
+      },
     });
   });
 
@@ -54,5 +59,13 @@ describe('Photo metadata service', () => {
 
       done();
     });
+  });
+
+  it.skip('should get metadata from not geotagged photo', () => {
+    // TODO: write the test
+  });
+
+  it.skip('should get some metadata from photo without exif data', () => {
+    // TODO: write the test
   });
 });
