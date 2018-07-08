@@ -55,6 +55,14 @@ function getGeoPositionData(exifData) {
     GPSAltitude,
   } = exifData.gps;
 
+  if (
+    !GPSLatitude ||
+    !GPSLatitudeRef ||
+    !GPSLongitude ||
+    !GPSLongitudeRef ||
+    !GPSAltitude
+  ) return null;
+
   const [lat, lng] = dms2dec(
     GPSLatitude, GPSLatitudeRef,
     GPSLongitude, GPSLongitudeRef,

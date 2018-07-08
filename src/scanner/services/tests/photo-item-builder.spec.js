@@ -69,8 +69,34 @@ describe('Photo library item builder', () => {
     });
   });
 
-  it.skip('should get metadata from photo without geodata', () => {
-    // TODO: write the test
+  it('should get metadata from photo without geodata', async () => {
+    // given
+    const path = getTestResourcePath('photo-without-geodata.jpg');
+
+    // when
+    const metadata = await buildPhotoLibrary(path);
+
+    // then
+    expect(metadata).toEqual({
+      type: 'PHOTO',
+      filePath: path,
+      fileSizeBytes: 2215101,
+      date: '2018-07-08T11:53:21',
+      width: 4640,
+      height: 3480,
+      megapixels: '16.1',
+      description: '',
+      categoryId: null,
+      tags: [],
+      photoMetadata: {
+        cameraModel: 'ONEPLUS A3003',
+        fNumber: '2',
+        exposureTime: '1/25',
+        focalLength: '4.26',
+        iso: '200',
+      },
+      geo: null,
+    });
   });
 
   it('should get some metadata from photo without exif data', async () => {
