@@ -2,9 +2,18 @@ import fs from 'fs';
 import { promisify } from 'util';
 import { ExifImage } from 'exif';
 import dms2dec from 'dms2dec';
+import getImageSize from 'image-size';
 
 const readFileStats = promisify(fs.stat);
 const readExifData = promisify(ExifImage);
+
+async function getExifData(path) {
+  try {
+    return await readExifData({ image: path });
+  } catch (ex) {
+    return null;
+  }
+}
 
 function exifDateToIso(exifDate) {
   // 2018:04:29 12:32:44
@@ -12,6 +21,14 @@ function exifDateToIso(exifDate) {
   const formattedDate = date.replace(/:/g, '-');
 
   return `${formattedDate}T${time}`;
+}
+
+function getPhotoDate(exifData, fileStats) {
+  if (exifData && exifData.exif && exifData.exif.CreateDate) {
+    return exifDateToIso(exifData.exif.CreateDate);
+  }
+
+  return fileStats.birthtime.toISOString();
 }
 
 function calculateExposureTime(exposureTime) {
@@ -28,6 +45,8 @@ function prettyPrintGeoCoordinates(coords, ref) {
 }
 
 function getGeoPositionData(exifData) {
+  if (!exifData || !exifData.gps) return null;
+
   const {
     GPSLatitude,
     GPSLatitudeRef,
@@ -54,36 +73,49 @@ function getGeoPositionData(exifData) {
   };
 }
 
-async function buildPhotoLibrary(path) {
-  const stats = await readFileStats(path);
-  const exifData = await readExifData({ image: path });
+function getPhotoMetadata(exifData) {
+  if (!exifData) return null;
+  const { image, exif } = exifData;
 
-  console.log(exifData);
-
-  const fileSizeBytes = stats.size;
-  const width = exifData.exif.ExifImageWidth;
-  const height = exifData.exif.ExifImageHeight;
+  const cameraModel = image && image.Model;
+  const fNumber = exif && exif.FNumber && exif.FNumber.toString();
+  const exposureTime = exif && exif.ExposureTime && calculateExposureTime(exif.ExposureTime);
+  const focalLength = exif && exif.FocalLength && exif.FocalLength.toString();
+  const iso = exif && exif.ISO && exif.ISO.toString();
 
   return {
-    type: 'PHOTO',
-    filePath: path,
-    fileSizeBytes,
-    date: exifDateToIso(exifData.exif.CreateDate),
-    width,
-    height,
-    megapixels: calculateMegapixels(width, height),
-    description: '',
-    categoryId: null,
-    tags: [],
-    photoMetadata: {
-      cameraModel: exifData.image.Model,
-      fNumber: exifData.exif.FNumber.toString(),
-      exposureTime: calculateExposureTime(exifData.exif.ExposureTime),
-      focalLength: exifData.exif.FocalLength.toString(),
-      iso: exifData.exif.ISO.toString(),
-    },
-    geo: getGeoPositionData(exifData),
+    cameraModel: cameraModel || null,
+    fNumber: fNumber || null,
+    exposureTime: exposureTime || null,
+    focalLength: focalLength || null,
+    iso: iso || null,
   };
+}
+
+async function buildPhotoLibrary(path) {
+  const stats = await readFileStats(path);
+
+  try {
+    const { width, height } = await getImageSize(path);
+    const exifData = await getExifData(path);
+
+    return {
+      type: 'PHOTO',
+      filePath: path,
+      fileSizeBytes: stats.size,
+      date: getPhotoDate(exifData, stats),
+      width,
+      height,
+      megapixels: calculateMegapixels(width, height),
+      description: '',
+      categoryId: null,
+      tags: [],
+      photoMetadata: getPhotoMetadata(exifData),
+      geo: getGeoPositionData(exifData),
+    };
+  } catch (ex) {
+    throw new Error('Given file is not an image');
+  }
 }
 
 export { buildPhotoLibrary };

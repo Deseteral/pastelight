@@ -1,6 +1,9 @@
-/* eslint-disable no-use-before-define */
 import { resolve as pathResolve } from 'path';
 import { buildPhotoLibrary } from '../photo-item-builder';
+
+function getTestResourcePath(fileName) {
+  return pathResolve(`${__dirname}/resources/${fileName}`);
+}
 
 describe('Photo library item builder', () => {
   it('should create photo library item given file path', async () => {
@@ -60,21 +63,37 @@ describe('Photo library item builder', () => {
     buildPhotoLibrary(path).catch((err) => {
       // then
       expect(err.toString())
-        .toBe('Error: The given image is not a JPEG and thus unsupported right now.');
+        .toBe('Error: Given file is not an image');
 
       done();
     });
   });
 
-  it.skip('should get metadata from not geotagged photo', () => {
+  it.skip('should get metadata from photo without geodata', () => {
     // TODO: write the test
   });
 
-  it.skip('should get some metadata from photo without exif data', () => {
-    // TODO: write the test
+  it('should get some metadata from photo without exif data', async () => {
+    // given
+    const path = getTestResourcePath('photo-without-exif.jpg');
+
+    // when
+    const metadata = await buildPhotoLibrary(path);
+
+    // then
+    expect(metadata).toEqual({
+      type: 'PHOTO',
+      filePath: path,
+      fileSizeBytes: 344670,
+      date: '2018-07-08T09:36:27.170Z',
+      width: 1024,
+      height: 633,
+      megapixels: '0.6',
+      description: '',
+      categoryId: null,
+      tags: [],
+      photoMetadata: null,
+      geo: null,
+    });
   });
 });
-
-function getTestResourcePath(fileName) {
-  return pathResolve(`${__dirname}/resources/${fileName}`);
-}

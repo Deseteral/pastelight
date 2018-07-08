@@ -20,6 +20,7 @@
     "electron-devtools-installer": "2.2.4",
     "electron-squirrel-startup": "1.0.0",
     "exif": "0.6.0",
+    "image-size": "0.6.3",
     "prop-types": "15.6.1",
     "react": "16.3.2",
     "react-dom": "16.3.2",
