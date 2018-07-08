@@ -1,5 +1,4 @@
 import fs from 'fs';
-import { resolve as pathResolve } from 'path';
 import { promisify } from 'util';
 import { ExifImage } from 'exif';
 import dms2dec from 'dms2dec';
@@ -55,18 +54,19 @@ function getGeoPositionData(exifData) {
   };
 }
 
-async function getPhotoMetadata(filePath) {
-  const fullPath = pathResolve(filePath);
+async function buildPhotoLibrary(path) {
+  const stats = await readFileStats(path);
+  const exifData = await readExifData({ image: path });
 
-  const stats = await readFileStats(fullPath);
-  const exifData = await readExifData({ image: fullPath });
+  console.log(exifData);
 
   const fileSizeBytes = stats.size;
   const width = exifData.exif.ExifImageWidth;
   const height = exifData.exif.ExifImageHeight;
 
   return {
-    filePath: fullPath,
+    type: 'PHOTO',
+    filePath: path,
     fileSizeBytes,
     date: exifDateToIso(exifData.exif.CreateDate),
     width,
@@ -75,13 +75,15 @@ async function getPhotoMetadata(filePath) {
     description: '',
     categoryId: null,
     tags: [],
-    cameraModel: exifData.image.Model,
-    fNumber: exifData.exif.FNumber.toString(),
-    exposureTime: calculateExposureTime(exifData.exif.ExposureTime),
-    focalLength: exifData.exif.FocalLength.toString(),
-    iso: exifData.exif.ISO.toString(),
+    photoMetadata: {
+      cameraModel: exifData.image.Model,
+      fNumber: exifData.exif.FNumber.toString(),
+      exposureTime: calculateExposureTime(exifData.exif.ExposureTime),
+      focalLength: exifData.exif.FocalLength.toString(),
+      iso: exifData.exif.ISO.toString(),
+    },
     geo: getGeoPositionData(exifData),
   };
 }
 
-export { getPhotoMetadata };
+export { buildPhotoLibrary };

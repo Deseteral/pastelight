@@ -1,17 +1,19 @@
+/* eslint-disable no-use-before-define */
 import { resolve as pathResolve } from 'path';
-import { getPhotoMetadata } from '../photo-metadata';
+import { buildPhotoLibrary } from '../photo-item-builder';
 
-describe('Photo metadata service', () => {
-  it('should extract photo metadata given file path', async () => {
+describe('Photo library item builder', () => {
+  it('should create photo library item given file path', async () => {
     // given
-    const path = `${__dirname}/resources/example.jpg`;
+    const path = getTestResourcePath('example.jpg');
 
     // when
-    const metadata = await getPhotoMetadata(path);
+    const metadata = await buildPhotoLibrary(path);
 
     // then
     expect(metadata).toEqual({
-      filePath: pathResolve(path),
+      type: 'PHOTO',
+      filePath: path,
       fileSizeBytes: 5720363,
       date: '2018-04-29T12:32:44',
       width: 4640,
@@ -20,11 +22,13 @@ describe('Photo metadata service', () => {
       description: '',
       categoryId: null,
       tags: [],
-      cameraModel: 'ONEPLUS A3003',
-      fNumber: '2',
-      exposureTime: '1/1668',
-      focalLength: '4.26',
-      iso: '100',
+      photoMetadata: {
+        cameraModel: 'ONEPLUS A3003',
+        fNumber: '2',
+        exposureTime: '1/1668',
+        focalLength: '4.26',
+        iso: '100',
+      },
       geo: {
         lat: 49.221336916666665,
         lng: 20.230778305555553,
@@ -39,7 +43,7 @@ describe('Photo metadata service', () => {
     const path = '/not/existing/path';
 
     // when
-    getPhotoMetadata(path).catch((err) => {
+    buildPhotoLibrary(path).catch((err) => {
       // then
       expect(err.toString())
         .toBe("Error: ENOENT: no such file or directory, stat '/not/existing/path'");
@@ -50,10 +54,10 @@ describe('Photo metadata service', () => {
 
   it('should reject when given file is not a photo or does not contain exif data', (done) => {
     // given
-    const path = `${__dirname}/resources/not-a-photo.txt`;
+    const path = getTestResourcePath('not-a-photo.txt');
 
     // when
-    getPhotoMetadata(path).catch((err) => {
+    buildPhotoLibrary(path).catch((err) => {
       // then
       expect(err.toString())
         .toBe('Error: The given image is not a JPEG and thus unsupported right now.');
@@ -70,3 +74,7 @@ describe('Photo metadata service', () => {
     // TODO: write the test
   });
 });
+
+function getTestResourcePath(fileName) {
+  return pathResolve(`${__dirname}/resources/${fileName}`);
+}
