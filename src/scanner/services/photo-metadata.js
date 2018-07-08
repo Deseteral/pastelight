@@ -24,6 +24,37 @@ function calculateMegapixels(width, height) {
   return ((width * height) / 1000000).toFixed(1);
 }
 
+function prettyPrintGeoCoordinates(coords, ref) {
+  return `${coords[0]}°${coords[1]}'${coords[2]}"${ref}`;
+}
+
+function getGeoPositionData(exifData) {
+  const {
+    GPSLatitude,
+    GPSLatitudeRef,
+    GPSLongitude,
+    GPSLongitudeRef,
+    GPSAltitude,
+  } = exifData.gps;
+
+  const [lat, lng] = dms2dec(
+    GPSLatitude, GPSLatitudeRef,
+    GPSLongitude, GPSLongitudeRef,
+  );
+
+  const formatted = [
+    prettyPrintGeoCoordinates(GPSLatitude, GPSLatitudeRef),
+    prettyPrintGeoCoordinates(GPSLongitude, GPSLongitudeRef),
+  ].join(' ');
+
+  return {
+    lat,
+    lng,
+    altitude: GPSAltitude,
+    formatted,
+  };
+}
+
 async function getPhotoMetadata(filePath) {
   const fullPath = pathResolve(filePath);
 
@@ -33,20 +64,6 @@ async function getPhotoMetadata(filePath) {
   const fileSizeBytes = stats.size;
   const width = exifData.exif.ExifImageWidth;
   const height = exifData.exif.ExifImageHeight;
-
-  const [lat, lng] = dms2dec(
-    exifData.gps.GPSLatitude,
-    exifData.gps.GPSLatitudeRef,
-    exifData.gps.GPSLongitude,
-    exifData.gps.GPSLongitudeRef,
-  );
-
-  const geo = {
-    lat,
-    lng,
-    altitude: exifData.gps.GPSAltitude,
-    // TODO: add pretty printed version
-  };
 
   return {
     filePath: fullPath,
@@ -63,7 +80,7 @@ async function getPhotoMetadata(filePath) {
     exposureTime: calculateExposureTime(exifData.exif.ExposureTime),
     focalLength: exifData.exif.FocalLength.toString(),
     iso: exifData.exif.ISO.toString(),
-    geo,
+    geo: getGeoPositionData(exifData),
   };
 }
 

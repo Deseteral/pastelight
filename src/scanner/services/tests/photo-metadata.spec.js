@@ -29,6 +29,7 @@ describe('Photo metadata service', () => {
         lat: 49.221336916666665,
         lng: 20.230778305555553,
         altitude: 1643,
+        formatted: '49°13\'16.8129"N 20°13\'50.8019"E',
       },
     });
   });
