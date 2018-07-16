@@ -1,5 +1,5 @@
 import { resolve as pathResolve } from 'path';
-import { buildPhotoLibrary } from '../photo-item-builder';
+import { buildPhotoItem } from '../photo-item-builder';
 
 function getTestResourcePath(fileName) {
   return pathResolve(`${__dirname}/resources/${fileName}`);
@@ -11,7 +11,7 @@ describe('Photo library item builder', () => {
     const path = getTestResourcePath('example.jpg');
 
     // when
-    const metadata = await buildPhotoLibrary(path);
+    const metadata = await buildPhotoItem(path);
 
     // then
     expect(metadata).toEqual({
@@ -46,7 +46,7 @@ describe('Photo library item builder', () => {
     const path = '/not/existing/path';
 
     // when
-    buildPhotoLibrary(path).catch((err) => {
+    buildPhotoItem(path).catch((err) => {
       // then
       expect(err.toString())
         .toBe("Error: ENOENT: no such file or directory, stat '/not/existing/path'");
@@ -60,7 +60,7 @@ describe('Photo library item builder', () => {
     const path = getTestResourcePath('not-a-photo.txt');
 
     // when
-    buildPhotoLibrary(path).catch((err) => {
+    buildPhotoItem(path).catch((err) => {
       // then
       expect(err.toString())
         .toBe('Error: Given file is not an image');
@@ -74,7 +74,7 @@ describe('Photo library item builder', () => {
     const path = getTestResourcePath('photo-without-geodata.jpg');
 
     // when
-    const metadata = await buildPhotoLibrary(path);
+    const metadata = await buildPhotoItem(path);
 
     // then
     expect(metadata).toEqual({
@@ -104,7 +104,7 @@ describe('Photo library item builder', () => {
     const path = getTestResourcePath('photo-without-exif.jpg');
 
     // when
-    const metadata = await buildPhotoLibrary(path);
+    const metadata = await buildPhotoItem(path);
 
     // then
     expect(metadata).toEqual({

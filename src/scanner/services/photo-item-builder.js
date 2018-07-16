@@ -100,7 +100,7 @@ function getPhotoMetadata(exifData) {
   };
 }
 
-async function buildPhotoLibrary(path) {
+async function buildPhotoItem(path) {
   const stats = await readFileStats(path);
 
   try {
@@ -126,4 +126,4 @@ async function buildPhotoLibrary(path) {
   }
 }
 
-export { buildPhotoLibrary };
+export { buildPhotoItem };
