@@ -3,6 +3,10 @@
 
 module.exports = {
   rootDir: '../',
+  testPathIgnorePatterns: [
+    '/node_modules/',
+    '/out/',
+  ],
   transform: {
     '^.+\\.jsx?$': './config/script.transform.js',
   },
