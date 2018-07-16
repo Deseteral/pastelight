@@ -7,7 +7,7 @@ function scanningStart() {
   };
 }
 
-function scanningPrelightComplete(totalFileCount) {
+function scanningPreflightComplete(totalFileCount) {
   return {
     type: ScanningActionTypes.SCANNING_PREFLIGHT_COMPLETE,
     payload: {
@@ -35,7 +35,7 @@ function scanningFinished() {
 
 export {
   scanningStart,
-  scanningPrelightComplete,
+  scanningPreflightComplete,
   scanningProgress,
   scanningFinished,
 };

@@ -20,11 +20,15 @@ async function processFile(filePath, fileScannedCallback) {
   fileScannedCallback();
 }
 
-async function scanDirectory(directoryPath, scannerPrelightCompletedCallback, fileScannedCallback) {
+async function scanDirectory(
+  directoryPath,
+  scannerPreflightCompletedCallback,
+  fileScannedCallback,
+) {
   const files = await getAcceptableFiles(directoryPath);
 
   const totalFileCount = files.length;
-  scannerPrelightCompletedCallback(totalFileCount);
+  scannerPreflightCompletedCallback(totalFileCount);
 
   Promise.all(files.map(filePath => processFile(filePath, fileScannedCallback)));
 }
