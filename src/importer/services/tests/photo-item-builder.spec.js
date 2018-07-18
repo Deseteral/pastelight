@@ -1,3 +1,4 @@
+import fs from 'fs';
 import { resolve as pathResolve } from 'path';
 import { buildPhotoItem } from '../photo-item-builder';
 
@@ -102,6 +103,7 @@ describe('Photo library item builder', () => {
   it('should get some metadata from photo without exif data', async () => {
     // given
     const path = getTestResourcePath('photo-without-exif.jpg');
+    const fileCreationDate = fs.statSync(path).birthtime.toISOString();
 
     // when
     const metadata = await buildPhotoItem(path);
@@ -111,7 +113,7 @@ describe('Photo library item builder', () => {
       type: 'PHOTO',
       filePath: path,
       fileSizeBytes: 344670,
-      date: '2018-07-08T09:36:27.170Z',
+      date: fileCreationDate,
       width: 1024,
       height: 633,
       megapixels: '0.6',
