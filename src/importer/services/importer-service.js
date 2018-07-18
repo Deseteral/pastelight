@@ -14,23 +14,23 @@ async function addToDatabase(libraryItem) {
   console.log(libraryItem);
 }
 
-async function processFile(filePath, fileScannedCallback) {
+async function processFile(filePath, fileImportedCallback) {
   const item = await buildPhotoItem(filePath);
   await addToDatabase(item);
-  fileScannedCallback();
+  fileImportedCallback();
 }
 
-async function scanDirectory(
+async function importDirectory(
   directoryPath,
-  scannerPreflightCompletedCallback,
-  fileScannedCallback,
+  preflightCompletedCallback,
+  fileImportedCallback,
 ) {
   const files = await getAcceptableFiles(directoryPath);
 
   const totalFileCount = files.length;
-  scannerPreflightCompletedCallback(totalFileCount);
+  preflightCompletedCallback(totalFileCount);
 
-  Promise.all(files.map(filePath => processFile(filePath, fileScannedCallback)));
+  Promise.all(files.map(filePath => processFile(filePath, fileImportedCallback)));
 }
 
-export default { scanDirectory };
+export default { importDirectory };
