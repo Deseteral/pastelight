@@ -4,15 +4,17 @@ import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { AppContainer } from 'react-hot-loader';
 import reducer from './reducer';
+import saga from './saga';
 
 const sagaMiddleware = createSagaMiddleware();
+
 const store = createStore(
   reducer,
   window['__REDUX_DEVTOOLS_EXTENSION__'] && window['__REDUX_DEVTOOLS_EXTENSION__'](), // eslint-disable-line
   applyMiddleware(sagaMiddleware),
 );
 
-// sagaMiddleware.run(saga);
+sagaMiddleware.run(saga);
 
 function render() {
   const App = require('./components/App').default; // eslint-disable-line global-require
@@ -26,3 +28,5 @@ function render() {
 }
 
 export { render };
+
+// TODO: Logging
