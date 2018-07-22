@@ -1,20 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
-import createSagaMiddleware from 'redux-saga';
 import { AppContainer } from 'react-hot-loader';
 import reducer from './reducer';
-import saga from './saga';
+import middleware from '../middleware';
+import { importStartRequest } from '../importer/actions/import';
 
-const sagaMiddleware = createSagaMiddleware();
+require('../importer/tasks');
 
 const store = createStore(
   reducer,
   window['__REDUX_DEVTOOLS_EXTENSION__'] && window['__REDUX_DEVTOOLS_EXTENSION__'](), // eslint-disable-line
-  applyMiddleware(sagaMiddleware),
+  applyMiddleware(middleware),
 );
 
-sagaMiddleware.run(saga);
+setTimeout(
+  () => store.dispatch(importStartRequest('/some/test/path')),
+  1000,
+);
 
 function render() {
   const App = require('./components/App').default; // eslint-disable-line global-require
