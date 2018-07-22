@@ -1,5 +1,14 @@
 import ImportActionTypes from '../domain/import-action-types';
 
+function importStartRequest(directoryPath) {
+  return {
+    type: ImportActionTypes.IMPORT_START_REQUEST,
+    payload: {
+      directoryPath,
+    },
+  };
+}
+
 function importStart() {
   return {
     type: ImportActionTypes.IMPORT_START,
@@ -18,7 +27,7 @@ function importPreflightComplete(totalFileCount) {
 
 function importProgress(processedFileCount, progressPercent) {
   return {
-    type: ImportActionTypes.IMPORT_FINISH,
+    type: ImportActionTypes.IMPORT_PROGRESS,
     payload: {
       processedFileCount,
       progressPercent,
@@ -34,6 +43,7 @@ function importFinished() {
 }
 
 export {
+  importStartRequest,
   importStart,
   importPreflightComplete,
   importProgress,
