@@ -6,9 +6,9 @@ import {
   importFinished,
 } from '../actions/import';
 import { importDirectory } from '../services/importer-service';
-import { subscribe } from '../../middleware';
+import { onAction } from '../../application/redux-tasks';
 
-subscribe(ImportActionTypes.IMPORT_START_REQUEST, async (action, dispatch) => {
+onAction(ImportActionTypes.IMPORT_START_REQUEST, async (action, dispatch) => {
   dispatch(importStart());
 
   await importDirectory(
