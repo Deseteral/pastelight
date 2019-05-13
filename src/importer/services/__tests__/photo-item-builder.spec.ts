@@ -2,7 +2,7 @@ import fs from 'fs';
 import { resolve as pathResolve } from 'path';
 import { buildPhotoItem } from '../photo-item-builder';
 
-function getTestResourcePath(fileName: string) {
+function getTestResourcePath(fileName: string) : string {
   return pathResolve(`${__dirname}/resources/${fileName}`);
 }
 
@@ -24,8 +24,6 @@ describe('Photo library item builder', () => {
       height: 3480,
       megapixels: '16.1',
       description: '',
-      categoryId: null,
-      tags: [],
       photoMetadata: {
         cameraModel: 'ONEPLUS A3003',
         fNumber: '2',
@@ -87,8 +85,6 @@ describe('Photo library item builder', () => {
       height: 3480,
       megapixels: '16.1',
       description: '',
-      categoryId: null,
-      tags: [],
       photoMetadata: {
         cameraModel: 'ONEPLUS A3003',
         fNumber: '2',
@@ -118,8 +114,6 @@ describe('Photo library item builder', () => {
       height: 633,
       megapixels: '0.6',
       description: '',
-      categoryId: null,
-      tags: [],
       photoMetadata: null,
       geo: null,
     });

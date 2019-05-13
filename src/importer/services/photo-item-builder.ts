@@ -6,29 +6,27 @@ import getImageSize from 'image-size';
 import MediaItem, { MediaType, GeoPosition, PhotoMetadata } from '../domain/media-item';
 
 const readFileStats = promisify(fs.stat);
-// const readExifData: Promise<ExifImage> = promisify(ExifImage);
+const readExifData = promisify(ExifImage);
 
-function getExifData(path: string) : Promise<ExifData> {
-  return new Promise((resolve, reject) => {
-    try {
-      const exif = new ExifImage({ image: path }, (err, exifData) => {
-        if (err) {
-          reject(err);
-          return;
-        }
+// async function getExifData(path: string) : Promise<(ExifData)> {
+  // return new Promise((resolve, reject) => {
+  //   new ExifImage({ image: path }, (err, exifData) => { // eslint-disable-line no-new
+  //     if (err) {
+  //       reject(err);
+  //       return;
+  //     }
 
-        resolve(exifData);
-      });
-    } catch (err) {
-      reject(err);
-    }
-  });
+  //     resolve(exifData);
+  //   });
+  // });
+// }
 
-  // try {
-  //   return await readExifData({ image: path });
-  // } catch (ex) {
-  //   return null;
-  // }
+async function getExifData(path: string) {
+  try {
+    return await readExifData({ image: path });
+  } catch (ex) {
+    return null;
+  }
 }
 
 function exifDateToIso(exifDate: string) : string {

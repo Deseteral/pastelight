@@ -15,6 +15,8 @@
   },
   "dependencies": {
     "dms2dec": "1.1.0",
+    "electron": "5.0.1",
+    "electron-devtools-installer": "2.2.4",
     "exif": "0.6.0",
     "image-size": "0.7.4",
     "react": "16.8.6",
@@ -35,8 +37,6 @@
     "@types/react-redux": "7.0.8",
     "@types/recursive-readdir": "2.2.0",
     "@types/styled-components": "4.1.14",
-    "electron": "5.0.1",
-    "electron-devtools-installer": "2.2.4",
     "eslint": "5.16.0",
     "jest": "24.8.0",
     "jest-watch-typeahead": "0.3.1",
