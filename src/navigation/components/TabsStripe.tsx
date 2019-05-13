@@ -12,6 +12,10 @@ interface TabsStripeProps {
   onTabChange: (nextView: View) => void;
 }
 
+interface ConnectedTabsStripeProps {
+  extended: boolean;
+}
+
 function TabsStripe({ currentView, extended = false, onTabChange }: TabsStripeProps) {
   const tabs = [
     {
@@ -40,7 +44,7 @@ function TabsStripe({ currentView, extended = false, onTabChange }: TabsStripePr
 }
 
 export default connect(
-  (state: AppState, ownProps: TabsStripeProps) => ({
+  (state: AppState, ownProps: ConnectedTabsStripeProps) => ({
     currentView: state.currentView,
     extended: ownProps.extended,
   }),
