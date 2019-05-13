@@ -7,7 +7,7 @@
   "main": "build/main.js",
   "scripts": {
     "start": "electron build/main.js",
-    "build": "rm -rf build && tsc",
+    "build": "rm -rf build && gulp && tsc",
     "build:watch": "tsc -w",
     "test": "npm run unit && npm run lint",
     "unit": "node ./config/run-unit-tests.js",
@@ -38,6 +38,7 @@
     "@types/recursive-readdir": "2.2.0",
     "@types/styled-components": "4.1.14",
     "eslint": "5.16.0",
+    "gulp": "4.0.2",
     "jest": "24.8.0",
     "jest-watch-typeahead": "0.3.1",
     "ts-jest": "24.0.2",
