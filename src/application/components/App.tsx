@@ -9,9 +9,9 @@ interface AppProps {
   store: Store<AppState>;
 }
 
-function App(props: AppProps) {
+function App({ store }: AppProps) {
   return (
-    <Provider store={props.store}>
+    <Provider store={store}>
       <>
         <NavigationBar />
         <ViewRouter />

@@ -8,20 +8,7 @@ import MediaItem, { MediaType, GeoPosition, PhotoMetadata } from '../domain/medi
 const readFileStats = promisify(fs.stat);
 const readExifData = promisify(ExifImage);
 
-// async function getExifData(path: string) : Promise<(ExifData)> {
-  // return new Promise((resolve, reject) => {
-  //   new ExifImage({ image: path }, (err, exifData) => { // eslint-disable-line no-new
-  //     if (err) {
-  //       reject(err);
-  //       return;
-  //     }
-
-  //     resolve(exifData);
-  //   });
-  // });
-// }
-
-async function getExifData(path: string) {
+async function getExifData(path: string) { // TODO: This function returns Promise<any> FIX IT!
   try {
     return await readExifData({ image: path });
   } catch (ex) {
