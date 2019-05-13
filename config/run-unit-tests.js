@@ -1,23 +1,17 @@
 const { spawnSync } = require('child_process');
 
-const isCI = !!process.env.CI;
-
-const localOnlyArgs = [
+const IS_CI = !!process.env.CI;
+const LOCAL_ONLY_ARGS = [
   '--watchAll',
   '--notify',
 ];
 
 const args = [
   '--config', './config/jest.config.js',
-  ...(isCI ? [] : localOnlyArgs),
+  ...(IS_CI ? [] : LOCAL_ONLY_ARGS),
 ];
 
-const options = {
-  stdio: 'inherit',
-};
-
-const out = spawnSync('jest', args, options);
-
+const out = spawnSync('jest', args, { stdio: 'inherit'  });
 if (out.status !== 0) {
   process.exit(out.status);
 }

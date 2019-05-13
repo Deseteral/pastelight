@@ -2,7 +2,7 @@ import fs from 'fs';
 import { resolve as pathResolve } from 'path';
 import { buildPhotoItem } from '../photo-item-builder';
 
-function getTestResourcePath(fileName) {
+function getTestResourcePath(fileName: string) {
   return pathResolve(`${__dirname}/resources/${fileName}`);
 }
 
@@ -47,7 +47,7 @@ describe('Photo library item builder', () => {
     const path = '/not/existing/path';
 
     // when
-    buildPhotoItem(path).catch((err) => {
+    buildPhotoItem(path).catch((err: Error) => {
       // then
       expect(err.toString())
         .toBe("Error: ENOENT: no such file or directory, stat '/not/existing/path'");
@@ -61,7 +61,7 @@ describe('Photo library item builder', () => {
     const path = getTestResourcePath('not-a-photo.txt');
 
     // when
-    buildPhotoItem(path).catch((err) => {
+    buildPhotoItem(path).catch((err: Error) => {
       // then
       expect(err.toString())
         .toBe('Error: Given file is not an image');

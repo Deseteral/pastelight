@@ -1,16 +1,3 @@
 {
-  "extends": "airbnb",
-  "env": {
-    "browser": true,
-    "node": true,
-    "jest": true,
-    "es6": true
-  },
-  "rules": {
-    "import/prefer-default-export": "off",
-    "import/no-extraneous-dependencies": [
-      "error",
-      { "devDependencies": ["**/*.spec.js", "config/**"] }
-    ]
-  }
+  "extends": "@deseteral/eslint-config/typescript"
 }

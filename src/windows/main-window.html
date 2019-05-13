@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
   <style>
     body {
       margin: 0;
       font-family: 'Roboto', sans-serif;
+
+      --color-active: #FFB300;
+      --color-text: #FFFFFF;
+      --color-navigationBar: #263238;
     }
   </style>
 </head>
@@ -14,10 +19,8 @@
   <div id="root"></div>
 </body>
 
-<script>window.exports = module.exports</script>
-<script type="text/jsx">
-import * as Bootup from '../application/bootup';
-Bootup.render();
-if (module.hot) { module.hot.accept(Bootup.render); }
+<script>
+const render = require('../application/bootup').render;
+render();
 </script>
 </html>
