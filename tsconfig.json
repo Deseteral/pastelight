@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "outDir": "build",
+    "allowSyntheticDefaultImports": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "esModuleInterop": true,
+    "noUnusedLocals": true,
+    "noImplicitAny": true,
+    "strict": true,
+    "module": "commonjs",
+    "jsx": "react",
+    "target": "es2018",
+    "moduleResolution": "node",
+    "lib": [
+      "dom",
+      "es2018"
+    ],
+    "types": [
+      "react",
+      "jest"
+    ],
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "build",
+    "**/__tests__/**/*"
+  ]
+}

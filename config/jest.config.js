@@ -1,6 +1,3 @@
-// For a detailed explanation regarding each configuration property, visit:
-// https://facebook.github.io/jest/docs/en/configuration.html
-
 module.exports = {
   rootDir: '../',
   testPathIgnorePatterns: [
@@ -8,7 +5,7 @@ module.exports = {
     '/out/',
   ],
   transform: {
-    '^.+\\.jsx?$': './config/script.transform.js',
+    '^.+\\.tsx?$': 'ts-jest',
   },
   clearMocks: true,
   collectCoverage: true,

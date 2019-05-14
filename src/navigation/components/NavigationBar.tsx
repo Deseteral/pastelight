@@ -1,9 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import TabsStripe from './TabsStripe';
-import Views from '../domain/views';
+import View from '../domain/view';
+import { AppState } from '../../application/reducer';
+
+interface PanelContainerProps {
+  extended: boolean;
+}
 
 const PanelContainer = styled.div`
   display: flex;
@@ -13,12 +17,16 @@ const PanelContainer = styled.div`
   align-items: center;
   padding: 16px;
   box-sizing: border-box;
-  background-color: ${({ extended, theme }) => (extended ? theme.colors.navigationBar : 'transparent')};
+  background-color: ${({ extended }: PanelContainerProps) => (extended ? 'var(--color-navigationBar)' : 'transparent')};
   transition: background-color 0.3s ease;
 `;
 
-function NavigationBar({ currentView }) {
-  const extended = currentView !== Views.MAPS;
+interface NavigationBarProps {
+  currentView: View;
+}
+
+function NavigationBar({ currentView }: NavigationBarProps) {
+  const extended = currentView !== View.MAPS;
 
   return (
     <PanelContainer extended={extended}>
@@ -28,10 +36,6 @@ function NavigationBar({ currentView }) {
   );
 }
 
-NavigationBar.propTypes = {
-  currentView: PropTypes.string.isRequired,
-};
-
-export default connect(state => ({
+export default connect((state: AppState) => ({
   currentView: state.currentView,
 }))(NavigationBar);

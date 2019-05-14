@@ -1,13 +1,18 @@
 import styled, { css } from 'styled-components';
 import TabsStripeContainer from './TabsStripeContainer';
 
+interface TabItemProps {
+  active: boolean;
+  shouldHide: boolean;
+}
+
 const TabItem = styled.div`
   cursor: pointer;
   max-width: 100px;
   margin: 0 8px;
   text-align: center;
   text-transform: uppercase;
-  color: ${({ active, theme }) => (active ? theme.colors.active : theme.colors.text)};
+  color: ${(props: TabItemProps) => (props.active ? 'var(--color-active)' : 'var(--color-text)')};
   opacity: 1;
   transition: max-width 0.4s, margin 0.4s, opacity 0.3s, color 0.4s;
   ${TabsStripeContainer}:not(:hover) & {
@@ -21,3 +26,6 @@ const TabItem = styled.div`
 `;
 
 export default TabItem;
+export {
+  TabItemProps,
+};

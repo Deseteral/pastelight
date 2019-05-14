@@ -1,13 +1,14 @@
 import fs from 'fs';
 import { promisify } from 'util';
-import { ExifImage } from 'exif';
+import { ExifImage, ExifData } from 'exif';
 import dms2dec from 'dms2dec';
 import getImageSize from 'image-size';
+import MediaItem, { MediaType, GeoPosition, PhotoMetadata } from '../domain/media-item';
 
 const readFileStats = promisify(fs.stat);
 const readExifData = promisify(ExifImage);
 
-async function getExifData(path) {
+async function getExifData(path: string) { // TODO: This function returns Promise<any> FIX IT!
   try {
     return await readExifData({ image: path });
   } catch (ex) {
@@ -15,7 +16,7 @@ async function getExifData(path) {
   }
 }
 
-function exifDateToIso(exifDate) {
+function exifDateToIso(exifDate: string) : string {
   // 2018:04:29 12:32:44
   const [date, time] = exifDate.split(' ');
   const formattedDate = date.replace(/:/g, '-');
@@ -23,7 +24,7 @@ function exifDateToIso(exifDate) {
   return `${formattedDate}T${time}`;
 }
 
-function getPhotoDate(exifData, fileStats) {
+function getPhotoDate(exifData: ExifData, fileStats: fs.Stats) : string {
   if (exifData && exifData.exif && exifData.exif.CreateDate) {
     return exifDateToIso(exifData.exif.CreateDate);
   }
@@ -31,20 +32,19 @@ function getPhotoDate(exifData, fileStats) {
   return fileStats.birthtime.toISOString();
 }
 
-function calculateExposureTime(exposureTime) {
-  const denominator = parseInt((1 / exposureTime), 10);
-  return `1/${denominator}`;
+function calculateExposureTime(exposureTime: number) : string {
+  return `1/${Math.floor((1 / exposureTime))}`;
 }
 
-function calculateMegapixels(width, height) {
+function calculateMegapixels(width: number, height: number) : string {
   return ((width * height) / 1000000).toFixed(1);
 }
 
-function prettyPrintGeoCoordinates(coords, ref) {
+function prettyPrintGeoCoordinates(coords: number[], ref: string) : string {
   return `${coords[0]}°${coords[1]}'${coords[2]}"${ref}`;
 }
 
-function getGeoPositionData(exifData) {
+function getGeoPositionData(exifData: ExifData) : (GeoPosition | null) {
   if (!exifData || !exifData.gps) return null;
 
   const {
@@ -81,7 +81,7 @@ function getGeoPositionData(exifData) {
   };
 }
 
-function getPhotoMetadata(exifData) {
+function getPhotoMetadata(exifData: ExifData) : (PhotoMetadata | null) {
   if (!exifData) return null;
   const { image, exif } = exifData;
 
@@ -100,7 +100,7 @@ function getPhotoMetadata(exifData) {
   };
 }
 
-async function buildPhotoItem(path) {
+async function buildPhotoItem(path: string) : Promise<MediaItem> {
   const stats = await readFileStats(path);
 
   try {
@@ -108,7 +108,7 @@ async function buildPhotoItem(path) {
     const exifData = await getExifData(path);
 
     return {
-      type: 'PHOTO',
+      type: MediaType.PHOTO,
       filePath: path,
       fileSizeBytes: stats.size,
       date: getPhotoDate(exifData, stats),
@@ -116,8 +116,6 @@ async function buildPhotoItem(path) {
       height,
       megapixels: calculateMegapixels(width, height),
       description: '',
-      categoryId: null,
-      tags: [],
       photoMetadata: getPhotoMetadata(exifData),
       geo: getGeoPositionData(exifData),
     };
