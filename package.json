@@ -7,8 +7,11 @@
   "main": "build/main.js",
   "scripts": {
     "start": "electron build/main.js",
-    "build": "rm -rf build && gulp && tsc",
-    "build:watch": "tsc -w",
+    "build": "npm run clean && npm run build:assets && npm run compile",
+    "build:assets": "gulp",
+    "compile": "tsc",
+    "compile:watch": "tsc -w",
+    "clean": "rm -rf build",
     "test": "npm run unit && npm run lint",
     "unit": "node ./config/run-unit-tests.js",
     "lint": "eslint src --ext js,jsx,ts,tsx"
