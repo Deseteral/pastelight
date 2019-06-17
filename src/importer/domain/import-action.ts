@@ -1,7 +1,7 @@
 enum ImportActionType {
   IMPORT_START_REQUEST = 'IMPORT_START_REQUEST',
-  IMPORT_START = 'IMPORT_START',
-  IMPORT_PREFLIGHT_COMPLETE = 'IMPORT_PREFLIGHT_COMPLETE',
+  IMPORT_STARTED = 'IMPORT_STARTED',
+  IMPORT_PREFLIGHT_COMPLETED = 'IMPORT_PREFLIGHT_COMPLETED',
   IMPORT_PROGRESS = 'IMPORT_PROGRESS',
   IMPORT_FINISHED = 'IMPORT_FINISHED',
 }
@@ -10,9 +10,9 @@ interface ImportStartRequestPayload {
   directoryPath: string; // TODO: This might be shared with library module (LibraryPath type)
 }
 
-type ImportStartPayload = null;
+type ImportStartedPayload = null;
 
-interface ImportPreflightCompletePayload {
+interface ImportPreflightCompletedPayload {
   totalFileCount: number;
 }
 
@@ -25,8 +25,8 @@ type ImportFinishedPayload = null;
 
 type ImportPayload = (
   ImportStartRequestPayload |
-  ImportStartPayload |
-  ImportPreflightCompletePayload |
+  ImportStartedPayload |
+  ImportPreflightCompletedPayload |
   ImportProgressPayload |
   ImportFinishedPayload
 );
@@ -42,8 +42,8 @@ export {
   ImportPayload,
   ImportAction,
   ImportStartRequestPayload,
-  ImportStartPayload,
-  ImportPreflightCompletePayload,
+  ImportStartedPayload,
+  ImportPreflightCompletedPayload,
   ImportProgressPayload,
   ImportFinishedPayload,
 };

@@ -1,8 +1,8 @@
 import ImportAction, {
   ImportStartRequestPayload,
   ImportActionType,
-  ImportStartPayload,
-  ImportPreflightCompletePayload,
+  ImportStartedPayload,
+  ImportPreflightCompletedPayload,
   ImportProgressPayload,
   ImportFinishedPayload,
 } from '../domain/import-action';
@@ -16,16 +16,16 @@ function importStartRequest(directoryPath: string) : ImportAction<ImportStartReq
   };
 }
 
-function importStart() : ImportAction<ImportStartPayload> {
+function importStarted() : ImportAction<ImportStartedPayload> {
   return {
-    type: ImportActionType.IMPORT_START,
+    type: ImportActionType.IMPORT_STARTED,
     payload: null,
   };
 }
 
-function importPreflightComplete(
+function importPreflightCompleted(
   totalFileCount: number,
-) : ImportAction<ImportPreflightCompletePayload> {
+) : ImportAction<ImportPreflightCompletedPayload> {
   return {
     type: ImportActionType.IMPORT_PREFLIGHT_COMPLETE,
     payload: {
@@ -56,8 +56,8 @@ function importFinished() : ImportAction<ImportFinishedPayload> {
 
 export {
   importStartRequest,
-  importStart,
-  importPreflightComplete,
+  importStarted,
+  importPreflightCompleted,
   importProgress,
   importFinished,
 };

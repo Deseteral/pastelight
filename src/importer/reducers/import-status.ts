@@ -1,5 +1,5 @@
 
-import ImportAction, { ImportPayload, ImportPreflightCompletePayload, ImportProgressPayload, ImportActionType } from '../domain/import-action';
+import ImportAction, { ImportPayload, ImportPreflightCompletedPayload, ImportProgressPayload, ImportActionType } from '../domain/import-action';
 import ImportStatus from '../domain/import-status';
 
 const DEFAULT_STATE: ImportStatus = {
@@ -11,11 +11,11 @@ const DEFAULT_STATE: ImportStatus = {
 
 function importStatus(state: ImportStatus = DEFAULT_STATE, action: ImportAction<ImportPayload>) {
   switch (action.type) {
-    case ImportActionType.IMPORT_START:
+    case ImportActionType.IMPORT_STARTED:
       return { ...state, isInProgress: true };
 
-    case ImportActionType.IMPORT_PREFLIGHT_COMPLETE: {
-      const payload = action.payload as ImportPreflightCompletePayload;
+    case ImportActionType.IMPORT_PREFLIGHT_COMPLETED: {
+      const payload = action.payload as ImportPreflightCompletedPayload;
       return { ...state, totalFileCount: payload.totalFileCount };
     }
 
