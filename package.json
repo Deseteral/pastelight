@@ -7,6 +7,7 @@
   "main": "build/main.js",
   "scripts": {
     "start": "electron build/main.js",
+    "dev": "npm run build && npm run compile:watch",
     "build": "npm run clean && npm run build:assets && npm run compile",
     "build:assets": "gulp",
     "compile": "tsc",
