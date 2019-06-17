@@ -8,7 +8,6 @@ module.exports = {
     '^.+\\.tsx?$': 'ts-jest',
   },
   clearMocks: true,
-  collectCoverage: true,
   coverageDirectory: 'coverage',
   watchPlugins: [
     'jest-watch-typeahead/filename',
