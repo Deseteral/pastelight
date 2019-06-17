@@ -8,3 +8,8 @@ script:
   - npm test
 env:
   CI=true
+jobs:
+  include:
+    - stage: Produce Coverage
+      node_js: node
+      script: npm run unit && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
