@@ -2,8 +2,7 @@ import recursiveReaddir from 'recursive-readdir';
 import { buildPhotoItem } from './photo-item-builder';
 import MediaItem from '../domain/media-item';
 
-// TODO: `directoryPath` might share type with library module
-async function getAcceptableFiles(directoryPath: string) {
+async function getAcceptableFiles(directoryPath: string) : Promise<string[]> {
   const supportedPhotoFormats = [
     'jpg', 'jpeg', // TODO: Move this somewhere else
   ];
@@ -32,6 +31,8 @@ async function importDirectory(
   const totalFileCount = files.length;
   preflightCompletedCallback(totalFileCount);
 
+  // TODO: Promise#all rejects as soon as first promise rejects.
+  // This should have proper error handling.
   Promise.all(files.map((filePath: string) => processFile(filePath, fileImportedCallback)));
 }
 
