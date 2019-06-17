@@ -27,7 +27,7 @@ function importPreflightCompleted(
   totalFileCount: number,
 ) : ImportAction<ImportPreflightCompletedPayload> {
   return {
-    type: ImportActionType.IMPORT_PREFLIGHT_COMPLETE,
+    type: ImportActionType.IMPORT_PREFLIGHT_COMPLETED,
     payload: {
       totalFileCount,
     },
