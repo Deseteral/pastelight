@@ -1,6 +1,8 @@
 import Path from '../model/path';
 import { LibraryPathAction, LibraryPathActionType } from '../actions/library-path-actions';
 
+type LibraryPathState = Path;
+
 function libraryPath(state: Path = null, action: LibraryPathAction) : Path {
   switch (action.type) {
     case LibraryPathActionType.LIBRARY_PATH_LOADED:
@@ -11,3 +13,6 @@ function libraryPath(state: Path = null, action: LibraryPathAction) : Path {
 }
 
 export default libraryPath;
+export {
+  LibraryPathState,
+};

@@ -1,12 +1,10 @@
 import { combineReducers, Reducer } from 'redux';
-import libraryPath from '../library/reducers/library-path';
-import currentView from '../navigation/reducers/current-view';
-import Path from '../library/model/path';
-import View from '../navigation/domain/view';
+import libraryPath, { LibraryPathState } from '../library/reducers/library-path';
+import currentView, { CurrentViewState } from '../navigation/reducers/current-view';
 
 interface AppState {
-  libraryPath: Path;
-  currentView: View;
+  libraryPath: LibraryPathState;
+  currentView: CurrentViewState;
 }
 
 const reducer: Reducer<AppState> = combineReducers({
