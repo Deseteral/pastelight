@@ -1,5 +1,5 @@
 import View from '../domain/view';
-import ViewChangeAction, { ViewChangeActionType } from '../domain/view-change-action';
+import { ViewChangeAction, ViewChangeActionType } from '../actions/view-change-actions';
 
 function currentView(state: View = View.LIBRARY, action: ViewChangeAction) {
   switch (action.type) {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import TabItem from './TabItem';
-import { viewChange } from '../actions/view-change';
+import { viewChange } from '../actions/view-change-actions';
 import View from '../domain/view';
 import { AppState } from '../../application/reducer';
 import TabsStripeContainer from './TabsStripeContainer';
