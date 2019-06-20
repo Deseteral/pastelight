@@ -7,7 +7,7 @@ enum ImportActionType {
 }
 
 interface ImportStartRequestPayload {
-  directoryPath: string; // TODO: This might be shared with library module (LibraryPath type)
+  directoryPath: string;
 }
 
 type ImportStartedPayload = null;
