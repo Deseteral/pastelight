@@ -1,3 +1,9 @@
 {
-  "extends": "@deseteral/eslint-config/typescript"
+  "extends": "@deseteral/eslint-config/typescript",
+  "plugins": [
+    "eslint-plugin-pastelight"
+  ],
+  "rules": {
+    "pastelight/no-application-import": "error"
+  }
 }

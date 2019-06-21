@@ -13,8 +13,9 @@
     "compile": "tsc",
     "compile:watch": "tsc -w",
     "clean": "rm -rf build",
-    "test": "npm run unit && npm run lint",
+    "test": "npm run unit && npm run unit:eslint-rules && npm run lint",
     "unit": "node ./config/run-unit-tests.js",
+    "unit:eslint-rules": "node ./config/eslint-plugin-pastelight/tests.js",
     "lint": "eslint src --ext js,jsx,ts,tsx"
   },
   "dependencies": {
@@ -43,6 +44,7 @@
     "@types/styled-components": "4.1.14",
     "coveralls": "3.0.4",
     "eslint": "5.16.0",
+    "eslint-plugin-pastelight": "file:config/eslint-plugin-pastelight",
     "gulp": "4.0.2",
     "gulp-replace": "1.0.0",
     "jest": "24.8.0",
