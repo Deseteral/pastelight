@@ -1,5 +1,5 @@
 {
   "name": "eslint-plugin-pastelight",
   "version": "0.0.0",
-  "main": "abc.js"
+  "main": "index.js"
 }

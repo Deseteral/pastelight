@@ -1,6 +1,5 @@
 {
   "rules": {
-    "pastelight/no-application-import": "off",
     "pastelight/import-only-module-index": "off"
   }
 }

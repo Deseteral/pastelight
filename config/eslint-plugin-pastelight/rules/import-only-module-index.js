@@ -5,7 +5,7 @@ const srcPath = path.join(process.cwd(), 'src');
 // TODO: It is possible to use withFileTypes: true and get isDirectory immediately, just have to
 //       wait for VSCode to bump their version of node to probably 12? It currently sits on 10 and
 //       that's too low
-const moduleList = fs.readdirSync(srcPath, { withFileTypes: true, encoding: 'utf8' })
+const moduleList = fs.readdirSync(srcPath, { encoding: 'utf8' })
   .map(name => ({ name, stat: fs.lstatSync(path.join(srcPath, name)) }))
   .filter(file => file.stat.isDirectory())
   .map(file => file.name)
