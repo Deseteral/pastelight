@@ -1,4 +1,3 @@
-/* eslint-ignore pastelight/no-application-import */
 const processor = context => (node) => {
   const importPath = node.parent.source.value;
 
