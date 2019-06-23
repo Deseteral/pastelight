@@ -8,8 +8,7 @@ const srcPath = path.join(process.cwd(), 'src');
 const moduleList = fs.readdirSync(srcPath, { encoding: 'utf8' })
   .map(name => ({ name, stat: fs.lstatSync(path.join(srcPath, name)) }))
   .filter(file => file.stat.isDirectory())
-  .map(file => file.name)
-  .filter(name => name !== 'application');
+  .map(file => file.name);
 
 const moduleImportPatternList = moduleList.map(name => `/${name}/`);
 
