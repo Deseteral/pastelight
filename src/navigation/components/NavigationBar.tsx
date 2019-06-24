@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import TabsStripe from './TabsStripe';
 import View from '../domain/view';
-import { AppState } from '../../application/reducer';
+import { AppState } from '../../application';
 
 interface PanelContainerProps {
   extended: boolean;

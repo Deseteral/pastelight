@@ -1,6 +1,6 @@
 import { combineReducers, Reducer } from 'redux';
-import libraryPath, { LibraryPathState } from '../library/reducers/library-path';
-import currentView, { CurrentViewState } from '../navigation/reducers/current-view';
+import { libraryPath, LibraryPathState } from '../library';
+import { currentView, CurrentViewState } from '../navigation';
 
 interface AppState {
   libraryPath: LibraryPathState;

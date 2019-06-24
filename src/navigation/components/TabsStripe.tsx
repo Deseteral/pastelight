@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import TabItem from './TabItem';
 import { viewChange } from '../actions/view-change-actions';
 import View from '../domain/view';
-import { AppState } from '../../application/reducer';
+import { AppState } from '../../application';
 import TabsStripeContainer from './TabsStripeContainer';
 
 interface TabsStripeProps {

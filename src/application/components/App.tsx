@@ -2,8 +2,7 @@ import React from 'react';
 import { Store } from 'redux';
 import { Provider } from 'react-redux';
 import { AppState } from '../reducer';
-import ViewRouter from '../../navigation/components/ViewRouter';
-import NavigationBar from '../../navigation/components/NavigationBar';
+import { ViewRouter, NavigationBar } from '../../navigation';
 
 interface AppProps {
   store: Store<AppState>;

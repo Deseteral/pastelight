@@ -1,5 +1,5 @@
 import { app } from 'electron';
-import * as MainWindow from './windows/main-window';
+import { createMainWindow } from './windows';
 
-app.on('ready', MainWindow.create);
+app.on('ready', createMainWindow);
 app.on('window-all-closed', () => app.quit());

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import View from '../domain/view';
-import { AppState } from '../../application/reducer';
+import { AppState } from '../../application';
 
 interface ViewRouterProps {
   currentView: View;
