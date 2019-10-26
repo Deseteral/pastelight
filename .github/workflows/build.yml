@@ -2,15 +2,17 @@ name: Build
 
 on: [push]
 
+use-node-ver: 12.x
+
 jobs:
   Windows:
     runs-on: windows-2019
     steps:
     - uses: actions/checkout@v1
-    - name: Use Node.js 12.x
+    - name: Use Node.js ${{ use-node-ver }}
       uses: actions/setup-node@v1
       with:
-        node-version: 12.x
+        node-version: ${{ use-node-ver }}
     - name: npm install, build, and test
       run: |
         npm ci
@@ -23,10 +25,10 @@ jobs:
     runs-on: macOS-10.14
     steps:
     - uses: actions/checkout@v1
-    - name: Use Node.js 12.x
+    - name: Use Node.js ${{ use-node-ver }}
       uses: actions/setup-node@v1
       with:
-        node-version: 12.x
+        node-version: ${{ use-node-ver }}
     - name: npm install, build, and test
       run: |
         npm ci
@@ -39,10 +41,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - name: Use Node.js 12.x
+    - name: Use Node.js ${{ use-node-ver }}
       uses: actions/setup-node@v1
       with:
-        node-version: 12.x
+        node-version: ${{ use-node-ver }}
     - name: npm install, build, and test
       run: |
         npm ci
