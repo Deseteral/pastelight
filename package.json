@@ -42,7 +42,7 @@
     "@types/recursive-readdir": "2.2.0",
     "@types/styled-components": "4.1.19",
     "coveralls": "3.0.7",
-    "eslint": "6.6.0",
+    "eslint": "5.16.0",
     "eslint-plugin-pastelight": "file:config/eslint-plugin-pastelight",
     "gulp": "4.0.2",
     "gulp-replace": "1.0.0",
