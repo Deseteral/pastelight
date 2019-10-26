@@ -5,7 +5,7 @@ const packageJson = require('./package.json');
 const APPLICATION_NAME = `${packageJson.name} ${packageJson.version}`;
 
 function copyWindowHtml() {
-  return src('src/windows/*.html')
+  return src('src/windows/**/*.html')
     .pipe(replace('{APPLICATION_NAME}', APPLICATION_NAME))
     .pipe(dest('build/windows'));
 }
