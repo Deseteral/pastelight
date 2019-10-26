@@ -11,6 +11,7 @@ const CI_ONLY_ARGS = [
 
 const args = [
   '--config', './config/jest.config.js',
+  '--passWithNoTests',
   ...(IS_CI ? CI_ONLY_ARGS : LOCAL_ONLY_ARGS),
 ];
 
