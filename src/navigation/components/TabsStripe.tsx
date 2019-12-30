@@ -22,7 +22,7 @@ function TabsStripe({ currentView, extended = false, onTabChange }: TabsStripePr
 
   return (
     <TabsStripeContainer>
-      {tabs.map(tab => (
+      {tabs.map((tab) => (
         <TabItem
           key={tab.name}
           onClick={() => onTabChange(tab.view)}
