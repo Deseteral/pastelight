@@ -1,9 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
 import TabsStripe from './TabsStripe';
 import View from '../domain/view';
-import { AppState } from '../../application';
+import useNavigation from '../state/use-navigation';
 
 interface PanelContainerProps {
   extended: boolean;
@@ -21,21 +20,16 @@ const PanelContainer = styled.div`
   transition: background-color 0.3s ease;
 `;
 
-interface NavigationBarProps {
-  currentView: View;
-}
-
-function NavigationBar({ currentView }: NavigationBarProps) {
+function NavigationBar() {
+  const { currentView, changeView } = useNavigation();
   const extended = currentView !== View.MAPS;
 
   return (
     <PanelContainer extended={extended}>
       <div style={({ flex: 1 })} />
-      <TabsStripe extended={extended} />
+      <TabsStripe extended={extended} currentView={currentView} onTabChange={changeView} />
     </PanelContainer>
   );
 }
 
-export default connect((state: AppState) => ({
-  currentView: state.currentView,
-}))(NavigationBar);
+export default NavigationBar;

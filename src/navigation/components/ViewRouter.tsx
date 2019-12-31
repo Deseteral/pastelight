@@ -1,13 +1,10 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import View from '../domain/view';
-import { AppState } from '../../application';
+import useNavigation from '../state/use-navigation';
 
-interface ViewRouterProps {
-  currentView: View;
-}
+function ViewRouter() {
+  const { currentView } = useNavigation();
 
-function ViewRouter({ currentView }: ViewRouterProps) {
   switch (currentView) {
     case View.LIBRARY:
       return (<div>library view</div>);
@@ -18,6 +15,4 @@ function ViewRouter({ currentView }: ViewRouterProps) {
   }
 }
 
-export default connect((state: AppState) => ({
-  currentView: state.currentView,
-}))(ViewRouter);
+export default ViewRouter;

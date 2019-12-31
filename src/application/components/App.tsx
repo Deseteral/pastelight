@@ -1,21 +1,12 @@
 import React from 'react';
-import { Store } from 'redux';
-import { Provider } from 'react-redux';
-import { AppState } from '../reducer';
-import { ViewRouter, NavigationBar } from '../../navigation';
+import { ViewRouter, NavigationBar, NavigationProvider } from '../../navigation';
 
-interface AppProps {
-  store: Store<AppState>;
-}
-
-function App({ store }: AppProps) {
+function App() {
   return (
-    <Provider store={store}>
-      <>
-        <NavigationBar />
-        <ViewRouter />
-      </>
-    </Provider>
+    <NavigationProvider>
+      <NavigationBar />
+      <ViewRouter />
+    </NavigationProvider>
   );
 }
 
