@@ -4,6 +4,7 @@ const { RuleTester } = require('../../node_modules/eslint');
 const ruleTester = new RuleTester();
 
 const parserOptions = {
+  ecmaVersion: 2015,
   sourceType: 'module',
 };
 
