@@ -1,10 +1,14 @@
-node_modules
-build
+# General
 coverage
+build
+dist
+.DS_Store
+
+# Node specific
+node_modules
 .eslintcache
 
+# Rust specific
 **/target
 *.node
 artifacts.json
-
-.DS_Store
