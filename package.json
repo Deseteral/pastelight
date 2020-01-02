@@ -10,6 +10,7 @@
     "dev": "npm run build && npm run compile:watch",
     "build": "npm run clean && npm run build:assets && npm run compile",
     "build:assets": "gulp",
+    "build:neon": "electron-build-env neon build --release",
     "compile": "tsc",
     "compile:watch": "tsc -w",
     "clean": "rm -rf build",
@@ -33,12 +34,14 @@
     "@types/react-dom": "16.9.4",
     "@types/styled-components": "4.4.1",
     "coveralls": "3.0.9",
+    "electron-build-env": "0.2.0",
     "eslint": "6.8.0",
     "eslint-plugin-pastelight": "file:config/eslint-plugin-pastelight",
     "gulp": "4.0.2",
     "gulp-replace": "1.0.0",
     "jest": "24.9.0",
     "jest-watch-typeahead": "0.4.2",
+    "neon-cli": "0.3.3",
     "ts-jest": "24.2.0",
     "typescript": "3.7.4"
   }

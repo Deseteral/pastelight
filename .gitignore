@@ -2,3 +2,9 @@ node_modules
 build
 coverage
 .eslintcache
+
+**/target
+*.node
+artifacts.json
+
+.DS_Store
