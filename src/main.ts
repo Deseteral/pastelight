@@ -1,7 +1,7 @@
 import { app } from 'electron';
 import { createMainWindow } from './windows';
 
-const native = require('../native/index.node');
+const native = require('./native/index.node');
 
 app.on('ready', () => {
   createMainWindow();

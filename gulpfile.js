@@ -10,4 +10,9 @@ function copyWindowHtml() {
     .pipe(dest('build/windows'));
 }
 
-exports.default = parallel(copyWindowHtml);
+function copyNative() {
+  return src('src/native/index.node')
+    .pipe(dest('build/native'));
+}
+
+exports.default = parallel(copyWindowHtml, copyNative);
