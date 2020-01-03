@@ -8,14 +8,15 @@
   "main": "build/main.js",
   "build": {
     "appId": "xyz.deseteral.pastelight",
-    "files": ["build/**/*"]
+    "files": [
+      "build/**/*"
+    ]
   },
   "scripts": {
     "start": "electron build/main.js",
     "dev": "npm run build && npm run compile:watch",
-    "build": "npm run clean && npm run build:native && npm run build:assets && npm run compile",
+    "build": "npm run clean && npm run build:assets && npm run compile",
     "build:assets": "gulp",
-    "build:native": "electron-build-env neon build --release && cp native/index.node src/native/index.node",
     "compile": "tsc",
     "compile:watch": "tsc -w",
     "clean": "rm -rf build",
@@ -50,7 +51,6 @@
     "gulp-replace": "1.0.0",
     "jest": "24.9.0",
     "jest-watch-typeahead": "0.4.2",
-    "neon-cli": "0.3.3",
     "ts-jest": "24.2.0",
     "typescript": "3.7.4"
   }
