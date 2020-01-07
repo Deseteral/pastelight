@@ -4,6 +4,7 @@
     "eslint-plugin-pastelight"
   ],
   "rules": {
+    "import/no-extraneous-dependencies": "off",
     "pastelight/import-only-module-index": "error"
   }
 }
