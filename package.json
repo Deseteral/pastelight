@@ -15,7 +15,9 @@
       {
         "from": "native",
         "to": "Resources/native",
-        "filter": ["**/*"]
+        "filter": [
+          "**/*"
+        ]
       }
     ]
   },
@@ -30,9 +32,10 @@
     "test": "npm run unit && npm run unit:eslint-rules && npm run lint",
     "unit": "node ./config/run-unit-tests.js",
     "unit:eslint-rules": "node ./config/eslint-plugin-pastelight/tests.js",
-    "lint": "eslint src --ext js,jsx,ts,tsx",
+    "lint": "eslint . --ext js,jsx,ts,tsx",
     "pack": "npm run build && cross-env CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder --dir",
-    "dist": "electron-builder"
+    "dist": "npm run build && electron-builder",
+    "install": "node ./config/install-native-binaries.js"
   },
   "dependencies": {
     "electron-devtools-installer": "2.2.4",
@@ -59,6 +62,8 @@
     "gulp-replace": "1.0.0",
     "jest": "24.9.0",
     "jest-watch-typeahead": "0.4.2",
+    "node-fetch": "2.6.0",
+    "rimraf": "3.0.0",
     "ts-jest": "24.2.0",
     "typescript": "3.7.4"
   }

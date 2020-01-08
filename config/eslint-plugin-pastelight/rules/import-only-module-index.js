@@ -6,13 +6,13 @@ const srcPath = path.join(process.cwd(), 'src');
 //       wait for VSCode to bump their version of node to probably 12? It currently sits on 10 and
 //       that's too low
 const moduleList = fs.readdirSync(srcPath, { encoding: 'utf8' })
-  .map(name => ({ name, stat: fs.lstatSync(path.join(srcPath, name)) }))
-  .filter(file => file.stat.isDirectory())
-  .map(file => file.name);
+  .map((name) => ({ name, stat: fs.lstatSync(path.join(srcPath, name)) }))
+  .filter((file) => file.stat.isDirectory())
+  .map((file) => file.name);
 
-const moduleImportPatternList = moduleList.map(name => `/${name}/`);
+const moduleImportPatternList = moduleList.map((name) => `/${name}/`);
 
-const processor = context => (node) => {
+const processor = (context) => (node) => {
   const importPath = node.parent.source.value;
 
   moduleImportPatternList.forEach((pattern) => {
@@ -30,7 +30,7 @@ module.exports = {
     type: 'suggestion',
     fixable: 'code',
   },
-  create: context => ({
+  create: (context) => ({
     ImportSpecifier: processor(context),
     ImportDefaultSpecifier: processor(context),
     ImportNamespaceSpecifier: processor(context),
