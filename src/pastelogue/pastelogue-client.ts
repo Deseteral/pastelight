@@ -1,10 +1,10 @@
 import { spawn, ChildProcessWithoutNullStreams } from 'child_process';
-import { getExecPath } from '../application';
+import { getNativeBinaryPath } from '../application';
 
 let serverProcess: ChildProcessWithoutNullStreams;
 
 (function initializePastelogueClient() {
-  const execPath = getExecPath(['pastelogue', 'pastelogue_server']);
+  const execPath = getNativeBinaryPath(['pastelogue', 'pastelogue_server']);
   serverProcess = spawn(execPath);
 
   serverProcess.stdout.on('data', (data) => {

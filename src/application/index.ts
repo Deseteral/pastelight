@@ -1,4 +1,4 @@
 import isDevMode from './is-dev-mode';
-import getExecPath from './get-exec-path';
+import getNativeBinaryPath from './get-native-binary-path';
 
-export { isDevMode, getExecPath };
+export { isDevMode, getNativeBinaryPath };

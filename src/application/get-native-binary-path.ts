@@ -4,7 +4,7 @@ import { remote } from 'electron';
 import { rootPath } from 'electron-root-path'; // TODO: Do something with missing declarations
 import isDevMode from './is-dev-mode';
 
-function getExecPath(pathInsideNative: string[]) : string {
+function getNativeBinaryPath(pathInsideNative: string[]) : string {
   const binaryPath = path.join(...pathInsideNative);
 
   const { getAppPath } = remote.app;
@@ -16,4 +16,4 @@ function getExecPath(pathInsideNative: string[]) : string {
   return path.resolve(binariesPath);
 }
 
-export default getExecPath;
+export default getNativeBinaryPath;
