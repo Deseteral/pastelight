@@ -47,11 +47,11 @@ async function pastelogue() {
     windows: 'Windows',
   });
   const extension = getForPlatform({
-    macos: 'tar.gz',
-    windows: 'zip',
+    macos: '.tar.gz',
+    windows: '.zip',
   });
-  const url = `https://github.com/Deseteral/pastelogue/releases/download/${version}/pastelogue_${version}_${platform}.${extension}`;
-  const archivePath = `./native/pastelogue.${extension}`;
+  const url = `https://github.com/Deseteral/pastelogue/releases/download/${version}/pastelogue_${version}_${platform}${extension}`;
+  const archivePath = `./native/pastelogue${extension}`;
 
   logger(`Downloading pastelogue ${version} for ${platform}`);
 
