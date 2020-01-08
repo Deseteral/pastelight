@@ -16,7 +16,8 @@ const logger = console.log; // eslint-disable-line no-console
 const rmrf = (pathToRemove) => rimraf.sync(pathToRemove);
 const mkdir = (pathToCreate) => fs.mkdirSync(pathToCreate);
 const getForPlatform = (platformData) => platformData[CURRENT_PLATFORM] || null;
-const shell = (cmd) => spawnSync(cmd.split(' ')[0], cmd.split(' ').slice(1), { stdio: 'inherit' });
+const shell = (cmd) => spawnSync(cmd.split(' ')[0], cmd.split(' ').slice(1), { stdio: 'inherit', shell: true });
+const powershell = (cmd) => shell(`powershell.exe -NoP -NonI -Command "${cmd}"`);
 
 async function downloadFile(url, filePath) {
   const res = await fetch(url);
@@ -34,7 +35,7 @@ function extractArchive(filePath, outputPath) {
     return shell(`tar xzf ${filePath} -C ${outputPath} --strip-components 1`);
   }
   if (CURRENT_PLATFORM === 'windows') {
-    return shell('echo "not implemented"'); // TODO: Add Windows support
+    return powershell(`Expand-Archive '${filePath}' '${outputPath}'`);
   }
   return null;
 }
@@ -56,7 +57,7 @@ async function pastelogue() {
 
   mkdir('./native/pastelogue');
   await downloadFile(url, archivePath);
-  await extractArchive(archivePath, './native/pastelogue');
+  extractArchive(archivePath, './native/pastelogue');
   rmrf(archivePath);
 
   logger('Done');
