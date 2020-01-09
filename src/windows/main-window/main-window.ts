@@ -1,7 +1,6 @@
 import { BrowserWindow } from 'electron';
 import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
-
-const isDevMode = !!process.execPath.match(/[\\/]electron/);
+import { isDevMode } from '../../application';
 
 let mainWindow = null;
 
@@ -14,7 +13,7 @@ async function create() {
 
   mainWindow.loadURL(`file://${__dirname}/main-window.html`);
 
-  if (isDevMode) {
+  if (isDevMode()) {
     await installExtension(REACT_DEVELOPER_TOOLS);
     mainWindow.webContents.openDevTools();
   }

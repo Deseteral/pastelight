@@ -1,4 +1,10 @@
-node_modules
-build
+# General
 coverage
+build
+dist
+native
+.DS_Store
+
+# Node specific
+node_modules
 .eslintcache

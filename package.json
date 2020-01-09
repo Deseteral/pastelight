@@ -1,10 +1,26 @@
 {
   "name": "pastelight",
+  "description": "Photo organizer",
   "productName": "pastelight",
   "version": "1.0.0-beta",
   "author": "deseteral@gmail.com",
   "license": "MIT",
   "main": "build/main.js",
+  "build": {
+    "appId": "xyz.deseteral.pastelight",
+    "files": [
+      "build/**/*"
+    ],
+    "extraFiles": [
+      {
+        "from": "native",
+        "to": "Resources/native",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ]
+  },
   "scripts": {
     "start": "electron build/main.js",
     "dev": "npm run build && npm run compile:watch",
@@ -16,11 +32,14 @@
     "test": "npm run unit && npm run unit:eslint-rules && npm run lint",
     "unit": "node ./config/run-unit-tests.js",
     "unit:eslint-rules": "node ./config/eslint-plugin-pastelight/tests.js",
-    "lint": "eslint src --ext js,jsx,ts,tsx"
+    "lint": "eslint . --ext js,jsx,ts,tsx",
+    "pack:dist": "npm run build && cross-env CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder",
+    "pack:exec": "npm run pack:dist -- --dir",
+    "install": "node ./config/install-native-binaries.js"
   },
   "dependencies": {
-    "electron": "7.1.7",
     "electron-devtools-installer": "2.2.4",
+    "electron-root-path": "1.0.16",
     "react": "16.12.0",
     "react-dom": "16.12.0",
     "styled-components": "4.4.1"
@@ -31,15 +50,20 @@
     "@types/jest": "24.0.25",
     "@types/react": "16.9.17",
     "@types/react-dom": "16.9.4",
-    "@types/styled-components": "4.4.1",
+    "@types/styled-components": "4.4.2",
     "coveralls": "3.0.9",
+    "cross-env": "6.0.3",
+    "electron": "7.1.8",
+    "electron-builder": "21.2.0",
     "eslint": "6.8.0",
     "eslint-plugin-pastelight": "file:config/eslint-plugin-pastelight",
     "gulp": "4.0.2",
     "gulp-replace": "1.0.0",
     "jest": "24.9.0",
     "jest-watch-typeahead": "0.4.2",
-    "ts-jest": "24.2.0",
+    "node-fetch": "2.6.0",
+    "rimraf": "3.0.0",
+    "ts-jest": "24.3.0",
     "typescript": "3.7.4"
   }
 }
