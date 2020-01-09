@@ -32,7 +32,7 @@
     "test": "npm run unit && npm run unit:eslint-rules && npm run lint",
     "unit": "node ./config/run-unit-tests.js",
     "unit:eslint-rules": "node ./config/eslint-plugin-pastelight/tests.js",
-    "lint": "eslint '{src,config}/**/*.{js,jsx,ts,tsx}'",
+    "lint": "eslint . --ext js,jsx,ts,tsx",
     "pack:dist": "npm run build && cross-env CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder",
     "pack:exec": "npm run pack:dist -- --dir",
     "install": "node ./config/install-native-binaries.js"
@@ -40,7 +40,6 @@
   "dependencies": {
     "electron-devtools-installer": "2.2.4",
     "electron-root-path": "1.0.16",
-    "fsevents": "1.2.9",
     "react": "16.12.0",
     "react-dom": "16.12.0",
     "styled-components": "4.4.1"
