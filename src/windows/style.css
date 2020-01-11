@@ -4,8 +4,10 @@ body {
   --color-text: #000000;
   --color-text-primary: #FFFFFF;
   --color-background: #FFFFFF;
-  --color-primary: #FFB300;
-  --color-primary-dark: #FFA000;
+  --color-primary: #2196F3;
+  --color-primary-dark: #1E88E5;
+
+  /* Primary color for 'DSLR dark' theme: #FFB300 */
 
   margin: 0;
   color: var(--color-text);
