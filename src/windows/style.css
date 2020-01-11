@@ -3,6 +3,9 @@
 body {
   margin: 0;
   font-family: 'Varela Round', sans-serif;
+  user-select: none;
+
+  --color-background: #FFFFFF;
 
   --color-active: #FFB300;
   --color-text: #FFFFFF;
