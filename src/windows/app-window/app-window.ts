@@ -1,6 +1,6 @@
 import { BrowserWindow } from 'electron';
-import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
-import { isDevMode } from '../../application';
+// import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
+// import { isDevMode } from '../../application';
 
 let appWindow = null;
 

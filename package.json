@@ -33,7 +33,7 @@
     "unit": "node ./config/run-unit-tests.js",
     "unit:eslint-rules": "node ./config/eslint-plugin-pastelight/tests.js",
     "lint": "eslint . --ext js,jsx,ts,tsx",
-    "pack:dist": "npm run build && cross-env CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder",
+    "pack:dist": "rm -rf dist && npm run build && cross-env CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder",
     "pack:exec": "npm run pack:dist -- --dir",
     "install": "node ./config/install-native-binaries.js"
   },

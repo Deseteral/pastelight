@@ -21,6 +21,8 @@ async function createWelcomeScreenWindow() {
   });
   welcomeScreenWindow.loadURL(`file://${__dirname}/welcome-screen.html`);
 
+  // TODO: Make correct menu for this window
+
   if (isDevMode()) {
     await installExtension(REACT_DEVELOPER_TOOLS);
     welcomeScreenWindow.webContents.openDevTools();
