@@ -7,7 +7,7 @@ let welcomeScreenWindow: (BrowserWindow | null);
 async function createWelcomeScreenWindow() {
   welcomeScreenWindow = new BrowserWindow({
     title: 'pastelight',
-    width: 640,
+    width: 800,
     height: 480,
     show: false,
     center: true,
@@ -16,6 +16,7 @@ async function createWelcomeScreenWindow() {
     fullscreen: false,
     fullscreenable: false,
     titleBarStyle: 'hidden',
+    vibrancy: 'under-window',
     webPreferences: { nodeIntegration: true },
   });
   welcomeScreenWindow.loadURL(`file://${__dirname}/welcome-screen.html`);
