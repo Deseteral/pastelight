@@ -1,5 +1,7 @@
 import { app } from 'electron';
-import { createMainWindow } from './windows';
+import { createAppWindow } from './application';
 
-app.on('ready', createMainWindow);
+app.on('ready', async () => {
+  await createAppWindow();
+});
 app.on('window-all-closed', () => app.quit());
