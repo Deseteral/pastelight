@@ -2,12 +2,20 @@ import { BrowserWindow } from 'electron';
 import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
 import { isDevMode } from '../../application';
 
-let welcomeScreenWindow = null;
+let welcomeScreenWindow: (BrowserWindow | null);
 
 async function createWelcomeScreenWindow() {
   welcomeScreenWindow = new BrowserWindow({
+    title: 'pastelight',
     width: 640,
     height: 480,
+    show: false,
+    center: true,
+    resizable: false,
+    maximizable: false,
+    fullscreen: false,
+    fullscreenable: false,
+    titleBarStyle: 'hidden',
     webPreferences: { nodeIntegration: true },
   });
   welcomeScreenWindow.loadURL(`file://${__dirname}/welcome-screen.html`);
@@ -19,6 +27,10 @@ async function createWelcomeScreenWindow() {
 
   welcomeScreenWindow.on('closed', () => {
     welcomeScreenWindow = null;
+  });
+
+  welcomeScreenWindow.once('ready-to-show', () => {
+    (welcomeScreenWindow as BrowserWindow).show();
   });
 }
 

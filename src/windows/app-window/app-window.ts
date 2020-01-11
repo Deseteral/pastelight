@@ -6,8 +6,11 @@ let appWindow = null;
 
 async function createAppWindow() {
   appWindow = new BrowserWindow({
+    title: 'pastelight',
     width: 800,
     height: 600,
+    show: false,
+    center: true,
     webPreferences: { nodeIntegration: true },
   });
   appWindow.loadURL(`file://${__dirname}/app-window.html`);
