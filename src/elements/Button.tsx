@@ -9,7 +9,7 @@ const StyledButton = styled.button`
 
   padding: 10px;
 
-  color: white;
+  color: var(--color-text-primary);
   background-color: var(--color-primary);
 
   border: none;

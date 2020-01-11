@@ -1,11 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Varela+Round&display=swap');
 
 body {
-  margin: 0;
-  font-family: 'Varela Round', sans-serif;
-  user-select: none;
-
+  --color-text: #000000;
+  --color-text-primary: #FFFFFF;
   --color-background: #FFFFFF;
   --color-primary: #FFB300;
   --color-primary-dark: #FFA000;
+
+  margin: 0;
+  color: var(--color-text);
+  font-family: 'Varela Round', sans-serif;
+  user-select: none;
 }
