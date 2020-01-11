@@ -1,8 +1,8 @@
 {
   "name": "pastelight",
-  "description": "Photo organizer",
   "productName": "pastelight",
-  "version": "1.0.0-beta",
+  "description": "Photo organizer",
+  "version": "0.1.0",
   "author": "deseteral@gmail.com",
   "license": "MIT",
   "main": "build/main.js",
