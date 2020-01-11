@@ -23,6 +23,7 @@ const RecentPane = styled.div`
 `;
 
 // https://www.flaticon.com/free-icon/camera_846799
+// TODO: Add attribution for the icon or make my own
 const Logo = styled.div`
   width: 180px;
   height: 180px;
