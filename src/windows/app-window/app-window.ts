@@ -15,10 +15,10 @@ async function createAppWindow() {
   });
   appWindow.loadURL(`file://${__dirname}/app-window.html`);
 
-  if (isDevMode()) {
-    await installExtension(REACT_DEVELOPER_TOOLS);
-    appWindow.webContents.openDevTools();
-  }
+  // if (isDevMode()) {
+  //   await installExtension(REACT_DEVELOPER_TOOLS);
+  //   appWindow.webContents.openDevTools();
+  // }
 
   appWindow.on('closed', () => {
     appWindow = null;

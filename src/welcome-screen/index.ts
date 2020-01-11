@@ -1,3 +1,3 @@
-import WelcomeScreen from './components/welcome-screen';
+import WelcomeScreen from './components/WelcomeScreen';
 
 export { WelcomeScreen };

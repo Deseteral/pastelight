@@ -6,6 +6,9 @@ body {
   user-select: none;
 
   --color-background: #FFFFFF;
+  --color-primary: #FFB300;
+  --color-primary-dark: #FFA000;
+  --color-secondary: #CFD8DC;
 
   --color-active: #FFB300;
   --color-text: #FFFFFF;

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import { Button } from '../../elements';
 
 const Container = styled.div`
   -webkit-app-region: drag;
@@ -32,6 +33,7 @@ const Logo = styled.div`
 
 const Title = styled.div`
   font-size: 48px;
+  margin: 16px 0;
 `;
 
 function WelcomeScreen() : JSX.Element {
@@ -40,6 +42,7 @@ function WelcomeScreen() : JSX.Element {
       <TitlePane>
         <Logo />
         <Title>pastelight</Title>
+        <Button onClick={() => console.log('click')}>Open photo catalogue</Button>
       </TitlePane>
       <RecentPane />
     </Container>
