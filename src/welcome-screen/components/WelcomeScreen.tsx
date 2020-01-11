@@ -44,7 +44,9 @@ const TitleContainer = styled.div`
   margin-bottom: 32px;
 `;
 
-function WelcomeScreen() : JSX.Element {
+interface WelcomeScreenProps {}
+
+const WelcomeScreen: React.FunctionComponent<WelcomeScreenProps> = () => {
   const appVersion = getAppVersion();
 
   return (
@@ -62,6 +64,7 @@ function WelcomeScreen() : JSX.Element {
       <RecentPane />
     </Container>
   );
-}
+};
 
 export default WelcomeScreen;
+export { WelcomeScreenProps };
