@@ -16,7 +16,7 @@ const PanelContainer = styled.div`
   align-items: center;
   padding: 16px;
   box-sizing: border-box;
-  background-color: ${({ extended }: PanelContainerProps) => (extended ? 'var(--color-navigationBar)' : 'transparent')};
+  background-color: ${({ extended }: PanelContainerProps) => (extended ? '#263238' : 'transparent')};
   transition: background-color 0.3s ease;
 `;
 
