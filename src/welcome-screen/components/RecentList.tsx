@@ -25,6 +25,7 @@ const Clickable = styled.button`
   background: none;
   border: none;
   outline: none;
+  cursor: pointer;
   transition: background-color .3s ease-in-out;
 
   &:focus {

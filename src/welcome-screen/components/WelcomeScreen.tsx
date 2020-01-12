@@ -69,7 +69,9 @@ const WelcomeScreen: React.FunctionComponent<WelcomeScreenProps> = () => {
         </NoDrag>
       </TitlePane>
       <RecentPane>
-        <RecentList list={recentList} onSelect={console.log} />
+        <NoDrag>
+          <RecentList list={recentList} onSelect={console.log} />
+        </NoDrag>
       </RecentPane>
     </Container>
   );
