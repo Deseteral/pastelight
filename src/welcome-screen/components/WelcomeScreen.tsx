@@ -6,7 +6,6 @@ import RecentList from './RecentList';
 import { RecentLocation, getRecentLocationList } from '../services/recent-location-list';
 import { loadFromPath, loadFromPicker } from '../services/catalogue-picker';
 
-
 const Container = styled.div`
   -webkit-app-region: drag;
   width: 100vw;
