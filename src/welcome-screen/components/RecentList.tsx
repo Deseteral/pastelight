@@ -10,7 +10,6 @@ const OrderedList = styled.ol`
 `;
 
 const ListElement = styled.li`
-  height: 64px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -19,7 +18,7 @@ const ListElement = styled.li`
 const Clickable = styled.button`
   width: 100%;
   height: 100%;
-  padding: 0;
+  padding: 8px;
   padding-left: 16px;
   text-align: left;
   background: none;
