@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import { Button, Text } from '../../elements';
 import { getAppVersion } from '../../application';
 import RecentList from './RecentList';
-import { RecentLocation } from '../model';
+import { RecentLocation, getRecentLocationList } from '../services/recent-location-list';
 import { loadFromPath, loadFromPicker } from '../services/catalogue-picker';
-import { getRecentLocationList } from '../services/recent-location-list';
+
 
 const Container = styled.div`
   -webkit-app-region: drag;

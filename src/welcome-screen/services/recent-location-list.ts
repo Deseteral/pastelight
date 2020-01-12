@@ -1,7 +1,11 @@
 import storage from 'electron-json-storage';
-import { RecentLocation } from '../model';
 
 const DATA_KEY = 'recentLocations';
+
+interface RecentLocation {
+  path: string;
+  elementsCount: number;
+}
 
 interface RecentLocationData {
   list: RecentLocation[];
@@ -47,4 +51,4 @@ async function addNewLocation(location: RecentLocation): Promise<void> {
   }
 }
 
-export { getRecentLocationList, addNewLocation };
+export { getRecentLocationList, addNewLocation, RecentLocation };
