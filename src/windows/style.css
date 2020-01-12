@@ -2,8 +2,10 @@
 
 body {
   --color-background: #FFFFFF;
+
   --color-text: #000000;
   --color-text-primary: #FFFFFF;
+
   --color-primary: #2196F3;
   --color-primary-light: #64B5F6;
   --color-primary-dark: #1E88E5;
