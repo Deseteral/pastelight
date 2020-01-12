@@ -50,6 +50,7 @@ const Clickable = styled.button`
 
 const PathText = styled(Text)`
   margin-bottom: 2px;
+  overflow: hidden;
 `;
 
 interface RecentListProps {

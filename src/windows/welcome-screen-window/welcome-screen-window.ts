@@ -19,7 +19,7 @@ async function createWelcomeScreenWindow() {
     vibrancy: 'under-window',
     webPreferences: { nodeIntegration: true },
   });
-  welcomeScreenWindow.loadURL(`file://${__dirname}/welcome-screen.html`);
+  welcomeScreenWindow.loadURL(`file://${__dirname}/welcome-screen-window.html`);
 
   // TODO: Make correct menu for this window
 

@@ -5,12 +5,14 @@ import { getAppVersion } from '../../application';
 import RecentList from './RecentList';
 import { RecentLocation } from '../model';
 import { loadFromPath, loadFromPicker } from '../services/catalogue-picker';
+import { getRecentLocationList } from '../services/recent-location-list';
 
 const Container = styled.div`
   -webkit-app-region: drag;
   width: 100vw;
   height: 100vh;
   display: flex;
+  flex-direction: row;
 `;
 
 const NoDrag = styled.div`
@@ -20,14 +22,14 @@ const NoDrag = styled.div`
 const TitlePane = styled.div`
   padding-top: 56px;
   display: flex;
-  flex: 3;
+  width: 60%;
   flex-direction: column;
   align-items: center;
   background-color: var(--color-background);
 `;
 
 const RecentPane = styled.div`
-  flex: 2;
+  width: 40%;
   background: transparent;
 `;
 
@@ -51,11 +53,11 @@ interface WelcomeScreenProps {}
 
 const WelcomeScreen: React.FunctionComponent<WelcomeScreenProps> = () => {
   const appVersion = getAppVersion();
-  const recentList: RecentLocation[] = [
-    { path: '~/My photos', elementsCount: 271 },
-    { path: '~/Not my photos', elementsCount: 1337 },
-    { path: '~/thats/deep/path/to/Memes', elementsCount: 420 },
-  ];
+  const [recentList, setRecentList] = React.useState<RecentLocation[]>([]);
+
+  React.useEffect(() => {
+    getRecentLocationList().then(setRecentList);
+  }, []);
 
   return (
     <Container>
