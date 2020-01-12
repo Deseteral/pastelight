@@ -1,4 +1,4 @@
-import { BrowserWindow } from 'electron';
+import { BrowserWindow, app } from 'electron';
 // import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
 // import { isDevMode } from '../../application';
 
@@ -24,6 +24,7 @@ async function createAppWindow() {
 
   appWindow.on('closed', () => {
     appWindow = null;
+    app.quit();
   });
 
   return appWindow;

@@ -1,4 +1,4 @@
-import { BrowserWindow } from 'electron';
+import { BrowserWindow, app } from 'electron';
 import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
 import { isDevMode } from '../../application';
 
@@ -30,6 +30,7 @@ async function createWelcomeScreenWindow() {
 
   welcomeScreenWindow.on('closed', () => {
     welcomeScreenWindow = null;
+    app.quit();
   });
 
   welcomeScreenWindow.once('ready-to-show', () => {
