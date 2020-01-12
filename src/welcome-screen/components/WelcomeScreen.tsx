@@ -4,6 +4,7 @@ import { Button, Text } from '../../elements';
 import { getAppVersion } from '../../application';
 import RecentList from './RecentList';
 import { RecentLocation } from '../model';
+import { loadFromPath, loadFromPicker } from '../services/catalogue-picker';
 
 const Container = styled.div`
   -webkit-app-region: drag;
@@ -65,12 +66,12 @@ const WelcomeScreen: React.FunctionComponent<WelcomeScreenProps> = () => {
           <Text secondary>Version {appVersion}</Text>
         </TitleContainer>
         <NoDrag>
-          <Button onClick={() => console.log('click')}>Open photo catalogue</Button>
+          <Button onClick={loadFromPicker}>Open photo catalogue</Button>
         </NoDrag>
       </TitlePane>
       <RecentPane>
         <NoDrag>
-          <RecentList list={recentList} onSelect={console.log} />
+          <RecentList list={recentList} onSelect={((location) => loadFromPath(location.path))} />
         </NoDrag>
       </RecentPane>
     </Container>
