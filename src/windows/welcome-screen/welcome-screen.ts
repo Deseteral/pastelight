@@ -35,6 +35,8 @@ async function createWelcomeScreenWindow() {
   welcomeScreenWindow.once('ready-to-show', () => {
     (welcomeScreenWindow as BrowserWindow).show();
   });
+
+  return welcomeScreenWindow;
 }
 
 export default createWelcomeScreenWindow;

@@ -1,9 +1,14 @@
-import { remote, OpenDialogOptions } from 'electron';
+import { remote, ipcRenderer, OpenDialogOptions } from 'electron';
 import fs from 'fs';
 
 interface ValidationResult {
   status: boolean;
   message?: string;
+}
+
+const IPC_LOAD_CATALOGUE_CHANNEL = 'welcome-screen/load-catalogue';
+interface IpcLoadCatalogue {
+  path: string;
 }
 
 function isValidPath(potentialPath: string) : Promise<ValidationResult> {
@@ -50,7 +55,8 @@ async function loadFromPath(cataloguePath: string) {
     return;
   }
 
-  console.log('ok!');
+  const args: IpcLoadCatalogue = { path: cataloguePath };
+  ipcRenderer.send(IPC_LOAD_CATALOGUE_CHANNEL, args);
 }
 
 async function loadFromPicker() {
@@ -60,4 +66,4 @@ async function loadFromPicker() {
   }
 }
 
-export { loadFromPath, loadFromPicker };
+export { loadFromPath, loadFromPicker, IPC_LOAD_CATALOGUE_CHANNEL, IpcLoadCatalogue };
