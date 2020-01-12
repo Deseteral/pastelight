@@ -1,7 +1,13 @@
-import * as React from 'react';
 import styled from 'styled-components';
 
-const StyledButton = styled.button`
+interface ButtonProps {
+  onClick: () => void;
+}
+
+const Button = styled.button.attrs((props: ButtonProps) => ({
+  type: 'button',
+  onClick: props.onClick,
+}))`
   font-size: 16px;
   text-transform: uppercase;
   text-align: center;
@@ -26,16 +32,6 @@ const StyledButton = styled.button`
     box-shadow: 0 5px 15px rgba(0,0,0,.05), 0 4px 10px var(--color-primary-dark);
   }
 `;
-
-interface ButtonProps {
-  onClick: () => void;
-}
-
-const Button: React.FunctionComponent<ButtonProps> = ({ onClick, children }) => (
-  <StyledButton type="button" onClick={onClick}>
-    {children}
-  </StyledButton>
-);
 
 export default Button;
 export { ButtonProps };
