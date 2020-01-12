@@ -2,6 +2,8 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { Button, Text } from '../../elements';
 import { getAppVersion } from '../../application';
+import RecentList from './RecentList';
+import { RecentLocation } from '../model';
 
 const Container = styled.div`
   -webkit-app-region: drag;
@@ -48,6 +50,11 @@ interface WelcomeScreenProps {}
 
 const WelcomeScreen: React.FunctionComponent<WelcomeScreenProps> = () => {
   const appVersion = getAppVersion();
+  const recentList: RecentLocation[] = [
+    { path: '~/My photos', elementsCount: 271 },
+    { path: '~/Not my photos', elementsCount: 1337 },
+    { path: '~/thats/deep/path/to/Memes', elementsCount: 420 },
+  ];
 
   return (
     <Container>
@@ -61,7 +68,9 @@ const WelcomeScreen: React.FunctionComponent<WelcomeScreenProps> = () => {
           <Button onClick={() => console.log('click')}>Open photo catalogue</Button>
         </NoDrag>
       </TitlePane>
-      <RecentPane />
+      <RecentPane>
+        <RecentList list={recentList} onSelect={console.log} />
+      </RecentPane>
     </Container>
   );
 };
