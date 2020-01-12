@@ -3,6 +3,14 @@ import styled from 'styled-components';
 import { Text } from '../../elements';
 import { RecentLocation } from '../model';
 
+const EmptyListContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+`;
+
 const OrderedList = styled.ol`
   list-style: none;
   padding: 0;
@@ -41,18 +49,28 @@ interface RecentListProps {
   onSelect: (selected: RecentLocation) => void;
 }
 
-const RecentList: React.FunctionComponent<RecentListProps> = ({ list, onSelect }) => (
-  <OrderedList>
-    {list.map((recentLocation) => (
-      <ListElement key={recentLocation.path}>
-        <Clickable onClick={() => onSelect(recentLocation)}>
-          <Text>{recentLocation.path}</Text>
-          <Text secondary>Number of items: {recentLocation.elementsCount}</Text>
-        </Clickable>
-      </ListElement>
-    ))}
-  </OrderedList>
-);
+const RecentList: React.FunctionComponent<RecentListProps> = ({ list, onSelect }) => {
+  if (list.length === 0) {
+    return (
+      <EmptyListContainer>
+        <Text secondary>There are no recent photo catalogues</Text>
+      </EmptyListContainer>
+    );
+  }
+
+  return (
+    <OrderedList>
+      {list.map((recentLocation) => (
+        <ListElement key={recentLocation.path}>
+          <Clickable onClick={() => onSelect(recentLocation)}>
+            <Text>{recentLocation.path}</Text>
+            <Text secondary>Number of items: {recentLocation.elementsCount}</Text>
+          </Clickable>
+        </ListElement>
+      ))}
+    </OrderedList>
+  );
+};
 
 export default RecentList;
 export { RecentListProps };
