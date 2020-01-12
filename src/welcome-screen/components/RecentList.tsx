@@ -35,6 +35,10 @@ const Clickable = styled.button`
   cursor: pointer;
   transition: background-color .3s ease-in-out;
 
+  &:hover {
+    background-color: var(--color-primary-light);
+  }
+
   &:focus {
     background-color: var(--color-primary);
 
@@ -42,6 +46,10 @@ const Clickable = styled.button`
       color: var(--color-text-primary);
     }
   }
+`;
+
+const PathText = styled(Text)`
+  margin-bottom: 2px;
 `;
 
 interface RecentListProps {
@@ -63,7 +71,7 @@ const RecentList: React.FunctionComponent<RecentListProps> = ({ list, onSelect }
       {list.map((recentLocation) => (
         <ListElement key={recentLocation.path}>
           <Clickable onClick={() => onSelect(recentLocation)}>
-            <Text>{recentLocation.path}</Text>
+            <PathText>{recentLocation.path}</PathText>
             <Text secondary>Number of items: {recentLocation.elementsCount}</Text>
           </Clickable>
         </ListElement>

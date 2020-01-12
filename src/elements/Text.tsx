@@ -7,6 +7,7 @@ interface TextProps {
 
 const Text = styled.div<TextProps>`
   color: var(--color-text);
+  font-family: 'Varela Round', sans-serif;
   font-size: ${(props) => {
     if (props.heading) return '48px';
     if (props.secondary) return '15px';
