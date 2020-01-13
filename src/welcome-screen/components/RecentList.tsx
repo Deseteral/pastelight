@@ -49,7 +49,7 @@ const Clickable = styled.button`
 `;
 
 const PathText = styled(Text)`
-  margin-bottom: 2px;
+  margin-top: 2px;
   overflow: hidden;
 `;
 
@@ -72,8 +72,8 @@ const RecentList: React.FunctionComponent<RecentListProps> = ({ list, onSelect }
       {list.map((recentLocation) => (
         <ListElement key={recentLocation.path}>
           <Clickable onClick={() => onSelect(recentLocation)}>
-            <PathText>{recentLocation.path}</PathText>
-            <Text secondary>Number of items: {recentLocation.elementsCount}</Text>
+            <Text>{recentLocation.title}</Text>
+            <PathText secondary>{recentLocation.path}</PathText>
           </Clickable>
         </ListElement>
       ))}

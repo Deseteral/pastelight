@@ -3,8 +3,8 @@ import storage from 'electron-json-storage';
 const DATA_KEY = 'recentLocations';
 
 interface RecentLocation {
+  title: string;
   path: string;
-  elementsCount: number;
 }
 
 interface RecentLocationData {

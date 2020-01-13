@@ -1,5 +1,6 @@
 import { remote, ipcRenderer, OpenDialogOptions } from 'electron';
 import fs from 'fs';
+import path from 'path';
 import * as RecentLocationListService from './recent-location-list';
 
 interface ValidationResult {
@@ -27,6 +28,10 @@ function isValidPath(potentialPath: string) : Promise<ValidationResult> {
       }
     });
   });
+}
+
+function titleFromPath(dirPath: string): string {
+  return path.basename(dirPath);
 }
 
 async function openCataloguePicker(): Promise<string | null> {
@@ -59,7 +64,10 @@ async function loadFromPath(cataloguePath: string) {
   const args: IpcLoadCatalogue = { path: cataloguePath };
   ipcRenderer.send(IPC_LOAD_CATALOGUE_CHANNEL, args);
 
-  RecentLocationListService.addNewLocation({ path: cataloguePath, elementsCount: 0 });
+  RecentLocationListService.addNewLocation({
+    title: titleFromPath(cataloguePath),
+    path: cataloguePath,
+  });
 }
 
 async function loadFromPicker() {

@@ -30,6 +30,7 @@ const TitlePane = styled.div`
 const RecentPane = styled.div`
   width: 40%;
   background: transparent;
+  overflow-y: scroll;
 `;
 
 // https://www.flaticon.com/free-icon/camera_846799
