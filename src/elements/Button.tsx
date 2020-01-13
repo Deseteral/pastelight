@@ -3,7 +3,6 @@ import styled from 'styled-components';
 interface ButtonProps {
   primary?: boolean;
   onClick: () => void;
-
 }
 const Button = styled.button.attrs((props: ButtonProps) => ({
   type: 'button',
