@@ -1,4 +1,4 @@
-import storage from 'electron-json-storage';
+import { Storage } from '../../storage';
 
 const DATA_KEY = 'recentLocations';
 
@@ -11,29 +11,14 @@ interface RecentLocationData {
   list: RecentLocation[];
 }
 
-function setRecentLocationList(list: RecentLocation[]): Promise<void> {
-  return new Promise((resolve) => {
-    const data: RecentLocationData = { list };
-    storage.set(DATA_KEY, data, () => resolve());
-  });
+async function setRecentLocationList(list: RecentLocation[]): Promise<void> {
+  const data: RecentLocationData = { list };
+  return Storage.global.set<RecentLocationData>(DATA_KEY, data);
 }
 
-function getRecentLocationList(): Promise<RecentLocation[]> {
-  return new Promise((resolve) => {
-    storage.get(DATA_KEY, (err, data) => {
-      if (err) {
-        resolve([]);
-        return;
-      }
-
-      const { list } = (data as RecentLocationData);
-      if (list) {
-        resolve(list);
-      } else {
-        setRecentLocationList([]).then(() => resolve([]));
-      }
-    });
-  });
+async function getRecentLocationList(): Promise<RecentLocation[]> {
+  const data = await Storage.global.get<RecentLocationData>(DATA_KEY, { list: [] });
+  return data.list;
 }
 
 async function addNewLocation(location: RecentLocation): Promise<void> {
@@ -51,4 +36,5 @@ async function addNewLocation(location: RecentLocation): Promise<void> {
   }
 }
 
-export { getRecentLocationList, addNewLocation, RecentLocation };
+export { getRecentLocationList, addNewLocation };
+export { RecentLocation };

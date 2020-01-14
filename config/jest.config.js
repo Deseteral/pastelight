@@ -2,7 +2,8 @@ module.exports = {
   rootDir: '../',
   testPathIgnorePatterns: [
     '/node_modules/',
-    '/out/',
+    '/build/',
+    '/dist/',
   ],
   transform: {
     '^.+\\.tsx?$': 'ts-jest',
