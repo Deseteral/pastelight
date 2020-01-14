@@ -3,7 +3,7 @@ import path from 'path';
 import Storage from './storage';
 
 describe('Storage', () => {
-  const storagePath = path.resolve(os.tmpdir(), 'pastelight_test');
+  const storagePath = path.resolve(os.tmpdir());
   const key = 'TEST_KEY';
   const storage = new Storage(storagePath);
 
