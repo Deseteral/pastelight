@@ -57,10 +57,8 @@ describe('Storage', () => {
     // when
     await storage.clear(key);
 
-    // and
-    const data = await storage.get(key, defaultData);
-
     // then
+    const data = await storage.get(key, defaultData);
     expect(data).toEqual(defaultData);
   });
 });
