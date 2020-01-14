@@ -1,11 +1,10 @@
 import fs from 'fs';
 import path from 'path';
 import util from 'util';
-import rimraf from 'rimraf';
 
 const readFile = util.promisify(fs.readFile);
 const writeFile = util.promisify(fs.writeFile);
-const rmrf = util.promisify(rimraf);
+const unlink = util.promisify(fs.unlink);
 
 const DEFAULT_GLOBAL_DATA_PATH = process.cwd();
 
@@ -37,7 +36,10 @@ class Storage {
   }
 
   clear(key: string) : Promise<void> {
-    return rmrf(this.getFilePath(key));
+    const filePath = this.getFilePath(key);
+    return fs.existsSync(filePath)
+      ? unlink(this.getFilePath(key))
+      : Promise.resolve();
   }
 
   setDataPath(nextDataPath: string) {

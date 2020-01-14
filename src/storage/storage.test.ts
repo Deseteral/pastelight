@@ -52,7 +52,7 @@ describe('Storage', () => {
   it('should clear store', async () => {
     // given
     const defaultData = { data: 'default' };
-    storage.set(key, { some: 'data' });
+    await storage.set(key, { some: 'data' });
 
     // when
     await storage.clear(key);
