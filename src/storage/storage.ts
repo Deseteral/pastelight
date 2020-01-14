@@ -18,7 +18,7 @@ class Storage {
   }
 
   async get<T>(key: string, defaultValue: T) : Promise<T> {
-    const filePath = path.resolve(this.dataPath, `${key}.json`);
+    const filePath = this.getFilePath(key);
 
     // TODO: Sync function call - this might become a performance problem
     if (!fs.existsSync(filePath)) {
@@ -31,13 +31,12 @@ class Storage {
   }
 
   async set<T>(key: string, value: T) : Promise<void> {
-    const filePath = path.resolve(this.dataPath, `${key}.json`);
+    const filePath = this.getFilePath(key);
     await writeFile(filePath, JSON.stringify(value), { encoding: 'utf8' });
   }
 
   clear(key: string) : Promise<void> {
-    const filePath = path.resolve(this.dataPath, `${key}.json`);
-    return rmrf(filePath);
+    return rmrf(this.getFilePath(key));
   }
 
   setDataPath(nextDataPath: string) {
@@ -46,6 +45,10 @@ class Storage {
 
   getDataPath() : string {
     return this.dataPath;
+  }
+
+  private getFilePath(key: string) : string {
+    return path.resolve(this.dataPath, `${key}.json`);
   }
 }
 
