@@ -1,4 +1,5 @@
 const { spawnSync } = require('child_process');
+const path = require('path');
 
 const IS_CI = !!process.env.CI;
 const LOCAL_ONLY_ARGS = [
@@ -10,8 +11,7 @@ const CI_ONLY_ARGS = [
 ];
 
 const args = [
-  '--config', './config/jest.config.js',
-  '--passWithNoTests',
+  '--config', path.join('.', 'config', 'jest.config.js'),
   ...(IS_CI ? CI_ONLY_ARGS : LOCAL_ONLY_ARGS),
 ];
 
