@@ -13,11 +13,11 @@ interface RecentLocationData {
 
 async function setRecentLocationList(list: RecentLocation[]): Promise<void> {
   const data: RecentLocationData = { list };
-  return Storage.global.set<RecentLocationData>(DATA_KEY, data);
+  return Storage.process.set<RecentLocationData>(DATA_KEY, data);
 }
 
 async function getRecentLocationList(): Promise<RecentLocation[]> {
-  const data = await Storage.global.get<RecentLocationData>(DATA_KEY, { list: [] });
+  const data = await Storage.process.get<RecentLocationData>(DATA_KEY, { list: [] });
   return data.list;
 }
 

@@ -10,8 +10,9 @@ const rmrf = util.promisify(rimraf);
 const DEFAULT_GLOBAL_DATA_PATH = process.cwd();
 
 class Storage {
+  static process: Storage = new Storage(DEFAULT_GLOBAL_DATA_PATH);
+
   private dataPath: string;
-  static global: Storage = new Storage(DEFAULT_GLOBAL_DATA_PATH);
 
   constructor(dataPath: string) {
     this.dataPath = dataPath;

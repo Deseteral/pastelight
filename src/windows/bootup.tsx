@@ -11,7 +11,7 @@ function renderApp() {
 }
 
 function renderWelcomeScreen() {
-  Storage.global.setDataPath(path.join(remote.app.getPath('userData'), 'storage'));
+  Storage.process.setDataPath(path.join(remote.app.getPath('userData'), 'storage'));
   ReactDOM.render(<WelcomeScreen />, document.getElementById('root'));
 }
 
