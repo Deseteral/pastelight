@@ -22,8 +22,8 @@ jobs:
         npm test
       env:
         CI: true
-    - name: Coveralls
-      if: matrix.os == 'macOS-latest'
-      uses: coverallsapp/github-action@master
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
+    # - name: Coveralls
+    #   if: matrix.os == 'macOS-latest'
+    #   uses: coverallsapp/github-action@master
+    #   with:
+    #     github-token: ${{ secrets.GITHUB_TOKEN }}
