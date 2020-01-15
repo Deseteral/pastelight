@@ -4,7 +4,7 @@
 
 describe('Storage', () => {
   it('DEBUG true be true', () => {
-    expect(true).toBe(false);
+    expect(true).toBe(true);
   });
 
   // const storagePath = path.resolve(os.tmpdir());
