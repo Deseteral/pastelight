@@ -8,6 +8,8 @@ const LOCAL_ONLY_ARGS = [
 ];
 const CI_ONLY_ARGS = [
   '--coverage',
+  '--runInBand',
+  '--ci',
 ];
 
 const args = [
