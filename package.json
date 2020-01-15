@@ -29,7 +29,7 @@
     "compile": "tsc",
     "compile:watch": "tsc -w",
     "clean": "rm -rf build",
-    "test": "npm run unit && npm run unit:eslint-rules && npm run lint",
+    "test": "npm run unit:eslint-rules && npm run lint",
     "unit:watch": "npm run unit -- --watchAll --notify",
     "unit": "jest --runInBand --config ./config/jest.config.js",
     "unit:eslint-rules": "node ./config/eslint-plugin-pastelight/tests.js",
