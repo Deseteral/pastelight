@@ -31,7 +31,7 @@
     "clean": "rm -rf build",
     "test": "npm run unit && npm run unit:eslint-rules && npm run lint",
     "unit:watch": "npm run unit -- --watchAll --notify",
-    "unit": "jest --runInBand --ci --reporters=default --config ./config/jest.config.js",
+    "unit": "jest --runInBand --forceExit --ci --reporters=default --config ./config/jest.config.js",
     "unit:eslint-rules": "node ./config/eslint-plugin-pastelight/tests.js",
     "lint": "eslint . --ext js,jsx,ts,tsx",
     "pack:dist": "rm -rf dist && npm run build && cross-env CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder",
