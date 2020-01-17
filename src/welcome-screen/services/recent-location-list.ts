@@ -13,7 +13,7 @@ interface RecentLocationData {
 
 async function setRecentLocationList(list: RecentLocation[]): Promise<void> {
   const data: RecentLocationData = { list };
-  return Storage.process.set<RecentLocationData>(DATA_KEY, data);
+  await Storage.process.set<RecentLocationData>(DATA_KEY, data);
 }
 
 async function getRecentLocationList(): Promise<RecentLocation[]> {
@@ -25,15 +25,11 @@ async function addNewLocation(location: RecentLocation): Promise<void> {
   const list = await getRecentLocationList();
   const idx = list.findIndex((el) => el.path === location.path);
 
-  if (idx === -1) {
-    const newList = [location, ...list];
-    setRecentLocationList(newList);
-  } else {
-    const listWithoutNewItem = list.slice();
-    listWithoutNewItem.splice(idx, 1);
+  const newList = (idx === -1)
+    ? [location, ...list]
+    : [list[idx], ...list.slice(0, idx), ...list.slice(idx + 1)];
 
-    setRecentLocationList([location, ...listWithoutNewItem]);
-  }
+  await setRecentLocationList(newList);
 }
 
 export { getRecentLocationList, addNewLocation };
