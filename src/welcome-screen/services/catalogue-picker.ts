@@ -1,37 +1,25 @@
-import { remote, ipcRenderer, OpenDialogOptions } from 'electron';
+import { remote, OpenDialogOptions } from 'electron';
 import fs from 'fs';
-import path from 'path';
+import util from 'util';
 import * as RecentLocationListService from './recent-location-list';
+import { ipcSendLoadCatalogue } from './ipc-load-catalogue';
+
+const stat = util.promisify(fs.stat);
 
 interface ValidationResult {
-  status: boolean;
+  valid: boolean;
   message?: string;
 }
 
-const IPC_LOAD_CATALOGUE_CHANNEL = 'welcome-screen/load-catalogue';
-interface IpcLoadCatalogue {
-  path: string;
-}
-
-function isValidPath(potentialPath: string) : Promise<ValidationResult> {
-  return new Promise((resolve) => {
-    fs.stat(potentialPath, (err, stats) => {
-      if (err) {
-        resolve({ status: false, message: 'Directory does not exist' });
-        return;
-      }
-
-      if (stats.isDirectory()) {
-        resolve({ status: true });
-      } else {
-        resolve({ status: false, message: 'Selected path is not a directory' });
-      }
-    });
-  });
-}
-
-function titleFromPath(dirPath: string): string {
-  return path.basename(dirPath);
+async function isValidPath(potentialPath: string) : Promise<ValidationResult> {
+  try {
+    const stats = await stat(potentialPath);
+    return stats.isDirectory()
+      ? { valid: true }
+      : { valid: false, message: 'Selected path is not a directory' };
+  } catch (err) {
+    return { valid: false, message: 'Directory does not exist' };
+  }
 }
 
 async function openCataloguePicker(): Promise<string | null> {
@@ -48,26 +36,19 @@ async function openCataloguePicker(): Promise<string | null> {
   return result.canceled ? null : result.filePaths[0];
 }
 
-async function showErrorBox(content: string) {
-  const { dialog } = remote;
-  dialog.showErrorBox('Cannot open photo catalogue', content);
-}
-
 async function loadFromPath(cataloguePath: string) {
   const validationResult = await isValidPath(cataloguePath);
 
-  if (!validationResult.status) {
-    showErrorBox(validationResult.message as string);
+  if (!validationResult.valid) {
+    remote.dialog.showErrorBox(
+      'Cannot open photo catalogue',
+      validationResult.message as string,
+    );
     return;
   }
 
-  const args: IpcLoadCatalogue = { path: cataloguePath };
-  ipcRenderer.send(IPC_LOAD_CATALOGUE_CHANNEL, args);
-
-  RecentLocationListService.addNewLocation({
-    title: titleFromPath(cataloguePath),
-    path: cataloguePath,
-  });
+  ipcSendLoadCatalogue(cataloguePath);
+  RecentLocationListService.addNewLocationFromPath(cataloguePath);
 }
 
 async function loadFromPicker() {
@@ -77,4 +58,4 @@ async function loadFromPicker() {
   }
 }
 
-export { loadFromPath, loadFromPicker, IPC_LOAD_CATALOGUE_CHANNEL, IpcLoadCatalogue };
+export { loadFromPath, loadFromPicker };

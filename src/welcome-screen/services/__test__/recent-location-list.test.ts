@@ -18,47 +18,46 @@ describe('Recent location list service', () => {
 
   it('should add new location to the list', async () => {
     // given
-    const location: RecentLocationListService.RecentLocation = {
-      path: '/Some/test/path',
-      title: 'path',
-    };
+    const path = '/Some/test/path/My Photos';
 
     // when
-    await RecentLocationListService.addNewLocation(location);
-
-    // then
-    const list = await RecentLocationListService.getRecentLocationList();
-    expect(list).toEqual([location]);
-  });
-
-  it('should not duplicate existing location and make it first one', async () => {
-    // given
-    const location1: RecentLocationListService.RecentLocation = { path: '/path1', title: 'path1' };
-    const location2: RecentLocationListService.RecentLocation = { path: '/path2', title: 'path2' };
-    const location3: RecentLocationListService.RecentLocation = { path: '/path3', title: 'path3' };
-
-    // when
-    await RecentLocationListService.addNewLocation(location3);
-    await RecentLocationListService.addNewLocation(location2);
-    await RecentLocationListService.addNewLocation(location1);
+    await RecentLocationListService.addNewLocationFromPath(path);
 
     // then
     const list = await RecentLocationListService.getRecentLocationList();
     expect(list).toEqual([
-      location1,
-      location2,
-      location3,
+      { path, title: 'My Photos' },
+    ]);
+  });
+
+  it('should not duplicate existing location and make it first one', async () => {
+    // given
+    const path1 = '/Test/path1/foo';
+    const path2 = '/Test/path2/bar';
+    const path3 = '/Test/path3/baz';
+
+    // when
+    await RecentLocationListService.addNewLocationFromPath(path3);
+    await RecentLocationListService.addNewLocationFromPath(path2);
+    await RecentLocationListService.addNewLocationFromPath(path1);
+
+    // then
+    const list = await RecentLocationListService.getRecentLocationList();
+    expect(list).toEqual([
+      { path: path1, title: 'foo' },
+      { path: path2, title: 'bar' },
+      { path: path3, title: 'baz' },
     ]);
 
     // and
-    await RecentLocationListService.addNewLocation(location2);
+    await RecentLocationListService.addNewLocationFromPath(path2);
 
     // then
     const nextList = await RecentLocationListService.getRecentLocationList();
     expect(nextList).toEqual([
-      location2,
-      location1,
-      location3,
+      { path: path2, title: 'bar' },
+      { path: path1, title: 'foo' },
+      { path: path3, title: 'baz' },
     ]);
   });
 });

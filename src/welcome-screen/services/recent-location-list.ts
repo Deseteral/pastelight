@@ -1,3 +1,4 @@
+import path from 'path';
 import { Storage } from '../../storage';
 
 const DATA_KEY = 'recentLocations';
@@ -21,7 +22,12 @@ async function getRecentLocationList(): Promise<RecentLocation[]> {
   return data.list;
 }
 
-async function addNewLocation(location: RecentLocation): Promise<void> {
+async function addNewLocationFromPath(nextPath: string): Promise<void> {
+  const location: RecentLocation = {
+    path: nextPath,
+    title: path.basename(nextPath),
+  };
+
   const list = await getRecentLocationList();
   const idx = list.findIndex((el) => el.path === location.path);
 
@@ -32,5 +38,5 @@ async function addNewLocation(location: RecentLocation): Promise<void> {
   await setRecentLocationList(newList);
 }
 
-export { getRecentLocationList, addNewLocation };
+export { getRecentLocationList, addNewLocationFromPath };
 export { RecentLocation };

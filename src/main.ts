@@ -1,12 +1,12 @@
 import { app, ipcMain } from 'electron';
 import { createAppWindow, createWelcomeScreenWindow } from './windows';
-import { IPC_LOAD_CATALOGUE_CHANNEL, IpcLoadCatalogue } from './welcome-screen';
+import { IPC_LOAD_CATALOGUE_CHANNEL, IpcLoadCatalogueData } from './welcome-screen';
 
 app.on('ready', async () => {
   const welcomeScreenWindow = await createWelcomeScreenWindow();
   const appWindow = await createAppWindow();
 
-  ipcMain.on(IPC_LOAD_CATALOGUE_CHANNEL, (_, args: IpcLoadCatalogue) => {
+  ipcMain.on(IPC_LOAD_CATALOGUE_CHANNEL, (_, args: IpcLoadCatalogueData) => {
     console.log(args.path);
     welcomeScreenWindow.hide();
     appWindow.show();
