@@ -36,7 +36,7 @@ async function openCataloguePicker(): Promise<string | null> {
   return result.canceled ? null : result.filePaths[0];
 }
 
-async function loadFromPath(cataloguePath: string) {
+async function loadFromPath(cataloguePath: string) : Promise<void> {
   const validationResult = await isValidPath(cataloguePath);
 
   if (!validationResult.valid) {
