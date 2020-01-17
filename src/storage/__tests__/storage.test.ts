@@ -1,6 +1,6 @@
 import os from 'os';
 import path from 'path';
-import Storage from './storage';
+import Storage from '../storage';
 
 describe('Storage', () => {
   const storagePath = path.resolve(os.tmpdir());
