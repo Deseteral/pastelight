@@ -8,6 +8,9 @@ module.exports = {
   transform: {
     '^.+\\.tsx?$': 'ts-jest',
   },
+  moduleNameMapper: {
+    electron: '<rootDir>/config/mocks/electron.js',
+  },
   clearMocks: true,
   coverageDirectory: 'coverage',
   watchPlugins: [
