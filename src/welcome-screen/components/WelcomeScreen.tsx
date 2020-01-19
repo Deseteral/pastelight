@@ -1,9 +1,9 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { Button, Text } from '../../elements';
-import { getAppVersion } from '../../application';
+import { getAppVersion, getPlatform } from '../../application';
 import RecentList from './RecentList';
-import { RecentLocation, getRecentLocationList } from '../services/recent-location-list';
+// import { RecentLocation, getRecentLocationList } from '../services/recent-location-list';
 import { loadFromPath, loadFromPicker } from '../services/catalogue-picker';
 
 const Container = styled.div`
@@ -25,12 +25,16 @@ const TitlePane = styled.div`
   flex-direction: column;
   align-items: center;
   background-color: var(--color-background);
+
+  ${getPlatform() !== 'mac' && 'border-radius: 8px 0 0 8px;'}
 `;
 
 const RecentPane = styled.div`
   width: 40%;
-  background: transparent;
-  overflow-y: scroll;
+  background-color: ${(getPlatform() === 'mac') ? 'transparent' : 'var(--color-background)'};
+  overflow: hidden;
+
+  ${getPlatform() !== 'mac' && 'border-radius: 0 8px 8px 0;'}
 `;
 
 // https://www.flaticon.com/free-icon/camera_846799
@@ -53,11 +57,38 @@ interface WelcomeScreenProps { }
 
 const WelcomeScreen: React.FunctionComponent<WelcomeScreenProps> = () => {
   const appVersion = getAppVersion();
-  const [recentList, setRecentList] = React.useState<RecentLocation[]>([]);
+  // const [recentList, setRecentList] = React.useState<RecentLocation[]>([]);
 
-  React.useEffect(() => {
-    getRecentLocationList().then(setRecentList);
-  }, []);
+  // React.useEffect(() => {
+  //   getRecentLocationList().then(setRecentList);
+  // }, []);
+
+  const recentList = ([
+    { title: 'Test', path: '/some/path' },
+    { title: 'Wow', path: '/some/wow' },
+    { title: 'Test', path: '/some/path' },
+    { title: 'Wow', path: '/some/wow' },
+    { title: 'Test', path: '/some/path' },
+    { title: 'Wow', path: '/some/wow' },
+    { title: 'Test', path: '/some/path' },
+    { title: 'Wow', path: '/some/wow' },
+    { title: 'Test', path: '/some/path' },
+    { title: 'Wow', path: '/some/wow' },
+    { title: 'Test', path: '/some/path' },
+    { title: 'Wow', path: '/some/wow' },
+    { title: 'Test', path: '/some/path' },
+    { title: 'Wow', path: '/some/wow' },
+    { title: 'Test', path: '/some/path' },
+    { title: 'Wow', path: '/some/wow' },
+    { title: 'Test', path: '/some/path' },
+    { title: 'Wow', path: '/some/wow' },
+    { title: 'Test', path: '/some/path' },
+    { title: 'Wow', path: '/some/wow' },
+    { title: 'Test', path: '/some/path' },
+    { title: 'Wow', path: '/some/wow' },
+    { title: 'Test', path: '/some/path' },
+    { title: 'Wow', path: '/some/wow' },
+  ]);
 
   return (
     <Container>

@@ -15,6 +15,8 @@ const OrderedList = styled.ol`
   list-style: none;
   padding: 0;
   margin: 0;
+  height: 100vh;
+  overflow-y: scroll;
 `;
 
 const ListElement = styled.li`
