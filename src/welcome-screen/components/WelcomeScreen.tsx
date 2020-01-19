@@ -26,7 +26,11 @@ const TitlePane = styled.div`
   align-items: center;
   background-color: var(--color-background);
 
-  ${getPlatform() !== 'mac' && 'border-radius: 8px 0 0 8px;'}
+  ${(getPlatform() !== 'mac') && `
+    border: solid var(--color-primary);
+    border-radius: 8px 0 0 8px;
+    border-width: 2px 0 2px 2px;
+  `}
 `;
 
 const RecentPane = styled.div`
@@ -34,7 +38,11 @@ const RecentPane = styled.div`
   background-color: ${(getPlatform() === 'mac') ? 'transparent' : 'var(--color-background)'};
   overflow: hidden;
 
-  ${getPlatform() !== 'mac' && 'border-radius: 0 8px 8px 0;'}
+  ${(getPlatform() !== 'mac') && `
+    border: solid var(--color-primary);
+    border-radius: 0 8px 8px 0;
+    border-width: 2px 2px 2px 0;
+  `}
 `;
 
 // https://www.flaticon.com/free-icon/camera_846799
