@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Button, Text } from '../../elements';
 import { getAppVersion, getPlatform } from '../../application';
 import RecentList from './RecentList';
-// import { RecentLocation, getRecentLocationList } from '../services/recent-location-list';
+import { RecentLocation, getRecentLocationList } from '../services/recent-location-list';
 import { loadFromPath, loadFromPicker } from '../services/catalogue-picker';
 
 const Container = styled.div`
@@ -57,38 +57,11 @@ interface WelcomeScreenProps { }
 
 const WelcomeScreen: React.FunctionComponent<WelcomeScreenProps> = () => {
   const appVersion = getAppVersion();
-  // const [recentList, setRecentList] = React.useState<RecentLocation[]>([]);
+  const [recentList, setRecentList] = React.useState<RecentLocation[]>([]);
 
-  // React.useEffect(() => {
-  //   getRecentLocationList().then(setRecentList);
-  // }, []);
-
-  const recentList = ([
-    { title: 'Test', path: '/some/path' },
-    { title: 'Wow', path: '/some/wow' },
-    { title: 'Test', path: '/some/path' },
-    { title: 'Wow', path: '/some/wow' },
-    { title: 'Test', path: '/some/path' },
-    { title: 'Wow', path: '/some/wow' },
-    { title: 'Test', path: '/some/path' },
-    { title: 'Wow', path: '/some/wow' },
-    { title: 'Test', path: '/some/path' },
-    { title: 'Wow', path: '/some/wow' },
-    { title: 'Test', path: '/some/path' },
-    { title: 'Wow', path: '/some/wow' },
-    { title: 'Test', path: '/some/path' },
-    { title: 'Wow', path: '/some/wow' },
-    { title: 'Test', path: '/some/path' },
-    { title: 'Wow', path: '/some/wow' },
-    { title: 'Test', path: '/some/path' },
-    { title: 'Wow', path: '/some/wow' },
-    { title: 'Test', path: '/some/path' },
-    { title: 'Wow', path: '/some/wow' },
-    { title: 'Test', path: '/some/path' },
-    { title: 'Wow', path: '/some/wow' },
-    { title: 'Test', path: '/some/path' },
-    { title: 'Wow', path: '/some/wow' },
-  ]);
+  React.useEffect(() => {
+    getRecentLocationList().then(setRecentList);
+  }, []);
 
   return (
     <Container>
