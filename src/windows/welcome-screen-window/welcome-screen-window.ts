@@ -1,10 +1,14 @@
-import { BrowserWindow, app } from 'electron';
+import { BrowserWindow, app, BrowserWindowConstructorOptions } from 'electron';
 import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
-import { isDevMode } from '../../application';
+import { isDevMode, getPlatform } from '../../application';
 
 let welcomeScreenWindow: (BrowserWindow | null);
 
 async function createWelcomeScreenWindow() {
+  const framelessOptions: BrowserWindowConstructorOptions = (getPlatform() === 'mac')
+    ? { titleBarStyle: 'hidden', vibrancy: 'under-window' }
+    : { frame: false, transparent: true };
+
   welcomeScreenWindow = new BrowserWindow({
     title: 'pastelight',
     width: 800,
@@ -15,8 +19,7 @@ async function createWelcomeScreenWindow() {
     maximizable: false,
     fullscreen: false,
     fullscreenable: false,
-    titleBarStyle: 'hidden',
-    vibrancy: 'under-window',
+    ...framelessOptions,
     webPreferences: { nodeIntegration: true },
   });
   welcomeScreenWindow.loadURL(`file://${__dirname}/welcome-screen-window.html`);

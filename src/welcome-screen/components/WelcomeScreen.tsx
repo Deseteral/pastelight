@@ -49,7 +49,7 @@ const TitleContainer = styled.div`
   margin-bottom: 32px;
 `;
 
-interface WelcomeScreenProps {}
+interface WelcomeScreenProps { }
 
 const WelcomeScreen: React.FunctionComponent<WelcomeScreenProps> = () => {
   const appVersion = getAppVersion();
