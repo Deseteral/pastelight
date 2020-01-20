@@ -2,7 +2,7 @@
 coverage
 build
 dist
-native
+binary_deps
 .DS_Store
 
 # Node specific

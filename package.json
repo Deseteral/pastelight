@@ -13,8 +13,8 @@
     ],
     "extraFiles": [
       {
-        "from": "native",
-        "to": "Resources/native",
+        "from": "binary_deps",
+        "to": "Resources/binary_deps",
         "filter": [
           "**/*"
         ]

@@ -51,13 +51,13 @@ async function pastelogue() {
     windows: '.zip',
   });
   const url = `https://github.com/Deseteral/pastelogue/releases/download/${version}/pastelogue_${version}_${platform}${extension}`;
-  const archivePath = `./native/pastelogue${extension}`;
+  const archivePath = `./binary_deps/pastelogue${extension}`;
 
   logger(`Downloading pastelogue ${version} for ${platform}`);
 
-  mkdir('./native/pastelogue');
+  mkdir('./binary_deps/pastelogue');
   await downloadFile(url, archivePath);
-  extractArchive(archivePath, './native/pastelogue');
+  extractArchive(archivePath, './binary_deps/pastelogue');
   rmrf(archivePath);
 
   logger('Done');
@@ -66,8 +66,8 @@ async function pastelogue() {
 (async function main() {
   logger('Installing native binary dependencies...');
 
-  rmrf('./native');
-  mkdir('./native');
+  rmrf('./binary_deps');
+  mkdir('./binary_deps');
 
   await pastelogue();
 

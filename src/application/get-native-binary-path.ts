@@ -10,8 +10,8 @@ function getNativeBinaryPath(pathInsideNative: string[]) : string {
   const { getAppPath } = remote.app;
 
   const binariesPath = !isDevMode()
-    ? path.join(path.dirname(getAppPath()), '..', 'Resources', 'native', binaryPath)
-    : path.join(rootPath, 'native', binaryPath);
+    ? path.join(path.dirname(getAppPath()), '..', 'Resources', 'binary_deps', binaryPath)
+    : path.join(rootPath, 'binary_deps', binaryPath);
 
   return path.resolve(binariesPath);
 }
