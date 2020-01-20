@@ -4,7 +4,7 @@ import * as RecentLocationListService from '../recent-location-list';
 
 describe('Recent location list service', () => {
   beforeEach(async () => {
-    Storage.process.setDataPath(os.tmpdir());
+    await Storage.process.setAndCreateDataPath(os.tmpdir());
     await Storage.process.clear('recentLocations');
   });
 

@@ -1,5 +1,7 @@
 import os from 'os';
+import fs from 'fs';
 import path from 'path';
+import rimraf from 'rimraf';
 import Storage from '../storage';
 
 describe('Storage', () => {
@@ -39,14 +41,35 @@ describe('Storage', () => {
     expect(dataPath).toBe(storagePath);
   });
 
-  it('should set new data path', () => {
+  it('should set new data path', async () => {
+    // given
+    const nextPath = path.resolve(os.tmpdir(), 'storagetestdir');
     const storageWithDifferentPath = new Storage(storagePath);
 
     // when
-    storageWithDifferentPath.setDataPath('/Some/Path');
+    await storageWithDifferentPath.setAndCreateDataPath(nextPath);
 
     // then
-    expect(storageWithDifferentPath.getDataPath()).toBe('/Some/Path');
+    expect(storageWithDifferentPath.getDataPath()).toBe(nextPath);
+  });
+
+  it('should create directories in path when after chaneging data path', async () => {
+    // given
+    const basePath = path.resolve(os.tmpdir(), 'storagetestdir');
+    const testStoragePath = path.resolve(basePath, 'some', 'nested', 'dirs');
+    const storageWithDifferentPath = new Storage(storagePath);
+
+    // when then
+    expect(fs.existsSync(testStoragePath)).toBe(false);
+
+    // and
+    await storageWithDifferentPath.setAndCreateDataPath(testStoragePath);
+
+    // when then
+    expect(fs.existsSync(testStoragePath)).toBe(true);
+
+    // cleanup
+    rimraf.sync(basePath);
   });
 
   it('should clear store', async () => {

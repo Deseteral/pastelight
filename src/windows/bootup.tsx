@@ -10,19 +10,19 @@ function setPlatformDataAttribute() {
   document.body.dataset.platform = getPlatform();
 }
 
-function setStoragePath() {
-  Storage.process.setDataPath(path.join(remote.app.getPath('userData'), 'storage'));
+async function setStoragePath() {
+  await Storage.process.setAndCreateDataPath(path.join(remote.app.getPath('userData'), 'storage'));
 }
 
-function renderApp() {
-  setStoragePath();
+async function renderApp() {
+  await setStoragePath();
   setPlatformDataAttribute();
 
   ReactDOM.render(<App />, document.getElementById('root'));
 }
 
-function renderWelcomeScreen() {
-  setStoragePath();
+async function renderWelcomeScreen() {
+  await setStoragePath();
   setPlatformDataAttribute();
 
   ReactDOM.render(<WelcomeScreen />, document.getElementById('root'));

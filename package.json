@@ -40,6 +40,7 @@
   "dependencies": {
     "electron-devtools-installer": "2.2.4",
     "electron-root-path": "1.0.16",
+    "mkdirp": "0.5.1",
     "react": "16.12.0",
     "react-dom": "16.12.0",
     "styled-components": "5.0.0"
@@ -48,6 +49,7 @@
     "@deseteral/eslint-config": "2.0.1",
     "@types/electron-devtools-installer": "2.2.0",
     "@types/jest": "24.9.0",
+    "@types/mkdirp": "0.5.2",
     "@types/node": "12.12.6",
     "@types/react": "16.9.17",
     "@types/react-dom": "16.9.4",

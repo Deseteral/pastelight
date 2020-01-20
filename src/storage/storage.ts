@@ -1,10 +1,12 @@
 import fs from 'fs';
 import path from 'path';
 import util from 'util';
+import mkdirp from 'mkdirp';
 
 const readFile = util.promisify(fs.readFile);
 const writeFile = util.promisify(fs.writeFile);
 const unlink = util.promisify(fs.unlink);
+const mkdir = util.promisify(mkdirp);
 
 const DEFAULT_GLOBAL_DATA_PATH = process.cwd();
 
@@ -42,7 +44,8 @@ class Storage {
       : Promise.resolve();
   }
 
-  setDataPath(nextDataPath: string) {
+  async setAndCreateDataPath(nextDataPath: string) : Promise<void> {
+    await mkdir(nextDataPath);
     this.dataPath = nextDataPath;
   }
 
