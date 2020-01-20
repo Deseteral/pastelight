@@ -1,10 +1,25 @@
 {
   "extends": "@deseteral/eslint-config/typescript",
+  "settings": {
+    "import/core-modules": [
+      "electron"
+    ]
+  },
   "plugins": [
     "eslint-plugin-pastelight"
   ],
   "rules": {
-    "import/no-extraneous-dependencies": "off",
-    "pastelight/import-only-module-index": "error"
+    "pastelight/import-only-module-index": "error",
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": [
+          "**/__tests__/**",
+          "./config/**",
+          "gulpfile.js"
+        ],
+        "optionalDependencies": false
+      }
+    ],
   }
 }
