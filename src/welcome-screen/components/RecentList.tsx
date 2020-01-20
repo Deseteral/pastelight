@@ -16,7 +16,7 @@ const OrderedList = styled.ol`
   padding: 0;
   margin: 0;
   height: 100vh;
-  overflow-y: scroll;
+  overflow-y: overlay;
 `;
 
 const ListElement = styled.li`
