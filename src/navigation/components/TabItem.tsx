@@ -12,7 +12,7 @@ const TabItem = styled.div`
   margin: 0 8px;
   text-align: center;
   text-transform: uppercase;
-  color: ${(props: TabItemProps) => (props.active ? 'var(--color-active)' : 'var(--color-text)')};
+  color: ${(props: TabItemProps) => (props.active ? '#FFB300' : '#FFFFFF')};
   opacity: 1;
   transition: max-width 0.4s, margin 0.4s, opacity 0.3s, color 0.4s;
   ${TabsStripeContainer}:not(:hover) & {

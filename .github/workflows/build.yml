@@ -7,7 +7,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [macOS-10.14, windows-2019]
+        os: [macOS-latest, windows-2016] # TODO: Change windows version to `windows-latest` when this issue is fixed: https://github.com/facebook/jest/issues/9413
         node-version: [12.x]
     steps:
     - uses: actions/checkout@v1
@@ -22,3 +22,8 @@ jobs:
         npm test
       env:
         CI: true
+    - name: Coveralls
+      if: matrix.os == 'macOS-latest'
+      uses: coverallsapp/github-action@master
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}

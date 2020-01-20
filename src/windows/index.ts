@@ -1,5 +1,4 @@
-import { create as createMainWindow } from './main-window/main-window';
+import createAppWindow from './app-window/app-window';
+import createWelcomeScreenWindow from './welcome-screen-window/welcome-screen-window';
 
-export {
-  createMainWindow,
-};
+export { createAppWindow, createWelcomeScreenWindow };

@@ -2,10 +2,14 @@ module.exports = {
   rootDir: '../',
   testPathIgnorePatterns: [
     '/node_modules/',
-    '/out/',
+    '/build/',
+    '/dist/',
   ],
   transform: {
     '^.+\\.tsx?$': 'ts-jest',
+  },
+  moduleNameMapper: {
+    electron: '<rootDir>/config/mocks/electron.js',
   },
   clearMocks: true,
   coverageDirectory: 'coverage',
