@@ -7,7 +7,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [macOS-latest, windows-2016] # TODO: Change windows version to `windows-latest` when this issue is fixed: https://github.com/facebook/jest/issues/9413
+        os: [macOS-latest, windows-latest]
         node-version: [12.x]
     steps:
     - uses: actions/checkout@v1
