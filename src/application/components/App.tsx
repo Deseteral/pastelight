@@ -5,23 +5,31 @@ import { IpcLoadCatalogueData, IPC_LOAD_CATALOGUE_CHANNEL } from '../../welcome-
 import { PastelogueClient } from '../../pastelogue';
 import { MediaItem, Library } from '../../library';
 
-const pastelogue = new PastelogueClient();
-let library: Library;
+interface AppContext {
+  pastelogue: PastelogueClient,
+  library: Library
+}
+
+let appContext: AppContext;
 
 function App() {
   const [photos, setPhotos] = useState<MediaItem[]>([]);
 
   useEffect(() => {
     ipcRenderer.on(IPC_LOAD_CATALOGUE_CHANNEL, async (_, data: IpcLoadCatalogueData) => {
-      library = new Library(data.path);
-      await library.load();
-      pastelogue.startProcessing(data.path);
-    });
+      appContext = {
+        pastelogue: new PastelogueClient(),
+        library: new Library(data.path),
+      };
 
-    pastelogue.on('PROCESSING_PROGRESS', async (data) => {
-      const item: MediaItem = { path: data.path };
-      await library.addNewItem(item);
-      setPhotos(await library.getAllItems());
+      await appContext.library.load();
+      appContext.pastelogue.startProcessing(data.path);
+
+      appContext.pastelogue.on('PROCESSING_PROGRESS', async (progressInfo) => {
+        const item: MediaItem = { path: progressInfo.path };
+        await appContext.library.addNewItem(item);
+        setPhotos(await appContext.library.getAllItems());
+      });
     });
   }, []);
 
