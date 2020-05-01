@@ -5,6 +5,7 @@ interface MediaItem {
   path: string;
 }
 
+// TODO: Move this function outside of this module
 function guardError(err: Error, reject: (err: Error) => void) : boolean {
   if (err) {
     reject(err);
