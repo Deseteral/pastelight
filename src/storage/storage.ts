@@ -1,12 +1,12 @@
 import fs from 'fs';
 import path from 'path';
 import util from 'util';
-import mkdirp from 'mkdirp';
 
+// TODO: Generalize those; Node has promisifed variants of those methods I think
 const readFile = util.promisify(fs.readFile);
 const writeFile = util.promisify(fs.writeFile);
 const unlink = util.promisify(fs.unlink);
-const mkdir = util.promisify(mkdirp);
+const mkdir = util.promisify(fs.mkdir);
 
 const DEFAULT_GLOBAL_DATA_PATH = process.cwd();
 
@@ -45,7 +45,7 @@ class Storage {
   }
 
   async setAndCreateDataPath(nextDataPath: string) : Promise<void> {
-    await mkdir(nextDataPath);
+    await mkdir(nextDataPath, { recursive: true });
     this.dataPath = nextDataPath;
   }
 
@@ -53,7 +53,7 @@ class Storage {
     return this.dataPath;
   }
 
-  private getFilePath(key: string) : string {
+  private getFilePath(key: string) : string { // TODO: Cache this lol
     return path.resolve(this.dataPath, `${key}.json`);
   }
 }
