@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { remote } from 'electron';
 import { Storage } from '../storage';
-import { App, getPlatform } from '../application';
+import { AppContainer, getPlatform } from '../application';
 import { WelcomeScreen } from '../welcome-screen';
 
 function setPlatformDataAttribute() {
@@ -18,7 +18,7 @@ async function renderApp() {
   await setStoragePath();
   setPlatformDataAttribute();
 
-  ReactDOM.render(<App />, document.getElementById('root'));
+  ReactDOM.render(<AppContainer />, document.getElementById('root'));
 }
 
 async function renderWelcomeScreen() {
