@@ -46,7 +46,7 @@
     "styled-components": "5.1.0"
   },
   "devDependencies": {
-    "@deseteral/eslint-config": "2.1.0",
+    "@deseteral/eslint-config": "2.1.1",
     "@types/electron-devtools-installer": "2.2.0",
     "@types/jest": "25.2.1",
     "@types/nedb": "1.8.9",
