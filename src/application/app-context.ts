@@ -1,5 +1,5 @@
 import { PastelogueClient } from '../pastelogue';
-import { Library } from '../library';
+import { Library, MediaItem } from '../library';
 
 interface AppContext {
   pastelogue: PastelogueClient;
@@ -9,19 +9,22 @@ interface AppContext {
 let appContext: (AppContext|null) = null;
 
 async function initializeAppContext(libraryPath: string) {
+  // Load library database
+  const library = new Library(libraryPath);
+  await library.load();
+
+  // Create app context
   appContext = {
     pastelogue: new PastelogueClient(),
-    library: new Library(libraryPath),
+    library,
   };
 
-  await appContext.library.load();
-
-  // appContext.pastelogue.startProcessing(data.path);
-  // appContext.pastelogue.on('PROCESSING_PROGRESS', async (progressInfo) => {
-  //   const item: MediaItem = { path: progressInfo.path };
-  //   await appContext.library.addNewItem(item);
-  //   setPhotos(await appContext.library.getAllItems());
-  // });
+  // Kick off initial processing
+  appContext.pastelogue.on('PROCESSING_PROGRESS', async (progressInfo) => {
+    const item: MediaItem = { path: progressInfo.path };
+    await appContext?.library.addNewItem(item);
+  });
+  appContext.pastelogue.startProcessing(libraryPath);
 }
 
 function getAppContext() {

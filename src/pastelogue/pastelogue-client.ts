@@ -13,6 +13,7 @@ interface PastelogueProgress {
   progress: number;
   total: number;
   path: string;
+  originalPath: string;
 }
 
 type PastelogueResponseId = ('PROCESSING_STARTED' | 'PROCESSING_PROGRESS' | 'PROCESSING_FINISHED');
@@ -47,6 +48,8 @@ class PastelogueClient {
       action: 'START_PROCESSING',
       args: { path: cataloguePath },
     };
+
+    console.log('Started processing');
 
     this.serverProcess.stdin.write(JSON.stringify(action));
     this.serverProcess.stdin.end();
