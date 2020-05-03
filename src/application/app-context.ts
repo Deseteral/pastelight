@@ -21,8 +21,10 @@ async function initializeAppContext(libraryPath: string) {
 
   // Kick off initial processing
   appContext.pastelogue.on('PROCESSING_PROGRESS', async (progressInfo) => {
-    const item: MediaItem = { path: progressInfo.path };
-    await appContext?.library.addNewItem(item);
+    if (progressInfo.id === 'PROCESSING_PROGRESS') { // TODO: Do something with redundant condition
+      const item: MediaItem = { path: progressInfo.payload.path };
+      await appContext?.library.addNewItem(item);
+    }
   });
   appContext.pastelogue.startProcessing(libraryPath);
 }

@@ -2,26 +2,59 @@ import { spawn, ChildProcessWithoutNullStreams } from 'child_process';
 import { EventEmitter } from 'events';
 import { getNativeBinaryPath } from '../application';
 
-interface PastelogueRequest {
-  action: ('START_PROCESSING' | 'READ_EXIF_DATA');
+// Request
+interface PastelogueStartProcessingRequest {
+  action: 'START_PROCESSING';
   args: {
     path: string;
   };
 }
 
-interface PastelogueProgress {
+interface PastelogueReadExifDataRequest {
+  action: 'READ_EXIF_DATA';
+  args: {
+    path: string;
+  };
+}
+
+type PastelogueRequest = (PastelogueStartProcessingRequest | PastelogueReadExifDataRequest);
+
+// Response
+interface PastelogueProcessingStartedResponse {
+  id: 'PROCESSING_STARTED';
+  payload: null;
+}
+
+interface PastelogueProgressPayload {
   progress: number;
   total: number;
   path: string;
   originalPath: string;
 }
-
-type PastelogueResponseId = ('PROCESSING_STARTED' | 'PROCESSING_PROGRESS' | 'PROCESSING_FINISHED');
-
-interface PastelogueProcessingProgress {
-  id: PastelogueResponseId;
-  payload: (PastelogueProgress | null);
+interface PastelogueProcessingProgressResponse {
+  id: 'PROCESSING_PROGRESS';
+  payload: PastelogueProgressPayload;
 }
+
+interface PastelogueProcessingFinishedResponse {
+  id: 'PROCESSING_FINISHED';
+  payload: null;
+}
+
+interface PastelogueExifDataPayload {
+  exifData: any;
+}
+interface PastelogueExifDataResponse {
+  id: 'EXIF_DATA';
+  payload: PastelogueExifDataPayload;
+}
+
+type PastelogueResponse = (
+  PastelogueProcessingStartedResponse |
+  PastelogueProcessingProgressResponse |
+  PastelogueProcessingFinishedResponse |
+  PastelogueExifDataResponse
+);
 
 const EXEC_PATH = getNativeBinaryPath(['pastelogue', 'pastelogue_server']);
 class PastelogueClient {
@@ -33,13 +66,13 @@ class PastelogueClient {
 
     this.serverProcess = spawn(EXEC_PATH);
     this.serverProcess.stdout.on('data', (data: Buffer) => {
-      const events: PastelogueProcessingProgress[] = data.toString('utf8')
+      const events: PastelogueResponse[] = data.toString('utf8')
         .split('\n')
         .filter((s) => (s.length > 0))
         .map((s) => s.trim())
         .map((json) => JSON.parse(json));
 
-      events.forEach((event) => this.eventEmitter.emit(event.id, event.payload));
+      events.forEach((event) => this.eventEmitter.emit('event', event));
     });
   }
 
@@ -49,14 +82,14 @@ class PastelogueClient {
       args: { path: cataloguePath },
     };
 
-    console.log('Started processing');
-
     this.serverProcess.stdin.write(JSON.stringify(action));
     this.serverProcess.stdin.end();
+
+    console.log('Started processing');
   }
 
-  on(id: PastelogueResponseId, listener: (data: PastelogueProgress) => void) {
-    this.eventEmitter.on(id, listener);
+  on<T extends PastelogueResponse['id']>(responseId: T, listener: (data: (PastelogueResponse & { id: T })) => void) {
+    this.eventEmitter.on(responseId, listener);
   }
 }
 
