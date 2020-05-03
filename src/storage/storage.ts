@@ -1,12 +1,5 @@
-import fs from 'fs';
+import fs, { promises as fsp } from 'fs';
 import path from 'path';
-import util from 'util';
-
-// TODO: Generalize those; Node has promisifed variants of those methods I think
-const readFile = util.promisify(fs.readFile);
-const writeFile = util.promisify(fs.writeFile);
-const unlink = util.promisify(fs.unlink);
-const mkdir = util.promisify(fs.mkdir);
 
 const DEFAULT_GLOBAL_DATA_PATH = process.cwd();
 
@@ -28,24 +21,24 @@ class Storage {
       return defaultValue;
     }
 
-    const data = await readFile(filePath, { encoding: 'utf8' });
+    const data = await fsp.readFile(filePath, { encoding: 'utf8' });
     return JSON.parse(data);
   }
 
   async set<T>(key: string, value: T) : Promise<void> {
     const filePath = this.getFilePath(key);
-    await writeFile(filePath, JSON.stringify(value), { encoding: 'utf8' });
+    await fsp.writeFile(filePath, JSON.stringify(value), { encoding: 'utf8' });
   }
 
   clear(key: string) : Promise<void> {
     const filePath = this.getFilePath(key);
     return fs.existsSync(filePath)
-      ? unlink(this.getFilePath(key))
+      ? fsp.unlink(this.getFilePath(key))
       : Promise.resolve();
   }
 
   async setAndCreateDataPath(nextDataPath: string) : Promise<void> {
-    await mkdir(nextDataPath, { recursive: true });
+    await fsp.mkdir(nextDataPath, { recursive: true });
     this.dataPath = nextDataPath;
   }
 
