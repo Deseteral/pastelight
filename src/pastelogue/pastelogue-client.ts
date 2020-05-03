@@ -10,15 +10,6 @@ interface PastelogueStartProcessingRequest {
   };
 }
 
-interface PastelogueReadExifDataRequest {
-  action: 'READ_EXIF_DATA';
-  args: {
-    path: string;
-  };
-}
-
-type PastelogueRequest = (PastelogueStartProcessingRequest | PastelogueReadExifDataRequest);
-
 // Response
 interface PastelogueProcessingStartedResponse {
   id: 'PROCESSING_STARTED';
@@ -41,19 +32,16 @@ interface PastelogueProcessingFinishedResponse {
   payload: null;
 }
 
-interface PastelogueExifDataPayload {
-  exifData: any;
-}
-interface PastelogueExifDataResponse {
-  id: 'EXIF_DATA';
-  payload: PastelogueExifDataPayload;
+interface ResponseToPayload {
+  'PROCESSING_STARTED': null;
+  'PROCESSING_PROGRESS': PastelogueProgressPayload;
+  'PROCESSING_FINISHED': null;
 }
 
 type PastelogueResponse = (
   PastelogueProcessingStartedResponse |
   PastelogueProcessingProgressResponse |
-  PastelogueProcessingFinishedResponse |
-  PastelogueExifDataResponse
+  PastelogueProcessingFinishedResponse
 );
 
 const EXEC_PATH = getNativeBinaryPath(['pastelogue', 'pastelogue_server']);
@@ -77,7 +65,7 @@ class PastelogueClient {
   }
 
   startProcessing(cataloguePath: string) {
-    const action: PastelogueRequest = {
+    const action: PastelogueStartProcessingRequest = {
       action: 'START_PROCESSING',
       args: { path: cataloguePath },
     };
@@ -88,7 +76,10 @@ class PastelogueClient {
     console.log('Started processing');
   }
 
-  on<T extends PastelogueResponse['id']>(responseId: T, listener: (data: (PastelogueResponse & { id: T })) => void) {
+  on<ResponseIdT extends keyof ResponseToPayload>(
+    responseId: ResponseIdT,
+    listener: (data: (ResponseToPayload[ResponseIdT] & { id: ResponseIdT })) => void,
+  ) {
     this.eventEmitter.on(responseId, listener);
   }
 }
