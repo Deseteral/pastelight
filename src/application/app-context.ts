@@ -6,15 +6,13 @@ interface AppContext {
   library: Library;
 }
 
-let appContext: (AppContext|null) = null;
-
-async function initializeAppContext(libraryPath: string) {
+async function createAppContext(libraryPath: string) : Promise<AppContext> {
   // Load library database
   const library = new Library(libraryPath);
   await library.load();
 
   // Create app context
-  appContext = {
+  const appContext = {
     pastelogue: new PastelogueClient(),
     library,
   };
@@ -25,10 +23,8 @@ async function initializeAppContext(libraryPath: string) {
     await appContext?.library.addNewItem(item);
   });
   appContext.pastelogue.startProcessing(libraryPath);
-}
 
-function getAppContext() {
   return appContext;
 }
 
-export { AppContext, getAppContext, initializeAppContext };
+export { AppContext, createAppContext };

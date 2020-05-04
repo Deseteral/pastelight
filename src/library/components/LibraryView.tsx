@@ -1,20 +1,18 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { MediaItem } from '../library';
-import * as Application from '../../application';
+import { useAppContext } from '../../application';
 
 const ImageThumbnail = styled.img`
   width: 200px;
 `;
 
-interface LibraryViewProps { }
-function LibraryView(_: LibraryViewProps) : JSX.Element {
+interface LibraryViewProps {}
+const LibraryView: React.FunctionComponent<LibraryViewProps> = () => {
   const [mediaItems, setMediaItems] = React.useState<MediaItem[]>([]);
-  const context = React.useContext(Application.Context);
+  const context = useAppContext();
 
   React.useEffect(() => {
-    // TODO: If context changes this may be called more than once which is not good
-    if (!context) return;
     context.pastelogue.on('PROCESSING_FINISHED', async () => {
       const items = await context.library.getAllItems();
       setMediaItems(items);
@@ -24,7 +22,7 @@ function LibraryView(_: LibraryViewProps) : JSX.Element {
       const items = await context.library.getAllItems();
       setMediaItems(items);
     })();
-  }, [context]);
+  }, []);
 
   return (
     <div>
@@ -33,6 +31,7 @@ function LibraryView(_: LibraryViewProps) : JSX.Element {
       ))}
     </div>
   );
-}
+};
 
 export default LibraryView;
+export { LibraryViewProps };
