@@ -68,7 +68,7 @@ class PastelogueClient {
         .map((s) => s.trim())
         .map((json) => JSON.parse(json));
 
-      events.forEach((event) => this.eventEmitter.emit('event', event));
+      events.forEach((event) => this.eventEmitter.emit(event.id, event.payload));
     });
   }
 
