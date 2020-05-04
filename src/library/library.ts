@@ -15,11 +15,14 @@ function guardError(err: Error, reject: (err: Error) => void) : boolean {
 }
 
 class Library {
+  public readonly rootDirectoryPath: string;
   private db: Datastore;
 
   constructor(libraryPath: string) {
-    const dbFilename = path.join(libraryPath, 'data.db');
-    this.db = new Datastore({ filename: dbFilename });
+    this.rootDirectoryPath = libraryPath;
+    this.db = new Datastore({
+      filename: path.join(libraryPath, 'data.db'),
+    });
   }
 
   load() : Promise<void> {
