@@ -17,10 +17,18 @@ interface PastelogueProcessingStartedResponse {
 }
 
 interface PastelogueProgressPayload {
-  progress: number;
-  total: number;
-  path: string;
-  originalPath: string;
+  progress: {
+    current: number,
+    total: number,
+  },
+  file: {
+    input: {
+      path: string,
+    },
+    output: {
+      path: string,
+    },
+  },
 }
 interface PastelogueProcessingProgressResponse {
   id: 'PROCESSING_PROGRESS';
