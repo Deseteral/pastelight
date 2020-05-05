@@ -4,6 +4,7 @@ import { filter, map } from 'rxjs/operators';
 import { EventEmitter } from 'events';
 import { getNativeBinaryPath } from '../application';
 import { StartProcessingRequest, ProgressPayload, isProcessingProgressResponse, PastelogueRequest, PastelogueResponse } from './model';
+import * as Logger from '../logger';
 
 // Client
 const EXEC_PATH = getNativeBinaryPath(['pastelogue', 'pastelogue_server']);
@@ -39,7 +40,7 @@ class PastelogueClient {
 
     this.sendProcessRequest(request);
 
-    console.log('Started processing');
+    Logger.info('Started processing', 'pastelogue client');
   }
 
   responses() : Observable<PastelogueResponse> {
