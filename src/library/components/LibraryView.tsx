@@ -5,6 +5,10 @@ import { MediaItem } from '../library';
 import { useAppContext } from '../../application';
 import * as Pastelogue from '../../pastelogue';
 
+const Container = styled.div`
+  overflow-y: scroll;
+`;
+
 const ImageThumbnail = styled.img`
   width: 200px;
 `;
@@ -28,11 +32,11 @@ const LibraryView: React.FunctionComponent<LibraryViewProps> = () => {
   }, []);
 
   return (
-    <div>
+    <Container>
       {mediaItems.map((mediaItem) => (
         <ImageThumbnail src={mediaItem.path} key={mediaItem.path} />
       ))}
-    </div>
+    </Container>
   );
 };
 
