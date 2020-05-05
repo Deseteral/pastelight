@@ -3,56 +3,9 @@ import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { EventEmitter } from 'events';
 import { getNativeBinaryPath } from '../application';
+import { StartProcessingRequest, ProgressPayload, isProcessingProgressResponse, Request, Response } from './model';
 
-// Request
-interface StartProcessingRequest {
-  action: 'START_PROCESSING';
-  args: {
-    path: string;
-  };
-}
-
-type Request = (StartProcessingRequest);
-
-// Response
-interface ProcessingStartedResponse {
-  id: 'PROCESSING_STARTED';
-  payload: null;
-}
-const isProcessingStartedResponse = (res: Response) : res is ProcessingStartedResponse => (res.id === 'PROCESSING_STARTED');
-
-interface ProgressPayload {
-  progress: {
-    current: number,
-    total: number,
-  },
-  file: {
-    input: {
-      path: string,
-    },
-    output: {
-      path: string,
-    },
-  },
-}
-interface ProcessingProgressResponse {
-  id: 'PROCESSING_PROGRESS';
-  payload: ProgressPayload;
-}
-const isProcessingProgressResponse = (res: Response) : res is ProcessingProgressResponse => (res.id === 'PROCESSING_PROGRESS');
-
-interface ProcessingFinishedResponse {
-  id: 'PROCESSING_FINISHED';
-  payload: null;
-}
-const isProcessingFinishedResponse = (res: Response) : res is ProcessingFinishedResponse => (res.id === 'PROCESSING_FINISHED');
-
-type Response = (
-  ProcessingStartedResponse |
-  ProcessingProgressResponse |
-  ProcessingFinishedResponse
-);
-
+// Client
 const EXEC_PATH = getNativeBinaryPath(['pastelogue', 'pastelogue_server']);
 class PastelogueClient {
   private serverProcess: ChildProcessWithoutNullStreams;
@@ -108,5 +61,3 @@ class PastelogueClient {
 }
 
 export { PastelogueClient };
-export { Response, ProcessingProgressResponse };
-export { isProcessingStartedResponse, isProcessingProgressResponse, isProcessingFinishedResponse };
