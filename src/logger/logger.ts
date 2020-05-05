@@ -35,7 +35,7 @@ function printToConsole(l: Log) {
     color('group'),
     color(l.level),
     color('default'),
-    color(l.level),
+    color('default'),
   );
 }
 
