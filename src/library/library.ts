@@ -15,13 +15,11 @@ function guardError(err: Error, reject: (err: Error) => void) : boolean {
 }
 
 class Library {
-  public readonly rootDirectoryPath: string;
   private db: Datastore;
 
-  constructor(libraryPath: string) {
-    this.rootDirectoryPath = libraryPath;
+  constructor(libraryWorkingDirectoryPath: string) {
     this.db = new Datastore({
-      filename: path.join(libraryPath, 'data.db'),
+      filename: path.join(libraryWorkingDirectoryPath, 'data.db'),
     });
   }
 
