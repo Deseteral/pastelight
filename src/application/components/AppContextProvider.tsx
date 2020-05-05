@@ -2,6 +2,9 @@ import React, { useEffect, useState, useContext } from 'react';
 import { ipcRenderer } from 'electron';
 import { AppContext, createAppContext } from '../app-context';
 import { IPC_LOAD_CATALOGUE_CHANNEL, IpcLoadCatalogueData } from '../../welcome-screen';
+import * as Logger from '../../logger';
+
+const LGROUP = 'AppContextProvider';
 
 const Context = React.createContext<AppContext|null>(null);
 
@@ -11,6 +14,8 @@ const AppContextProvider: React.FunctionComponent<AppContextProviderProps> = (pr
 
   useEffect(() => {
     ipcRenderer.on(IPC_LOAD_CATALOGUE_CHANNEL, async (_, data: IpcLoadCatalogueData) => {
+      Logger.info(`Received library path from main process: "${data.path}"`, LGROUP);
+
       const appContext = await createAppContext(data.path);
       setContext(appContext);
     });
