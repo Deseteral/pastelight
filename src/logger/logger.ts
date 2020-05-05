@@ -5,12 +5,38 @@ interface Log {
   message: string,
 }
 
-const logs: Log[] = [];
-
 function printToConsole(l: Log) {
-  const s = `[${l.datetime.toLocaleString()}] [${l.group}] ${l.message}`;
-  // @ts-ignore
-  console[l.level](s); // eslint-disable-line no-console
+  const color = (ck: string) => {
+    const c = (() => {
+      switch (ck) {
+        case 'date': return '#78909C';
+        case 'group': return '#37474F';
+        case 'info': return '#1565C0';
+        case 'warn': return '#FFC107';
+        case 'error': return '#B71C1C';
+        default: return 'black';
+      }
+    })();
+
+    return `color:${c};`;
+  };
+
+  const msg = [
+    `[${l.datetime.toLocaleString()}] `,
+    `[${l.group}] `,
+    `${l.level.toUpperCase()}`,
+    ': ',
+    `${l.message}`,
+  ].map((s) => `%c${s}`).join('');
+
+  console.log( // eslint-disable-line no-console
+    msg,
+    color('date'),
+    color('group'),
+    color(l.level),
+    color('default'),
+    color(l.level),
+  );
 }
 
 function log(level: string, message: string, group = 'general') {
@@ -21,7 +47,6 @@ function log(level: string, message: string, group = 'general') {
     message,
   };
 
-  logs.push(l);
   printToConsole(l);
 }
 
