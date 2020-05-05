@@ -1,6 +1,6 @@
 import { PastelogueClient } from './pastelogue-client';
-import { Response, ProcessingProgressResponse, isProcessingStartedResponse, isProcessingProgressResponse, isProcessingFinishedResponse } from './model';
+import { PastelogueResponse, ProcessingProgressResponse, isProcessingStartedResponse, isProcessingProgressResponse, isProcessingFinishedResponse } from './model';
 
 export { PastelogueClient };
-export { Response, ProcessingProgressResponse };
+export { PastelogueResponse, ProcessingProgressResponse };
 export { isProcessingStartedResponse, isProcessingProgressResponse, isProcessingFinishedResponse };

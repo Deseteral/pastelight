@@ -3,21 +3,21 @@ import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { EventEmitter } from 'events';
 import { getNativeBinaryPath } from '../application';
-import { StartProcessingRequest, ProgressPayload, isProcessingProgressResponse, Request, Response } from './model';
+import { StartProcessingRequest, ProgressPayload, isProcessingProgressResponse, PastelogueRequest, PastelogueResponse } from './model';
 
 // Client
 const EXEC_PATH = getNativeBinaryPath(['pastelogue', 'pastelogue_server']);
 class PastelogueClient {
   private serverProcess: ChildProcessWithoutNullStreams;
   private eventEmitter: EventEmitter;
-  private observable: Observable<Response>;
+  private observable: Observable<PastelogueResponse>;
 
   constructor() {
     this.eventEmitter = new EventEmitter();
 
     this.serverProcess = spawn(EXEC_PATH);
     this.serverProcess.stdout.on('data', (data: Buffer) => {
-      const events: Response[] = data.toString('utf8')
+      const events: PastelogueResponse[] = data.toString('utf8')
         .split('\n')
         .filter((s) => (s.length > 0))
         .map((s) => s.trim())
@@ -42,7 +42,7 @@ class PastelogueClient {
     console.log('Started processing');
   }
 
-  responses() : Observable<Response> {
+  responses() : Observable<PastelogueResponse> {
     return this.observable;
   }
 
@@ -54,7 +54,7 @@ class PastelogueClient {
       );
   }
 
-  private sendProcessRequest(req: Request) {
+  private sendProcessRequest(req: PastelogueRequest) {
     this.serverProcess.stdin.write(JSON.stringify(req));
     this.serverProcess.stdin.end();
   }
