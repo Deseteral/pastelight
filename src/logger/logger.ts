@@ -1,3 +1,5 @@
+import path from 'path';
+
 interface Log {
   datetime: Date,
   group: string,
@@ -39,10 +41,28 @@ function printToConsole(l: Log) {
   );
 }
 
-function log(level: string, message: string, group = 'general') {
+function getFilenameOfCaller() : string {
+  const _ = Error.prepareStackTrace;
+  Error.prepareStackTrace = (_, stack) => stack;
+  const { stack } = new Error();
+  Error.prepareStackTrace = _;
+
+  // @ts-ignore
+  const callers = stack.map(x => x.getFileName());
+
+  const firstExternalFilePath = callers.find((x: any) => {
+    return x !== callers[0];
+  });
+
+  return firstExternalFilePath
+    ? path.basename(firstExternalFilePath, path.extname(firstExternalFilePath))
+    : 'anonymous';
+}
+
+function log(level: string, message: string, group?: string) {
   const l: Log = {
     datetime: new Date(),
-    group,
+    group: group ?? getFilenameOfCaller(),
     level,
     message,
   };
@@ -50,15 +70,15 @@ function log(level: string, message: string, group = 'general') {
   printToConsole(l);
 }
 
-function info(message: string, group = 'general') {
+function info(message: string, group?: string) {
   log('info', message, group);
 }
 
-function warn(message: string, group = 'general') {
+function warn(message: string, group?: string) {
   log('warn', message, group);
 }
 
-function error(message: string, group = 'general') {
+function error(message: string, group?: string) {
   log('warn', message, group);
 }
 

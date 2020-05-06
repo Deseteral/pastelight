@@ -4,8 +4,6 @@ import { PastelogueClient } from '../pastelogue';
 import { Library, MediaItem } from '../library';
 import * as Logger from '../logger';
 
-const LGROUP = 'AppContext';
-
 interface AppContext {
   libraryPath: string,
   libraryWorkingDirectoryPath: string,
@@ -14,7 +12,7 @@ interface AppContext {
 }
 
 async function createAppContext(libraryPath: string) : Promise<AppContext> {
-  Logger.info('Creating application context', LGROUP);
+  Logger.info('Creating application context');
 
   // Create working dir for library files
   const libraryWorkingDirectoryPath = path.join(libraryPath, '.pastelight');

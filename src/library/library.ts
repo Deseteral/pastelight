@@ -2,8 +2,6 @@ import Datastore from 'nedb';
 import path from 'path';
 import * as Logger from '../logger';
 
-const LGROUP = 'Library';
-
 interface MediaItem {
   path: string;
 }
@@ -22,7 +20,7 @@ class Library {
 
   constructor(libraryWorkingDirectoryPath: string) {
     const databaseFilePath = path.join(libraryWorkingDirectoryPath, 'data.db');
-    Logger.info(`Loading database at "${databaseFilePath}"`, LGROUP);
+    Logger.info(`Loading database at "${databaseFilePath}"`);
 
     this.db = new Datastore({ filename: databaseFilePath });
   }
@@ -40,7 +38,7 @@ class Library {
     const savedItem = await this.findOne({ path: item.path });
     if (!savedItem) {
       this.insert(item);
-      Logger.info(`Added item to library "${item.path}"`, LGROUP);
+      Logger.info(`Added item to library "${item.path}"`);
     }
   }
 
