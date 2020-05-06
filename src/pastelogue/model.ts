@@ -9,6 +9,15 @@ export interface StartProcessingRequest {
 export type PastelogueRequest = (StartProcessingRequest);
 
 // Response
+export interface ReadyResponse {
+  id: 'READY',
+  payload: ReadyPayload,
+}
+export interface ReadyPayload {
+  version: string,
+}
+export const isReadyResponse = (res: PastelogueResponse) : res is ReadyResponse => (res.id === 'READY');
+
 export interface ProcessingStartedResponse {
   id: 'PROCESSING_STARTED';
   payload: null;
@@ -42,6 +51,7 @@ export interface ProcessingFinishedResponse {
 export const isProcessingFinishedResponse = (res: PastelogueResponse) : res is ProcessingFinishedResponse => (res.id === 'PROCESSING_FINISHED');
 
 export type PastelogueResponse = (
+  ReadyResponse |
   ProcessingStartedResponse |
   ProcessingProgressResponse |
   ProcessingFinishedResponse

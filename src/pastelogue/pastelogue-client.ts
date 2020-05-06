@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { EventEmitter } from 'events';
 import { getNativeBinaryPath } from '../application';
-import { StartProcessingRequest, ProgressPayload, isProcessingProgressResponse, PastelogueRequest, PastelogueResponse } from './model';
+import { StartProcessingRequest, ProgressPayload, isProcessingProgressResponse, PastelogueRequest, PastelogueResponse, isReadyResponse } from './model';
 import * as Logger from '../logger';
 
 const EXEC_PATH = getNativeBinaryPath(['pastelogue', 'pastelogue_server']);
@@ -29,6 +29,12 @@ class PastelogueClient {
 
     this.observable = new Observable((subscriber) => {
       this.eventEmitter.on('response', (response) => subscriber.next(response));
+    });
+
+    this.eventEmitter.on('response', (response) => {
+      if (isReadyResponse(response)) {
+        Logger.info(`Connected to pastelogue_server v${response.payload.version}`);
+      }
     });
   }
 
