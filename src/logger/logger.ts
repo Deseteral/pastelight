@@ -42,17 +42,14 @@ function printToConsole(l: Log) {
 }
 
 function getFilenameOfCaller() : string {
-  const _ = Error.prepareStackTrace;
-  Error.prepareStackTrace = (_, stack) => stack;
+  const originalPrepareStackTrace = Error.prepareStackTrace;
+  Error.prepareStackTrace = (_err, stack) => stack;
   const { stack } = new Error();
-  Error.prepareStackTrace = _;
+  Error.prepareStackTrace = originalPrepareStackTrace;
 
-  // @ts-ignore
-  const callers = stack.map(x => x.getFileName());
-
-  const firstExternalFilePath = callers.find((x: any) => {
-    return x !== callers[0];
-  });
+  // @ts-ignore This feature is non-standard but it works in electron
+  const callers = stack.map((x) => x.getFileName());
+  const firstExternalFilePath = callers.find((x: any) => x !== callers[0]);
 
   return firstExternalFilePath
     ? path.basename(firstExternalFilePath, path.extname(firstExternalFilePath))
