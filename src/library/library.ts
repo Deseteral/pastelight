@@ -1,5 +1,6 @@
 import Datastore from 'nedb';
 import path from 'path';
+import * as Logger from '../logger';
 
 interface MediaItem {
   path: string;
@@ -18,9 +19,10 @@ class Library {
   private db: Datastore;
 
   constructor(libraryWorkingDirectoryPath: string) {
-    this.db = new Datastore({
-      filename: path.join(libraryWorkingDirectoryPath, 'data.db'),
-    });
+    const databaseFilePath = path.join(libraryWorkingDirectoryPath, 'data.db');
+    Logger.info(`Loading database at "${databaseFilePath}"`);
+
+    this.db = new Datastore({ filename: databaseFilePath });
   }
 
   load() : Promise<void> {
@@ -36,6 +38,7 @@ class Library {
     const savedItem = await this.findOne({ path: item.path });
     if (!savedItem) {
       this.insert(item);
+      Logger.info(`Added item to library "${item.path}"`);
     }
   }
 

@@ -2,6 +2,7 @@ import path from 'path';
 import { promises as fsp } from 'fs';
 import { PastelogueClient } from '../pastelogue';
 import { Library, MediaItem } from '../library';
+import * as Logger from '../logger';
 
 interface AppContext {
   libraryPath: string,
@@ -11,6 +12,8 @@ interface AppContext {
 }
 
 async function createAppContext(libraryPath: string) : Promise<AppContext> {
+  Logger.info('Creating application context');
+
   // Create working dir for library files
   const libraryWorkingDirectoryPath = path.join(libraryPath, '.pastelight');
   fsp.mkdir(libraryWorkingDirectoryPath, { recursive: true });
