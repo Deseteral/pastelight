@@ -7,7 +7,8 @@ app.on('ready', async () => {
   const appWindow = await createAppWindow();
 
   ipcMain.on(IPC_LOAD_CATALOGUE_CHANNEL, (_, args: IpcLoadCatalogueData) => {
-    console.log(args.path);
+    appWindow.webContents.send(IPC_LOAD_CATALOGUE_CHANNEL, args);
+
     welcomeScreenWindow.hide();
     appWindow.show();
   });

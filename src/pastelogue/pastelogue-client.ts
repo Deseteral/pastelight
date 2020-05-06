@@ -1,27 +1,63 @@
 import { spawn, ChildProcessWithoutNullStreams } from 'child_process';
+import { Observable } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
+import { EventEmitter } from 'events';
 import { getNativeBinaryPath } from '../application';
+import { StartProcessingRequest, ProgressPayload, isProcessingProgressResponse, PastelogueRequest, PastelogueResponse } from './model';
 
-let serverProcess: ChildProcessWithoutNullStreams;
+// Client
+const EXEC_PATH = getNativeBinaryPath(['pastelogue', 'pastelogue_server']);
+class PastelogueClient {
+  private serverProcess: ChildProcessWithoutNullStreams;
+  private eventEmitter: EventEmitter;
+  private observable: Observable<PastelogueResponse>;
 
-(function initializePastelogueClient() {
-  const execPath = getNativeBinaryPath(['pastelogue', 'pastelogue_server']);
-  serverProcess = spawn(execPath);
+  constructor() {
+    this.eventEmitter = new EventEmitter();
 
-  serverProcess.stdout.on('data', (data) => {
-    console.log(data);
-  });
-}());
+    this.serverProcess = spawn(EXEC_PATH);
+    this.serverProcess.stdout.on('data', (data: Buffer) => {
+      const events: PastelogueResponse[] = data.toString('utf8')
+        .split('\n')
+        .filter((s) => (s.length > 0))
+        .map((s) => s.trim())
+        .map((json) => JSON.parse(json));
 
-function startProcessing(cataloguePath: string) {
-  const action = {
-    action: 'START_PROCESSING',
-    args: { path: cataloguePath },
-  };
+      events.forEach((event) => this.eventEmitter.emit('response', event));
+    });
 
-  serverProcess.stdin.write(JSON.stringify(action));
-  serverProcess.stdin.end();
+    this.observable = new Observable((subscriber) => {
+      this.eventEmitter.on('response', (response) => subscriber.next(response));
+    });
+  }
+
+  startProcessing(cataloguePath: string) {
+    const request: StartProcessingRequest = {
+      action: 'START_PROCESSING',
+      args: { path: cataloguePath },
+    };
+
+    this.sendProcessRequest(request);
+
+    console.log('Started processing');
+  }
+
+  responses() : Observable<PastelogueResponse> {
+    return this.observable;
+  }
+
+  processingProgress() : Observable<ProgressPayload> {
+    return this.observable
+      .pipe(
+        filter(isProcessingProgressResponse),
+        map((response) => response.payload),
+      );
+  }
+
+  private sendProcessRequest(req: PastelogueRequest) {
+    this.serverProcess.stdin.write(JSON.stringify(req));
+    this.serverProcess.stdin.end();
+  }
 }
 
-export {
-  startProcessing,
-};
+export { PastelogueClient };

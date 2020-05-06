@@ -19,6 +19,7 @@ async function createAppWindow() {
 
   if (isDevMode()) {
     await installExtension(REACT_DEVELOPER_TOOLS);
+    appWindow.webContents.openDevTools();
   }
 
   appWindow.on('closed', () => {

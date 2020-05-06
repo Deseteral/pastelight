@@ -1,10 +1,7 @@
 import { remote, OpenDialogOptions } from 'electron';
-import fs from 'fs';
-import util from 'util';
+import { promises as fsp } from 'fs';
 import * as RecentLocationListService from './recent-location-list';
 import { ipcSendLoadCatalogue } from './ipc-load-catalogue';
-
-const stat = util.promisify(fs.stat);
 
 interface ValidationResult {
   valid: boolean;
@@ -13,7 +10,7 @@ interface ValidationResult {
 
 async function isValidPath(potentialPath: string) : Promise<ValidationResult> {
   try {
-    const stats = await stat(potentialPath);
+    const stats = await fsp.stat(potentialPath);
     return stats.isDirectory()
       ? { valid: true }
       : { valid: false, message: 'Selected path is not a directory' };

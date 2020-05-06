@@ -28,7 +28,7 @@ async function createWelcomeScreenWindow() {
 
   if (isDevMode()) {
     await installExtension(REACT_DEVELOPER_TOOLS);
-    welcomeScreenWindow.webContents.openDevTools();
+    // welcomeScreenWindow.webContents.openDevTools();
   }
 
   welcomeScreenWindow.on('closed', () => {
