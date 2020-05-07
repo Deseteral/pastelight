@@ -3,6 +3,7 @@ const path = require('path');
 const { spawnSync } = require('child_process');
 const fetch = require('node-fetch');
 const rimraf = require('rimraf');
+const packageJson = require('../package.json');
 
 const CURRENT_PLATFORM = (() => {
   switch (process.platform) {
@@ -40,8 +41,12 @@ function extractArchive(filePath, outputPath) {
   return null;
 }
 
+function getVersionFromPackageJson(depName) {
+  return packageJson.nativeDependencies[depName];
+}
+
 async function pastelogue() {
-  const version = 'v0.4.0';
+  const version = `v${getVersionFromPackageJson('pastelogue')}`;
   const platform = getForPlatform({
     macos: 'MacOS',
     windows: 'Windows',
