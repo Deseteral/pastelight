@@ -1,10 +1,7 @@
 import Datastore from 'nedb';
-import path from 'path';
+import { join as pathJoin } from 'path';
 import * as Logger from '../logger';
-
-interface MediaItem {
-  path: string;
-}
+import { MediaItem } from './media-item';
 
 // TODO: Move this function outside of this module
 function guardError(err: Error, reject: (err: Error) => void) : boolean {
@@ -16,13 +13,13 @@ function guardError(err: Error, reject: (err: Error) => void) : boolean {
 }
 
 class Library {
-  private db: Datastore;
+  private db: Datastore<MediaItem>;
 
   constructor(libraryWorkingDirectoryPath: string) {
-    const databaseFilePath = path.join(libraryWorkingDirectoryPath, 'data.db');
+    const databaseFilePath = pathJoin(libraryWorkingDirectoryPath, 'data.db');
     Logger.info(`Loading database at "${databaseFilePath}"`);
 
-    this.db = new Datastore({ filename: databaseFilePath });
+    this.db = new Datastore<MediaItem>({ filename: databaseFilePath });
   }
 
   load() : Promise<void> {
@@ -35,15 +32,19 @@ class Library {
   }
 
   async addNewItem(item: MediaItem) : Promise<void> {
-    const savedItem = await this.findOne({ path: item.path });
-    if (!savedItem) {
-      this.insert(item);
+    const isItemSaved = await this.findItemByPath(item.path);
+    if (!isItemSaved) {
+      await this.insert(item);
       Logger.info(`Added item to library "${item.path}"`);
     }
   }
 
   getAllItems() : Promise<MediaItem[]> {
     return this.find({});
+  }
+
+  findItemByPath(filePath: string) : Promise<MediaItem|null> {
+    return this.findOne({ path: filePath });
   }
 
   private insert(item: MediaItem) : Promise<void> {
@@ -64,9 +65,9 @@ class Library {
     });
   }
 
-  private findOne(query: any) : Promise<MediaItem> {
+  private findOne(query: any) : Promise<MediaItem|null> {
     return new Promise((resolve, reject) => {
-      this.db.findOne(query, (err: Error, item: MediaItem) => {
+      this.db.findOne(query, (err: Error, item: (MediaItem|null)) => {
         if (guardError(err, reject)) return;
         resolve(item);
       });
@@ -74,4 +75,4 @@ class Library {
   }
 }
 
-export { Library, MediaItem };
+export { Library };

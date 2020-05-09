@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { filter } from 'rxjs/operators';
-import { MediaItem } from '../library';
+import { MediaItem } from '../media-item';
 import { useAppContext } from '../../application';
 import * as Pastelogue from '../../pastelogue';
 
