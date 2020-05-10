@@ -1,8 +1,8 @@
 import { Library } from './library';
-import { MediaItem } from './media-item';
+import { MediaItem, ThumbnailInfo } from './media-item';
 import LibraryView from './components/LibraryView';
 import LibraryService from './library-service';
 
-export { Library, MediaItem };
+export { Library, LibraryService };
+export { MediaItem, ThumbnailInfo };
 export { LibraryView };
-export { LibraryService };

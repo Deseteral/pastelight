@@ -1,6 +1,6 @@
 interface MediaItem {
   path: string,
-  thumbnail: (ThumbnailInfo|null), // TODO: This should not be null
+  thumbnail: ThumbnailInfo,
 }
 
 interface ThumbnailInfo {

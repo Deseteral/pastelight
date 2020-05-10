@@ -18,10 +18,11 @@ async function createAppContext(libraryPath: string) : Promise<AppContext> {
   // Create working dir for library files
   const libraryWorkingDirectoryPath = path.join(libraryPath, '.pastelight');
   fsp.mkdir(libraryWorkingDirectoryPath, { recursive: true });
+  fsp.mkdir(path.join(libraryWorkingDirectoryPath, 'thumbnails'), { recursive: true });
 
   // Create library and library-service
   const library = new Library(libraryWorkingDirectoryPath);
-  const libraryService = new LibraryService(library);
+  const libraryService = new LibraryService(library, libraryPath, libraryWorkingDirectoryPath);
 
   // Create app context
   const appContext: AppContext = {
