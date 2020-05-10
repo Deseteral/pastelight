@@ -5,30 +5,44 @@ import { Library, LibraryService } from '../library';
 import * as Logger from '../logger';
 
 interface AppContext {
-  libraryPath: string,
-  libraryWorkingDirectoryPath: string,
+  paths: AppContextPaths,
   pastelogue: PastelogueClient,
   library: Library,
   libraryService: LibraryService,
 }
 
+interface AppContextPaths {
+  libraryPath: string,
+  libraryWorkingDirectoryPath: string,
+  thumbnails: string,
+}
+
 async function createAppContext(libraryPath: string) : Promise<AppContext> {
   Logger.info('Creating application context');
 
-  // Create working dir for library files
+  // Create AppContextPaths
   const libraryWorkingDirectoryPath = path.join(libraryPath, '.pastelight');
-  fsp.mkdir(libraryWorkingDirectoryPath, { recursive: true });
-  fsp.mkdir(path.join(libraryWorkingDirectoryPath, 'thumbnails'), { recursive: true });
+  const paths: AppContextPaths = {
+    libraryPath,
+    libraryWorkingDirectoryPath,
+    thumbnails: path.join(libraryWorkingDirectoryPath, 'thumbnails'),
+  };
+
+  // Create working dir for library files
+  fsp.mkdir(paths.libraryWorkingDirectoryPath, { recursive: true });
+  fsp.mkdir(paths.thumbnails, { recursive: true });
 
   // Create library and library-service
   const library = new Library(libraryWorkingDirectoryPath);
-  const libraryService = new LibraryService(library, libraryPath, libraryWorkingDirectoryPath);
+  const libraryService = new LibraryService(library, paths);
+
+  // Create and spawn pastelogue client
+  const pastelogue = new PastelogueClient();
 
   // Create app context
   const appContext: AppContext = {
-    libraryPath,
-    libraryWorkingDirectoryPath,
-    pastelogue: new PastelogueClient(),
+    paths,
+    pastelogue,
     library,
     libraryService,
   };
@@ -46,4 +60,4 @@ async function createAppContext(libraryPath: string) : Promise<AppContext> {
   return appContext;
 }
 
-export { AppContext, createAppContext };
+export { AppContext, AppContextPaths, createAppContext };

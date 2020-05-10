@@ -1,16 +1,15 @@
 import { MediaItem } from './media-item';
 import { generateThumbnail } from '../thumbnailer';
 import { Library } from './library';
+import { AppContextPaths } from '../application';
 
 class LibraryService {
   private library: Library;
-  private libraryPath: string;
-  private libraryWorkingDirectoryPath: string;
+  private paths: AppContextPaths;
 
-  constructor(library: Library, libraryPath: string, libWorkingDirPath: string) {
+  constructor(library: Library, paths: AppContextPaths) {
     this.library = library;
-    this.libraryPath = libraryPath;
-    this.libraryWorkingDirectoryPath = libWorkingDirPath;
+    this.paths = paths;
   }
 
   async addMediaItemFromPath(filePath: string) : Promise<MediaItem|null> {
@@ -19,11 +18,7 @@ class LibraryService {
     if (itemAlreadyExists) return null;
 
     // Generate thumbnail
-    const thumbnail = await generateThumbnail(
-      filePath,
-      this.libraryPath,
-      this.libraryWorkingDirectoryPath,
-    );
+    const thumbnail = await generateThumbnail(filePath, this.paths);
 
     // Save item to database
     const item: MediaItem = {
