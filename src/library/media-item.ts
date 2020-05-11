@@ -1,10 +1,10 @@
 interface MediaItem {
-  path: string,
+  relativePath: string,
   thumbnail: ThumbnailInfo,
 }
 
 interface ThumbnailInfo {
-  path: string,
+  relativePath: string,
 }
 
 export { MediaItem, ThumbnailInfo };

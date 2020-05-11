@@ -4,6 +4,7 @@ import { filter } from 'rxjs/operators';
 import { MediaItem } from '../media-item';
 import { useAppContext } from '../../application';
 import * as Pastelogue from '../../pastelogue';
+import { toFullPath } from '../path-converter';
 
 const Container = styled.div`
   overflow-y: scroll;
@@ -34,7 +35,10 @@ const LibraryView: React.FunctionComponent<LibraryViewProps> = () => {
   return (
     <Container>
       {mediaItems.map((mediaItem) => (
-        <ImageThumbnail src={mediaItem.path} key={mediaItem.path} />
+        <ImageThumbnail
+          src={toFullPath(mediaItem.relativePath, context.paths)}
+          key={mediaItem.relativePath}
+        />
       ))}
     </Container>
   );

@@ -32,10 +32,10 @@ class Library {
   }
 
   async addNewItem(item: MediaItem) : Promise<void> {
-    const isItemSaved = await this.findItemByPath(item.path);
+    const isItemSaved = await this.findItemByPath(item.relativePath);
     if (!isItemSaved) {
       await this.insert(item);
-      Logger.info(`Added item to library "${item.path}"`);
+      Logger.info(`Added item to library "${item.relativePath}"`);
     }
   }
 

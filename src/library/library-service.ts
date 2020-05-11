@@ -2,6 +2,7 @@ import { MediaItem } from './media-item';
 import { generateThumbnail } from '../thumbnailer';
 import { Library } from './library';
 import { AppContextPaths } from '../application';
+import { toRelativePath } from './path-converter';
 
 class LibraryService {
   private library: Library;
@@ -14,7 +15,8 @@ class LibraryService {
 
   async addMediaItemFromPath(filePath: string) : Promise<MediaItem|null> {
     // Check if item with this file path already exists in the database
-    const itemAlreadyExists = !!(await this.library.findItemByPath(filePath));
+    const relativePath = toRelativePath(filePath, this.paths);
+    const itemAlreadyExists = !!(await this.library.findItemByPath(relativePath));
     if (itemAlreadyExists) return null;
 
     // Generate thumbnail
@@ -22,7 +24,7 @@ class LibraryService {
 
     // Save item to database
     const item: MediaItem = {
-      path: filePath,
+      relativePath,
       thumbnail,
     };
     await this.library.addNewItem(item);

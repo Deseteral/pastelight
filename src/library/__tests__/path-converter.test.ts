@@ -1,0 +1,32 @@
+import { toRelativePath, toFullPath } from '../path-converter';
+import { AppContextPaths } from '../../application';
+
+describe('Library file path converter', () => {
+  const paths: AppContextPaths = {
+    libraryPath: '/Users/some.user/Pictures/Photos',
+    libraryWorkingDirectoryPath: '/Users/some.user/Pictures/Photos/.pastelight',
+    thumbnails: '/Users/some.user/Pictures/Photos/.pastelight/thumbnails',
+  };
+
+  it('should map full file path to library relative path', () => {
+    // given
+    const fullPath = '/Users/some.user/Pictures/Photos/2020/05/11/photo.jpg';
+
+    // when
+    const relativePath = toRelativePath(fullPath, paths);
+
+    // then
+    expect(relativePath).toBe('/2020/05/11/photo.jpg');
+  });
+
+  it('should map relative library file path to full path', () => {
+    // given
+    const relativePath = '/2020/05/11/photo.jpg';
+
+    // when
+    const fullPath = toFullPath(relativePath, paths);
+
+    // then
+    expect(fullPath).toBe('/Users/some.user/Pictures/Photos/2020/05/11/photo.jpg');
+  });
+});
