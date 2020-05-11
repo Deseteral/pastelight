@@ -21,6 +21,7 @@
         ],
         "optionalDependencies": false
       }
-    ]
+    ],
+    "react/destructuring-assignment": "off"
   }
 }

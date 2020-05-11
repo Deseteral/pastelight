@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { ViewRouter, NavigationBar, NavigationProvider } from '../../navigation';
 import AppContextProvider from './AppContextProvider';
+import { LibraryProcessingNotification } from '../../library';
 
 const ContentContainer = styled.div`
   display: flex;
@@ -18,6 +19,7 @@ const AppContainer: React.FunctionComponent<AppContainerProps> = () => (
         <ViewRouter />
       </ContentContainer>
     </NavigationProvider>
+    <LibraryProcessingNotification />
   </AppContextProvider>
 );
 

@@ -44,7 +44,7 @@ class Library {
   }
 
   findItemByPath(filePath: string) : Promise<MediaItem|null> {
-    return this.findOne({ path: filePath });
+    return this.findOne({ relativePath: filePath });
   }
 
   private insert(item: MediaItem) : Promise<void> {

@@ -3,7 +3,14 @@ import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { EventEmitter } from 'events';
 import { getNativeBinaryPath } from '../application';
-import { StartProcessingRequest, ProgressPayload, isProcessingProgressResponse, PastelogueRequest, PastelogueResponse, isReadyResponse } from './model';
+import {
+  StartProcessingRequest,
+  ProgressPayload,
+  isProcessingProgressResponse,
+  PastelogueRequest,
+  PastelogueResponse,
+  isReadyResponse,
+} from './model';
 import * as Logger from '../logger';
 
 const EXEC_PATH = getNativeBinaryPath(['pastelogue', 'pastelogue_server']);
