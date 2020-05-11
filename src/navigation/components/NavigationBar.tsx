@@ -22,7 +22,7 @@ const PanelContainer = styled.div`
 
 function NavigationBar() {
   const { currentView, changeView } = useNavigation();
-  const extended = currentView !== View.MAPS;
+  const extended = currentView !== View.MAP;
 
   return (
     <PanelContainer extended={extended}>

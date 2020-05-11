@@ -15,8 +15,8 @@ function TabsStripe({ currentView, extended = false, onTabChange }: TabsStripePr
       name: 'library',
       view: View.LIBRARY,
     }, {
-      name: 'maps',
-      view: View.MAPS,
+      name: 'map',
+      view: View.MAP,
     },
   ];
 

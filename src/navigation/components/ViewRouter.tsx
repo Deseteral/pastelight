@@ -9,8 +9,8 @@ function ViewRouter() {
   switch (currentView) {
     case View.LIBRARY:
       return (<LibraryView />);
-    case View.MAPS:
-      return (<div>maps view</div>);
+    case View.MAP:
+      return (<div>map view</div>);
     default:
       return null;
   }
