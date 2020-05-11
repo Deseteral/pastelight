@@ -1,4 +1,4 @@
-import { toRelativePath, toFullPath } from '../path-converter';
+import { toRelativePath, toFullPath, relativeToThumbnailPath, pathToThumbnailPath } from '../path-converter';
 import { AppContextPaths } from '../../application';
 
 describe('Library file path converter', () => {
@@ -28,5 +28,29 @@ describe('Library file path converter', () => {
 
     // then
     expect(fullPath).toBe('/Users/some.user/Pictures/Photos/2020/05/11/photo.jpg');
+  });
+
+  describe('thumbnails', () => {
+    it('should map relative path to full thumbnail path', () => {
+      // given
+      const relativePath = '/2020/05/11/photo.jpg';
+
+      // when
+      const fullThumbnailPath = relativeToThumbnailPath(relativePath, paths);
+
+      // then
+      expect(fullThumbnailPath).toBe('/Users/some.user/Pictures/Photos/.pastelight/thumbnails/2020/05/11/photo.jpg');
+    });
+
+    it('should map full path to full thumbnail path', () => {
+      // given
+      const fullPath = '/Users/some.user/Pictures/Photos/2020/05/11/photo.jpg';
+
+      // when
+      const fullThumbnailPath = pathToThumbnailPath(fullPath, paths);
+
+      // then
+      expect(fullThumbnailPath).toBe('/Users/some.user/Pictures/Photos/.pastelight/thumbnails/2020/05/11/photo.jpg');
+    });
   });
 });

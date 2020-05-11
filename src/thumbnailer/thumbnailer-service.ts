@@ -1,12 +1,11 @@
 import path from 'path';
 import { promises as fsp } from 'fs';
 import sharp from 'sharp';
-import { ThumbnailInfo, toRelativePath } from '../library';
+import { ThumbnailInfo, pathToThumbnailPath } from '../library';
 import { AppContextPaths } from '../application';
 
 async function generateThumbnail(filePath: string, paths: AppContextPaths) : Promise<ThumbnailInfo> {
-  const relativeFilePath = toRelativePath(filePath, paths);
-  const thumbnailPath = path.join(paths.thumbnails, relativeFilePath);
+  const thumbnailPath = pathToThumbnailPath(filePath, paths);
 
   await fsp.mkdir(path.dirname(thumbnailPath), { recursive: true });
 

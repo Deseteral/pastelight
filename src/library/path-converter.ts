@@ -9,4 +9,12 @@ function toFullPath(relativePath: string, paths: AppContextPaths) : string {
   return path.join(paths.libraryPath, relativePath);
 }
 
-export { toRelativePath, toFullPath };
+function relativeToThumbnailPath(relativePath: string, paths: AppContextPaths) : string {
+  return path.join(paths.thumbnails, relativePath);
+}
+
+function pathToThumbnailPath(fullPath: string, paths: AppContextPaths) : string {
+  return relativeToThumbnailPath(toRelativePath(fullPath, paths), paths);
+}
+
+export { toRelativePath, toFullPath, relativeToThumbnailPath, pathToThumbnailPath };
