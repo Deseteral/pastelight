@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { StyleSheetManager } from 'styled-components';
 import { ViewRouter, NavigationBar, NavigationProvider } from '../../navigation';
 import AppContextProvider from './AppContextProvider';
 import { LibraryProcessingNotification } from '../../library';
@@ -12,15 +12,17 @@ const ContentContainer = styled.div`
 
 interface AppContainerProps {}
 const AppContainer: React.FunctionComponent<AppContainerProps> = () => (
-  <AppContextProvider>
-    <NavigationProvider>
-      <ContentContainer>
-        <NavigationBar />
-        <ViewRouter />
-      </ContentContainer>
-    </NavigationProvider>
-    <LibraryProcessingNotification />
-  </AppContextProvider>
+  <StyleSheetManager disableVendorPrefixes>
+    <AppContextProvider>
+      <NavigationProvider>
+        <ContentContainer>
+          <NavigationBar />
+          <ViewRouter />
+        </ContentContainer>
+      </NavigationProvider>
+      <LibraryProcessingNotification />
+    </AppContextProvider>
+  </StyleSheetManager>
 );
 
 export default AppContainer;

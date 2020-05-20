@@ -4,14 +4,14 @@ import { filter } from 'rxjs/operators';
 import { MediaItem } from '../media-item';
 import { useAppContext } from '../../application';
 import * as Pastelogue from '../../pastelogue';
-import { relativeToThumbnailPath } from '../path-converter';
+import ThumbnailCell from './ThumbnailCell';
 
 const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
   overflow-y: scroll;
-`;
-
-const ImageThumbnail = styled.img`
-  width: 200px;
 `;
 
 interface LibraryViewProps {}
@@ -35,8 +35,8 @@ const LibraryView: React.FunctionComponent<LibraryViewProps> = () => {
   return (
     <Container>
       {mediaItems.map((mediaItem) => (
-        <ImageThumbnail
-          src={relativeToThumbnailPath(mediaItem.relativePath, context.paths)}
+        <ThumbnailCell
+          item={mediaItem}
           key={mediaItem.relativePath}
         />
       ))}
