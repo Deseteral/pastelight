@@ -12,7 +12,7 @@ function guardError(err: Error, reject: (err: Error) => void) : boolean {
   return false;
 }
 
-class Library {
+class LibraryRepository {
   private db: Datastore<MediaItem>;
 
   constructor(libraryWorkingDirectoryPath: string) {
@@ -75,4 +75,4 @@ class Library {
   }
 }
 
-export { Library };
+export { LibraryRepository };

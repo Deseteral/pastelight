@@ -20,7 +20,7 @@ const LibraryView: React.FunctionComponent<LibraryViewProps> = () => {
   const context = useAppContext();
 
   const getItemsFromLibrary = async () => {
-    const items = await context.library.getAllItems();
+    const items = await context.libraryRepository.getAllItems();
     setMediaItems(items);
   };
 
