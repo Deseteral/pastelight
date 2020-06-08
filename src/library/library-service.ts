@@ -3,6 +3,8 @@ import { generateThumbnail } from '../thumbnailer';
 import { LibraryRepository } from './library-repository';
 import { AppContextPaths } from '../application';
 import { toRelativePath } from './path-converter';
+import * as MediaItemGrouper from './media-item-grouper';
+import { MediaItemsGroup } from './media-items-group';
 
 class LibraryService {
   private libraryRepository: LibraryRepository;
@@ -30,6 +32,11 @@ class LibraryService {
     await this.libraryRepository.addNewItem(item);
 
     return item;
+  }
+
+  async getAllMediaItems() : Promise<MediaItemsGroup[]> {
+    const items = await this.libraryRepository.getAllItems();
+    return MediaItemGrouper.groupMediaItems(items);
   }
 }
 

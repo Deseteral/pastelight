@@ -1,46 +1,37 @@
 import * as React from 'react';
-import styled from 'styled-components';
 import { filter } from 'rxjs/operators';
-import { MediaItem } from '../media-item';
 import { useAppContext } from '../../application';
 import * as Pastelogue from '../../pastelogue';
-import ThumbnailCell from './ThumbnailCell';
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  overflow-y: scroll;
-`;
+import { MediaItemsGroup } from '../media-items-group';
+import ItemsGroup from './ItemsGroup';
 
 interface LibraryViewProps {}
 const LibraryView: React.FunctionComponent<LibraryViewProps> = () => {
-  const [mediaItems, setMediaItems] = React.useState<MediaItem[]>([]);
+  const [itemGroups, setItemGroups] = React.useState<MediaItemsGroup[]>([]);
   const context = useAppContext();
 
   const getItemsFromLibrary = async () => {
-    const items = await context.libraryRepository.getAllItems();
-    setMediaItems(items);
+    const items: MediaItemsGroup[] = await context.libraryService.getAllMediaItems();
+    setItemGroups(items);
   };
 
   React.useEffect(() => {
     context.pastelogue.responses()
       .pipe(filter(Pastelogue.isProcessingFinishedResponse))
       .subscribe(() => getItemsFromLibrary());
+    // TODO: This thing above is actually not really good - it's going to fetch items after pastelogue finishes
+    //       processing - but that's too early. Instead it should do it after items are processed and added to library.
+    //       This is not a big deal right now and this mechanism will probably change sooner than later so 🤷‍♀️.
 
     getItemsFromLibrary();
   }, []);
 
   return (
-    <Container>
-      {mediaItems.map((mediaItem) => (
-        <ThumbnailCell
-          item={mediaItem}
-          key={mediaItem.relativePath}
-        />
+    <div>
+      {itemGroups.map((group) => (
+        <ItemsGroup group={group} key={group.title} />
       ))}
-    </Container>
+    </div>
   );
 };
 
