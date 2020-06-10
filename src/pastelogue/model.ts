@@ -37,6 +37,9 @@ export interface ProgressPayload {
       path: string,
     },
   },
+  metadata: {
+    createdAt: string,
+  }
 }
 export interface ProcessingProgressResponse {
   id: 'PROCESSING_PROGRESS';
