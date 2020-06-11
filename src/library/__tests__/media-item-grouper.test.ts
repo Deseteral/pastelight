@@ -30,30 +30,30 @@ describe('MediaItemGrouper', () => {
     // then
     expect(groups).toEqual([
       {
-        title: '2020-06-05',
+        title: 'Friday, June 5, 2020',
         items: [
           mockMediaItem('2020-06-05T01:00:00Z'),
         ],
       }, {
-        title: '2020-06-04',
+        title: 'Thursday, June 4, 2020',
         items: [
           mockMediaItem('2020-06-04T03:00:00Z'),
           mockMediaItem('2020-06-04T02:00:00Z'),
           mockMediaItem('2020-06-04T01:00:00Z'),
         ],
       }, {
-        title: '2020-06-03',
+        title: 'Wednesday, June 3, 2020',
         items: [
           mockMediaItem('2020-06-03T01:00:00Z'),
         ],
       }, {
-        title: '2020-06-02',
+        title: 'Tuesday, June 2, 2020',
         items: [
           mockMediaItem('2020-06-02T02:00:00Z'),
           mockMediaItem('2020-06-02T01:00:00Z'),
         ],
       }, {
-        title: '2020-06-01',
+        title: 'Monday, June 1, 2020',
         items: [
           mockMediaItem('2020-06-01T01:00:00Z'),
         ],

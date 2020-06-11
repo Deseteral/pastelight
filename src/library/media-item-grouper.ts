@@ -1,6 +1,8 @@
 import { MediaItemsGroup } from './media-items-group';
 import { MediaItem } from './media-item';
 
+const dateFormatter = new Intl.DateTimeFormat('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
 function groupByDate(list: MediaItem[]) : Map<string, MediaItem[]> {
   const map = new Map<string, MediaItem[]>();
   list.forEach((item) => {
@@ -29,7 +31,7 @@ function groupMediaItems(items: MediaItem[]) : MediaItemsGroup[] {
     .sort()
     .reverse()
     .map((key) => ({
-      title: key,
+      title: dateFormatter.format(new Date(key)),
       items: sortItems(map.get(key)),
     }));
 }
