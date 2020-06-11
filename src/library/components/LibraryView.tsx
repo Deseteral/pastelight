@@ -46,7 +46,6 @@ const LibraryView: React.FunctionComponent<LibraryViewProps> = () => {
     window.addEventListener('resize', onResize);
     return () => window.removeEventListener('resize', onResize);
   }, []);
-
   React.useEffect(() => { onResize(); }); // TODO: This might be slow, check
 
   return (
