@@ -10,7 +10,7 @@ async function generateThumbnail(filePath: string, paths: AppContextPaths) : Pro
   await fsp.mkdir(path.dirname(thumbnailPath), { recursive: true });
 
   await sharp(filePath)
-    .resize({ width: 235 })
+    .resize({ width: 400 })
     .toFile(thumbnailPath);
 
   return {

@@ -1,13 +1,21 @@
 import * as React from 'react';
 import { filter } from 'rxjs/operators';
+import styled from 'styled-components';
 import { useAppContext } from '../../application';
 import * as Pastelogue from '../../pastelogue';
 import { MediaItemsGroup } from '../media-items-group';
 import ItemsGroup from './ItemsGroup';
 
+const ContainerWrapper = styled.div`
+  padding: 0 32px;
+`;
+
+const Container = styled.div``;
+
 interface LibraryViewProps {}
 const LibraryView: React.FunctionComponent<LibraryViewProps> = () => {
   const [itemGroups, setItemGroups] = React.useState<MediaItemsGroup[]>([]);
+  const containerElement = React.useRef<HTMLDivElement>(null);
   const context = useAppContext();
 
   const getItemsFromLibrary = async () => {
@@ -26,12 +34,29 @@ const LibraryView: React.FunctionComponent<LibraryViewProps> = () => {
     getItemsFromLibrary();
   }, []);
 
+  React.useEffect(() => {
+    const onResize = () => {
+      if (!containerElement.current) return;
+      const ITEMS_IN_ROW = 5;
+      const nextGridSize = Math.floor(containerElement.current.clientWidth / ITEMS_IN_ROW);
+      const root = document.documentElement;
+      root.style.setProperty('--item-grid-size', `${nextGridSize}px`);
+    };
+
+    // TODO: Run onResize when the app renders for the first time
+
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
+
   return (
-    <div>
-      {itemGroups.map((group) => (
-        <ItemsGroup group={group} key={group.title} />
-      ))}
-    </div>
+    <ContainerWrapper>
+      <Container ref={containerElement}>
+        {itemGroups.map((group) => (
+          <ItemsGroup group={group} key={group.title} />
+        ))}
+      </Container>
+    </ContainerWrapper>
   );
 };
 
