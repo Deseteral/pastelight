@@ -1,20 +1,24 @@
 import { MediaItemsGroup } from './media-items-group';
 import { MediaItem } from './media-item';
-import * as DateUtils from '../utils/date-utils';
 
 function groupByDate(list: MediaItem[]) : Map<string, MediaItem[]> {
   const map = new Map<string, MediaItem[]>();
   list.forEach((item) => {
-    const key = DateUtils.toISODateStringUTC(item.createdAt);
+    const key = item.createdAt.toISOString().slice(0, 10);
     if (!map.has(key)) map.set(key, []);
     (map.get(key) as MediaItem[]).push(item);
   });
   return map;
 }
 
+function byDateComparatorDescending(a: MediaItem, b: MediaItem) : (-1 | 0 | 1) {
+  if (a.createdAt > b.createdAt) return -1;
+  if (a.createdAt < b.createdAt) return 1;
+  return 0;
+}
+
 function sortItems(items: (MediaItem[] | undefined)) : MediaItem[] {
-  return (items as MediaItem[])
-    .sort((a, b) => DateUtils.comparatorDescending(a.createdAt, b.createdAt));
+  return (items as MediaItem[]).sort(byDateComparatorDescending);
 }
 
 // TODO: Move this off the main thread
