@@ -34,20 +34,20 @@ const LibraryView: React.FunctionComponent<LibraryViewProps> = () => {
     getItemsFromLibrary();
   }, []);
 
+  const onResize = () => {
+    if (!containerElement.current) return;
+    const ITEMS_IN_ROW = 5;
+    const nextGridSize = Math.floor(containerElement.current.clientWidth / ITEMS_IN_ROW);
+    const root = document.documentElement;
+    root.style.setProperty('--item-grid-size', `${nextGridSize}px`);
+  };
+
   React.useEffect(() => {
-    const onResize = () => {
-      if (!containerElement.current) return;
-      const ITEMS_IN_ROW = 5;
-      const nextGridSize = Math.floor(containerElement.current.clientWidth / ITEMS_IN_ROW);
-      const root = document.documentElement;
-      root.style.setProperty('--item-grid-size', `${nextGridSize}px`);
-    };
-
-    // TODO: Run onResize when the app renders for the first time
-
     window.addEventListener('resize', onResize);
     return () => window.removeEventListener('resize', onResize);
   }, []);
+
+  React.useEffect(() => { onResize(); }); // TODO: This might be slow, check
 
   return (
     <ContainerWrapper>
