@@ -16,7 +16,7 @@ interface ItemsGroupProps {
 }
 const ItemsGroup: React.FunctionComponent<ItemsGroupProps> = (props) => (
   <div>
-    <h1>{props.group.title}</h1>
+    <div>{props.group.title}</div>
     <ItemsContainer>
       {props.group.items.map((mediaItem) => (
         <ThumbnailCell
