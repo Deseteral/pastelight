@@ -8,6 +8,7 @@ import ItemsGroup from './ItemsGroup';
 
 const ContainerWrapper = styled.div`
   padding: 0 32px;
+  overflow-y: scroll;
 `;
 
 const Container = styled.div``;
