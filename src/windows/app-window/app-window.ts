@@ -7,8 +7,8 @@ let appWindow = null;
 async function createAppWindow() {
   appWindow = new BrowserWindow({
     title: 'pastelight',
-    width: 1024,
-    height: 768,
+    width: 1280,
+    height: 960,
     show: false,
     center: true,
     minWidth: 640,
