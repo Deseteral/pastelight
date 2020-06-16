@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import ItemsGroup from './ItemsGroup';
 import { MediaItemsGroup, MediaItemGroupPosition } from '../media-items-group';
+import { useEventListener } from '../../utils/use-event-listener';
 
 const ContainerWrapper = styled.div`
   padding: 0 32px;
@@ -25,10 +26,7 @@ const MediaItemGrid: React.FunctionComponent<MediaItemGridProps> = ({ itemGroups
     root.style.setProperty('--item-grid-size', `${nextGridSize}px`);
   };
 
-  React.useEffect(() => {
-    window.addEventListener('resize', onResize);
-    return () => window.removeEventListener('resize', onResize);
-  }, []);
+  useEventListener('resize', onResize);
   React.useEffect(() => { onResize(); }); // TODO: This might be slow, check
 
   return (

@@ -5,6 +5,7 @@ import * as Pastelogue from '../../pastelogue';
 import { MediaItemsGroup, MediaItemGroupPosition } from '../media-items-group';
 import FullscreenItemView from './FullscreenItemView';
 import MediaItemGrid from './MediaItemGrid';
+import { useEventListener } from '../../utils/use-event-listener';
 
 interface LibraryViewProps {}
 const LibraryView: React.FunctionComponent<LibraryViewProps> = () => {
@@ -30,14 +31,9 @@ const LibraryView: React.FunctionComponent<LibraryViewProps> = () => {
     getItemsFromLibrary();
   }, []);
 
-  React.useEffect(() => {
-    const handler = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setFullscreenActive(false);
-    };
-
-    window.addEventListener('keydown', handler);
-    return () => window.removeEventListener('keydown', handler);
-  }, []);
+  useEventListener('keydown', (event) => {
+    if (event.key === 'Escape') setFullscreenActive(false);
+  });
 
   const onItemClick = (selectedPosition: MediaItemGroupPosition) => {
     setFullscreenPosition(selectedPosition);
