@@ -16,14 +16,16 @@ const ItemsContainer = styled.div`
 
 interface ItemsGroupProps {
   group: MediaItemsGroup,
+  onItemSelect: () => void,
 }
-const ItemsGroup: React.FunctionComponent<ItemsGroupProps> = (props) => (
+const ItemsGroup: React.FunctionComponent<ItemsGroupProps> = ({ group, onItemSelect }) => (
   <Container>
-    <Text>{props.group.title}</Text>
+    <Text>{group.title}</Text>
     <ItemsContainer>
-      {props.group.items.map((mediaItem) => (
+      {group.items.map((mediaItem) => (
         <ThumbnailCell
           item={mediaItem}
+          onClick={onItemSelect}
           key={mediaItem.relativePath}
         />
       ))}

@@ -17,6 +17,7 @@ const Container = styled.div``;
 interface LibraryViewProps {}
 const LibraryView: React.FunctionComponent<LibraryViewProps> = () => {
   const [itemGroups, setItemGroups] = React.useState<MediaItemsGroup[]>([]);
+  const [fullscreenActive, setFullscreenActive] = React.useState<boolean>(false);
   const containerElement = React.useRef<HTMLDivElement>(null);
   const context = useAppContext();
 
@@ -55,11 +56,11 @@ const LibraryView: React.FunctionComponent<LibraryViewProps> = () => {
       <ContainerWrapper>
         <Container ref={containerElement}>
           {itemGroups.map((group) => (
-            <ItemsGroup group={group} key={group.title} />
+            <ItemsGroup group={group} onItemSelect={() => setFullscreenActive(true)} key={group.title} />
           ))}
         </Container>
       </ContainerWrapper>
-      <FullscreenItemView itemGroups={itemGroups} />
+      <FullscreenItemView itemGroups={itemGroups} visible={fullscreenActive} />
     </>
   );
 };
