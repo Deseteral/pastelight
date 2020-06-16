@@ -30,6 +30,15 @@ const LibraryView: React.FunctionComponent<LibraryViewProps> = () => {
     getItemsFromLibrary();
   }, []);
 
+  React.useEffect(() => {
+    const handler = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setFullscreenActive(false);
+    };
+
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, []);
+
   const onItemClick = (selectedPosition: MediaItemGroupPosition) => {
     setFullscreenPosition(selectedPosition);
     setFullscreenActive(true);
