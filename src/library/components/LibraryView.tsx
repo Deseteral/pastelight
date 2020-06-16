@@ -59,7 +59,7 @@ const LibraryView: React.FunctionComponent<LibraryViewProps> = () => {
           ))}
         </Container>
       </ContainerWrapper>
-      <FullscreenItemView itemGroups={itemGroups} position={({ groupIndex: 0, itemIndex: 0 })} />
+      <FullscreenItemView itemGroups={itemGroups} />
     </>
   );
 };

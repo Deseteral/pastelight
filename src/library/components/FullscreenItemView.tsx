@@ -22,10 +22,10 @@ const Image = styled.img`
 
 interface FullscreenItemViewProps {
   itemGroups: MediaItemsGroup[],
-  position: MediaItemGroupPosition,
 }
-const FullscreenItemView: React.FunctionComponent<FullscreenItemViewProps> = ({ itemGroups, position }) => {
+const FullscreenItemView: React.FunctionComponent<FullscreenItemViewProps> = ({ itemGroups }) => {
   const context = useAppContext();
+  const [position] = React.useState<MediaItemGroupPosition>({ groupIndex: 0, itemIndex: 0 });
   const currentItem: MediaItem = itemGroups[position.groupIndex]?.items[position.itemIndex];
 
   if (!currentItem) return null;
