@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Varela+Round&display=swap');
 
 :root {
+  /* TODO: Primary color for 'DSLR dark' theme: #FFB300 (Amber 600) */
   --color-background: #FFFFFF;
 
   --color-text: #000000;
@@ -18,7 +19,6 @@
 }
 
 body {
-  /* TODO: Primary color for 'DSLR dark' theme: #FFB300 (Amber 600) */
   margin: 0;
   color: var(--color-text);
   font-family: 'Varela Round', sans-serif;
