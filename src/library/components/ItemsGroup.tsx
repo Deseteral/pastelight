@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { MediaItemsGroup } from '../media-items-group';
+import { MediaItemsGroup, MediaItemGroupPosition } from '../media-items-group';
 import ThumbnailCell from './ThumbnailCell';
 import { Text } from '../../elements';
 
@@ -16,16 +16,17 @@ const ItemsContainer = styled.div`
 
 interface ItemsGroupProps {
   group: MediaItemsGroup,
-  onItemSelect: () => void,
+  groupIndex: number,
+  onItemClick: (selectedPosition: MediaItemGroupPosition) => void,
 }
-const ItemsGroup: React.FunctionComponent<ItemsGroupProps> = ({ group, onItemSelect }) => (
+const ItemsGroup: React.FunctionComponent<ItemsGroupProps> = ({ group, groupIndex, onItemClick }) => (
   <Container>
     <Text>{group.title}</Text>
     <ItemsContainer>
-      {group.items.map((mediaItem) => (
+      {group.items.map((mediaItem, idx) => (
         <ThumbnailCell
           item={mediaItem}
-          onClick={onItemSelect}
+          onClick={() => onItemClick({ groupIndex, itemIndex: idx })}
           key={mediaItem.relativePath}
         />
       ))}

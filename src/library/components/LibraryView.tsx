@@ -2,7 +2,7 @@ import * as React from 'react';
 import { filter } from 'rxjs/operators';
 import { useAppContext } from '../../application';
 import * as Pastelogue from '../../pastelogue';
-import { MediaItemsGroup } from '../media-items-group';
+import { MediaItemsGroup, MediaItemGroupPosition } from '../media-items-group';
 import FullscreenItemView from './FullscreenItemView';
 import MediaItemGrid from './MediaItemGrid';
 
@@ -10,6 +10,7 @@ interface LibraryViewProps {}
 const LibraryView: React.FunctionComponent<LibraryViewProps> = () => {
   const [itemGroups, setItemGroups] = React.useState<MediaItemsGroup[]>([]);
   const [fullscreenActive, setFullscreenActive] = React.useState<boolean>(false);
+  const [fullscreenPosition, setFullscreenPosition] = React.useState<MediaItemGroupPosition>({ groupIndex: 0, itemIndex: 0 });
 
   const context = useAppContext();
 
@@ -29,10 +30,22 @@ const LibraryView: React.FunctionComponent<LibraryViewProps> = () => {
     getItemsFromLibrary();
   }, []);
 
+  const onItemClick = (selectedPosition: MediaItemGroupPosition) => {
+    setFullscreenPosition(selectedPosition);
+    setFullscreenActive(true);
+  };
+
   return (
     <>
-      <MediaItemGrid itemGroups={itemGroups} onItemSelect={() => setFullscreenActive(true)} />
-      <FullscreenItemView itemGroups={itemGroups} visible={fullscreenActive} />
+      <MediaItemGrid
+        itemGroups={itemGroups}
+        onItemClick={onItemClick}
+      />
+      <FullscreenItemView
+        visible={fullscreenActive}
+        position={fullscreenPosition}
+        itemGroups={itemGroups}
+      />
     </>
   );
 };
