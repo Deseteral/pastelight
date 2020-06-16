@@ -5,6 +5,7 @@ import { useAppContext } from '../../application';
 import * as Pastelogue from '../../pastelogue';
 import { MediaItemsGroup } from '../media-items-group';
 import ItemsGroup from './ItemsGroup';
+import FullscreenItemView from './FullscreenItemView';
 
 const ContainerWrapper = styled.div`
   padding: 0 32px;
@@ -50,13 +51,16 @@ const LibraryView: React.FunctionComponent<LibraryViewProps> = () => {
   React.useEffect(() => { onResize(); }); // TODO: This might be slow, check
 
   return (
-    <ContainerWrapper>
-      <Container ref={containerElement}>
-        {itemGroups.map((group) => (
-          <ItemsGroup group={group} key={group.title} />
-        ))}
-      </Container>
-    </ContainerWrapper>
+    <>
+      <ContainerWrapper>
+        <Container ref={containerElement}>
+          {itemGroups.map((group) => (
+            <ItemsGroup group={group} key={group.title} />
+          ))}
+        </Container>
+      </ContainerWrapper>
+      <FullscreenItemView itemGroups={itemGroups} position={({ groupIndex: 0, itemIndex: 0 })} />
+    </>
   );
 };
 
