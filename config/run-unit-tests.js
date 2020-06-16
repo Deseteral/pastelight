@@ -4,7 +4,6 @@ const path = require('path');
 const IS_CI = !!process.env.CI;
 const LOCAL_ONLY_ARGS = [
   '--watchAll',
-  '--notify',
 ];
 const CI_ONLY_ARGS = [
   '--coverage',

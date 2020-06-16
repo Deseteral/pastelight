@@ -4,28 +4,21 @@ import { MediaItem } from '../media-item';
 import { useAppContext } from '../../application';
 import { relativeToThumbnailPath } from '../path-converter';
 
-const Container = styled.div`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 235px;
-  height: 180px;
-`;
-
 const Image = styled.img`
+  width: var(--item-grid-size);
+  height: var(--item-grid-size);
+  padding: 2px;
+  object-fit: cover;
 `;
 
 interface ThumbnailCellProps {
   item: MediaItem,
 }
-
 const ThumbnailCell: React.FunctionComponent<ThumbnailCellProps> = (props) => {
   const context = useAppContext();
   const path = relativeToThumbnailPath(props.item.relativePath, context.paths);
   return (
-    <Container>
-      <Image src={path} />
-    </Container>
+    <Image src={path} />
   );
 };
 
