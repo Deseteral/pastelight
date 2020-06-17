@@ -5,7 +5,7 @@ import * as Pastelogue from '../../pastelogue';
 import { MediaItemsGroup, MediaItemGroupPosition } from '../media-items-group';
 import FullscreenItemView from './FullscreenItemView';
 import MediaItemGrid from './MediaItemGrid';
-import { useEventListener } from '../../utils/use-event-listener';
+import { useEventListener } from '../../utils';
 
 interface LibraryViewProps {}
 const LibraryView: React.FunctionComponent<LibraryViewProps> = () => {
