@@ -5,4 +5,9 @@ interface MediaItemsGroup {
   items: MediaItem[],
 }
 
-export { MediaItemsGroup };
+interface MediaItemGroupPosition {
+  groupIndex: number,
+  itemIndex: number,
+}
+
+export { MediaItemsGroup, MediaItemGroupPosition };

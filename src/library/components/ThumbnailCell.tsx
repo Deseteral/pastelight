@@ -13,12 +13,13 @@ const Image = styled.img`
 
 interface ThumbnailCellProps {
   item: MediaItem,
+  onClick: () => void,
 }
-const ThumbnailCell: React.FunctionComponent<ThumbnailCellProps> = (props) => {
+const ThumbnailCell: React.FunctionComponent<ThumbnailCellProps> = ({ item, onClick }) => {
   const context = useAppContext();
-  const path = relativeToThumbnailPath(props.item.relativePath, context.paths);
+  const path = relativeToThumbnailPath(item.relativePath, context.paths);
   return (
-    <Image src={path} />
+    <Image src={path} onClick={onClick} />
   );
 };
 

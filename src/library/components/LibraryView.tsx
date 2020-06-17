@@ -1,22 +1,18 @@
 import * as React from 'react';
 import { filter } from 'rxjs/operators';
-import styled from 'styled-components';
 import { useAppContext } from '../../application';
 import * as Pastelogue from '../../pastelogue';
-import { MediaItemsGroup } from '../media-items-group';
-import ItemsGroup from './ItemsGroup';
-
-const ContainerWrapper = styled.div`
-  padding: 0 32px;
-  overflow-y: scroll;
-`;
-
-const Container = styled.div``;
+import { MediaItemsGroup, MediaItemGroupPosition } from '../media-items-group';
+import FullscreenItemView from './FullscreenItemView';
+import MediaItemGrid from './MediaItemGrid';
+import { useEventListener } from '../../utils';
 
 interface LibraryViewProps {}
 const LibraryView: React.FunctionComponent<LibraryViewProps> = () => {
   const [itemGroups, setItemGroups] = React.useState<MediaItemsGroup[]>([]);
-  const containerElement = React.useRef<HTMLDivElement>(null);
+  const [fullscreenActive, setFullscreenActive] = React.useState<boolean>(false);
+  const [fullscreenPosition, setFullscreenPosition] = React.useState<MediaItemGroupPosition>({ groupIndex: 0, itemIndex: 0 });
+
   const context = useAppContext();
 
   const getItemsFromLibrary = async () => {
@@ -35,28 +31,27 @@ const LibraryView: React.FunctionComponent<LibraryViewProps> = () => {
     getItemsFromLibrary();
   }, []);
 
-  const onResize = () => {
-    if (!containerElement.current) return;
-    const ITEMS_IN_ROW = 5;
-    const nextGridSize = Math.floor(containerElement.current.clientWidth / ITEMS_IN_ROW);
-    const root = document.documentElement;
-    root.style.setProperty('--item-grid-size', `${nextGridSize}px`);
+  useEventListener('keydown', (event) => {
+    if (event.key === 'Escape') setFullscreenActive(false);
+  });
+
+  const onItemClick = (selectedPosition: MediaItemGroupPosition) => {
+    setFullscreenPosition(selectedPosition);
+    setFullscreenActive(true);
   };
 
-  React.useEffect(() => {
-    window.addEventListener('resize', onResize);
-    return () => window.removeEventListener('resize', onResize);
-  }, []);
-  React.useEffect(() => { onResize(); }); // TODO: This might be slow, check
-
   return (
-    <ContainerWrapper>
-      <Container ref={containerElement}>
-        {itemGroups.map((group) => (
-          <ItemsGroup group={group} key={group.title} />
-        ))}
-      </Container>
-    </ContainerWrapper>
+    <>
+      <MediaItemGrid
+        itemGroups={itemGroups}
+        onItemClick={onItemClick}
+      />
+      <FullscreenItemView
+        visible={fullscreenActive}
+        position={fullscreenPosition}
+        itemGroups={itemGroups}
+      />
+    </>
   );
 };
 
