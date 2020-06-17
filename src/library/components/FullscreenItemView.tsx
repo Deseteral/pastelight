@@ -12,7 +12,7 @@ const Container = styled.div<{ visible: boolean }>`
   width: 100vw;
   height: 100vh;
   background: black;
-  opacity: ${({ visible }) => (visible ? '1.0' : '0')};
+  opacity: ${({ visible }) => (visible ? '1' : '0')};
   pointer-events: ${({ visible }) => (visible ? 'all' : 'none')};
   transition: opacity .3s ease-in-out;
 `;
