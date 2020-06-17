@@ -12,7 +12,9 @@ const Container = styled.div<{ visible: boolean }>`
   width: 100vw;
   height: 100vh;
   background: black;
-  display: ${({ visible }) => (visible ? 'block' : 'none')};
+  opacity: ${({ visible }) => (visible ? '1.0' : '0')};
+  pointer-events: ${({ visible }) => (visible ? 'all' : 'none')};
+  transition: opacity .3s ease-in-out;
 `;
 
 const Image = styled.img`
