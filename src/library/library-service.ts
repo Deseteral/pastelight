@@ -37,8 +37,12 @@ class LibraryService {
     return item;
   }
 
-  async getAllMediaItems() : Promise<MediaItemsGroup[]> {
-    const items = await this.libraryRepository.getAllItems();
+  async getAllMediaItems() : Promise<MediaItem[]> {
+    return this.libraryRepository.getAllItems();
+  }
+
+  async getAllMediaItemsGrouped() : Promise<MediaItemsGroup[]> {
+    const items = await this.getAllMediaItems();
     return MediaItemGrouper.groupMediaItems(items);
   }
 }

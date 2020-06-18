@@ -16,7 +16,7 @@ const LibraryView: React.FunctionComponent<LibraryViewProps> = () => {
   const context = useAppContext();
 
   const getItemsFromLibrary = async () => {
-    const items: MediaItemsGroup[] = await context.libraryService.getAllMediaItems();
+    const items: MediaItemsGroup[] = await context.libraryService.getAllMediaItemsGrouped();
     setItemGroups(items);
   };
 
