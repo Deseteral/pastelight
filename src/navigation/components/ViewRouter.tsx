@@ -2,6 +2,7 @@ import React from 'react';
 import View from '../domain/view';
 import useNavigation from '../state/use-navigation';
 import { LibraryView } from '../../library';
+import { MapView } from '../../map';
 
 function ViewRouter() {
   const { currentView } = useNavigation();
@@ -10,7 +11,7 @@ function ViewRouter() {
     case View.LIBRARY:
       return (<LibraryView />);
     case View.MAP:
-      return (<div>map view</div>);
+      return (<MapView />);
     default:
       return null;
   }
