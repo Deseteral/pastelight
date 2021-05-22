@@ -76,7 +76,7 @@ function warn(message: string, group?: string) {
 }
 
 function error(message: string, group?: string) {
-  log('warn', message, group);
+  log('error', message, group);
 }
 
 export { info, warn, error };

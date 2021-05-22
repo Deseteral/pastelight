@@ -9,6 +9,7 @@ interface PanelContainerProps {
 }
 
 const PanelContainer = styled.div`
+  z-index: 1000;
   display: flex;
   height: 80px;
   width: 100%;
@@ -20,13 +21,17 @@ const PanelContainer = styled.div`
   transition: background-color 0.3s ease;
 `;
 
+const Flex = styled.div`
+  flex: 1;
+`;
+
 function NavigationBar() {
   const { currentView, changeView } = useNavigation();
   const extended = currentView !== View.MAP;
 
   return (
     <PanelContainer extended={extended}>
-      <div style={({ flex: 1 })} />
+      <Flex />
       <TabsStripe extended={extended} currentView={currentView} onTabChange={changeView} />
     </PanelContainer>
   );
