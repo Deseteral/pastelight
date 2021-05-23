@@ -1,6 +1,6 @@
 import Datastore from 'nedb';
 import { join as pathJoin } from 'path';
-import * as Logger from '../logger';
+import Logger from '../application/logger';
 import { MediaItem } from './media-item';
 
 // TODO: Move this function outside of this module

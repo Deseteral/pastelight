@@ -10,7 +10,7 @@ import {
   PastelogueResponse,
   isReadyResponse,
 } from './model';
-import * as Logger from '../logger';
+import Logger from '../application/logger';
 
 class PastelogueClient {
   private serverProcess: ChildProcessWithoutNullStreams;

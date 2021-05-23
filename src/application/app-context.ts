@@ -2,7 +2,7 @@ import path from 'path';
 import { promises as fsp } from 'fs';
 import { PastelogueClient } from '../pastelogue';
 import { LibraryRepository, LibraryService } from '../library';
-import * as Logger from '../logger';
+import Logger from './logger';
 import AppService from './app-service';
 
 interface AppContext {
