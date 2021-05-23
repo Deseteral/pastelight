@@ -2,7 +2,6 @@ import { spawn, ChildProcessWithoutNullStreams } from 'child_process';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { EventEmitter } from 'events';
-import { getNativeBinaryPath } from '../application';
 import {
   StartProcessingRequest,
   ProgressPayload,
@@ -13,17 +12,16 @@ import {
 } from './model';
 import * as Logger from '../logger';
 
-const EXEC_PATH = getNativeBinaryPath(['pastelogue', 'pastelogue_server']);
 class PastelogueClient {
   private serverProcess: ChildProcessWithoutNullStreams;
   private eventEmitter: EventEmitter;
   private observable: Observable<PastelogueResponse>;
 
-  constructor() {
+  constructor(pastelogueServerPath: string) {
     this.eventEmitter = new EventEmitter();
 
-    Logger.info(`Spawning pastelogue client at "${EXEC_PATH}"`);
-    this.serverProcess = spawn(EXEC_PATH);
+    Logger.info(`Spawning pastelogue client at "${pastelogueServerPath}"`);
+    this.serverProcess = spawn(pastelogueServerPath);
     this.serverProcess.stdout.on('data', (data: Buffer) => {
       const events: PastelogueResponse[] = data.toString('utf8')
         .split('\n')

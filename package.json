@@ -3,54 +3,37 @@
   "productName": "pastelight",
   "description": "Photo organizer",
   "version": "0.1.0",
-  "author": "deseteral@gmail.com",
-  "license": "MIT",
-  "main": "build/main.js",
-  "build": {
-    "appId": "xyz.deseteral.pastelight",
-    "files": [
-      "build/**/*"
-    ],
-    "extraFiles": [
-      {
-        "from": "binary_deps",
-        "to": "Resources/binary_deps",
-        "filter": [
-          "**/*"
-        ]
-      }
-    ]
+  "author": {
+    "name": "Deseteral",
+    "email": "deseteral@gmail.com"
   },
+  "main": ".webpack/main",
+  "license": "MIT",
   "scripts": {
-    "start": "electron build/main.js",
-    "dev": "npm run build && npm run compile:watch",
-    "build": "npm run clean && npm run build:assets && npm run compile",
-    "build:assets": "gulp",
-    "compile": "tsc",
-    "compile:watch": "tsc -w",
-    "clean": "rimraf build",
-    "test": "npm run unit && npm run unit:eslint-rules && npm run lint",
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "test": "npm run unit && npm run lint",
     "unit": "node ./config/run-unit-tests.js",
-    "unit:eslint-rules": "node ./config/eslint-plugin-pastelight/tests.js",
     "lint": "eslint . --ext js,jsx,ts,tsx",
-    "pack:dist": "rimraf dist && npm run build && cross-env CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder",
-    "pack:exec": "npm run pack:dist -- --dir",
     "install": "node ./config/install-native-binaries.js"
   },
   "dependencies": {
-    "electron-devtools-installer": "3.0.0",
-    "electron-root-path": "1.0.16",
+    "electron-squirrel-startup": "1.0.0",
     "mapbox-gl": "1.11.0",
     "nedb": "1.8.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "rxjs": "6.5.5",
-    "sharp": "0.25.2",
     "styled-components": "5.1.0"
   },
   "devDependencies": {
-    "@deseteral/eslint-config": "2.1.1",
-    "@types/electron-devtools-installer": "2.2.0",
+    "@deseteral/eslint-config": "4.1.0",
+    "@electron-forge/cli": "6.0.0-beta.54",
+    "@electron-forge/maker-zip": "6.0.0-beta.54",
+    "@electron-forge/plugin-webpack": "6.0.0-beta.54",
+    "@marshallofsound/webpack-asset-relocator-loader": "0.5.0",
     "@types/jest": "25.2.1",
     "@types/mapbox-gl": "1.10.4",
     "@types/nedb": "1.8.9",
@@ -62,19 +45,90 @@
     "@types/styled-components": "5.1.0",
     "coveralls": "3.1.0",
     "cross-env": "7.0.2",
-    "electron": "8.2.5",
-    "electron-builder": "22.6.0",
-    "eslint": "6.8.0",
-    "eslint-plugin-pastelight": "file:config/eslint-plugin-pastelight",
+    "css-loader": "5.0.0",
+    "electron": "12.0.9",
+    "eslint": "7.6.0",
+    "fork-ts-checker-webpack-plugin": "6.0.1",
     "gulp": "4.0.2",
     "jest": "25.5.3",
     "jest-watch-typeahead": "0.5.0",
     "node-fetch": "2.6.0",
+    "node-loader": "1.0.1",
     "rimraf": "3.0.2",
+    "style-loader": "2.0.0",
     "ts-jest": "25.4.0",
-    "typescript": "3.8.3"
+    "ts-loader": "8.0.2",
+    "typescript": "4.0.2"
   },
   "nativeDependencies": {
     "pastelogue": "0.5.0"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "pastelight"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        }
+      ],
+      "plugins": [
+        [
+          "@electron-forge/plugin-webpack",
+          {
+            "mainConfig": "./webpack.main.config.js",
+            "renderer": {
+              "config": "./webpack.renderer.config.js",
+              "entryPoints": [
+                {
+                  "html": "./src/windows/app-window/app-window.html",
+                  "js": "./src/windows/app-window/renderer.ts",
+                  "name": "app_window"
+                },
+                {
+                  "html": "./src/windows/welcome-screen-window/welcome-screen-window.html",
+                  "js": "./src/windows/welcome-screen-window/renderer.ts",
+                  "name": "welcome_screen_window"
+                }
+              ]
+            }
+          }
+        ]
+      ]
+    }
+  },
+  "eslintConfig": {
+    "extends": "@deseteral/eslint-config/typescript",
+    "settings": {
+      "import/core-modules": [
+        "electron"
+      ]
+    },
+    "rules": {
+      "max-len": [
+        "error",
+        140
+      ],
+      "import/no-extraneous-dependencies": [
+        "error",
+        {
+          "devDependencies": [
+            "**/__tests__/**",
+            "./config/**",
+            "gulpfile.js"
+          ],
+          "optionalDependencies": false
+        }
+      ],
+      "react/destructuring-assignment": "off"
+    }
   }
 }

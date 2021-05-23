@@ -13,4 +13,8 @@ app.on('ready', async () => {
     appWindow.show();
   });
 });
+
 app.on('window-all-closed', () => app.quit());
+
+ipcMain.handle('app-get-path', async (_, name) => app.getPath(name));
+ipcMain.handle('app-get-app-path', async () => app.getAppPath());

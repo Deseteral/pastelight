@@ -1,6 +1,7 @@
 import { BrowserWindow, app } from 'electron';
-import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
 import { isDevMode } from '../../application';
+
+declare const APP_WINDOW_WEBPACK_ENTRY: any;
 
 let appWindow = null;
 
@@ -13,12 +14,14 @@ async function createAppWindow() {
     center: true,
     minWidth: 640,
     minHeight: 480,
-    webPreferences: { nodeIntegration: true },
+    webPreferences: { 
+      nodeIntegration: true,
+      contextIsolation: false,
+    },
   });
-  appWindow.loadURL(`file://${__dirname}/app-window.html`);
+  appWindow.loadURL(APP_WINDOW_WEBPACK_ENTRY);
 
   if (isDevMode()) {
-    await installExtension(REACT_DEVELOPER_TOOLS);
     appWindow.webContents.openDevTools();
   }
 

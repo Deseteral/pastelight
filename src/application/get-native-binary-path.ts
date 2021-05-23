@@ -1,17 +1,17 @@
 import path from 'path';
-import { app, remote } from 'electron';
-// @ts-ignore
-import { rootPath } from 'electron-root-path'; // TODO: Do something with missing declarations
+import { app, ipcRenderer } from 'electron';
 import isDevMode from './is-dev-mode';
 
-function getNativeBinaryPath(pathInsideNative: string[]) : string {
+async function getNativeBinaryPath(pathInsideNative: string[]) : Promise<string> {
   const binaryPath = path.join(...pathInsideNative);
   const isRendererProcess = (process?.type === 'renderer');
-  const getAppPath = isRendererProcess ? remote.app.getAppPath : app.getAppPath;
+  const appPath = isRendererProcess
+    ? await ipcRenderer.invoke('app-get-app-path')
+    : app.getAppPath();
 
-  const binariesPath = !isDevMode()
-    ? path.join(path.dirname(getAppPath()), '..', 'Resources', 'binary_deps', binaryPath)
-    : path.join(rootPath, 'binary_deps', binaryPath);
+  const binariesPath = isDevMode()
+    ? path.join(process.cwd(), 'binary_deps', binaryPath)
+    : path.join(path.dirname(appPath), '..', 'Resources', 'binary_deps', binaryPath);
 
   return path.resolve(binariesPath);
 }

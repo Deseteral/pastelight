@@ -1,7 +1,7 @@
 import path from 'path';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { remote } from 'electron';
+import { ipcRenderer } from 'electron';
 import { Storage } from '../storage';
 import { AppContainer, getPlatform } from '../application';
 import { WelcomeScreen } from '../welcome-screen';
@@ -11,7 +11,8 @@ function setPlatformDataAttribute() {
 }
 
 async function setStoragePath() {
-  await Storage.process.setAndCreateDataPath(path.join(remote.app.getPath('userData'), 'storage'));
+  const userDataPath: string = await ipcRenderer.invoke('app-get-path', 'userData'); // TODO: Put this inside a IPC service 
+  await Storage.process.setAndCreateDataPath(path.join(userDataPath, 'storage'));
 }
 
 async function renderApp() {
