@@ -1,6 +1,8 @@
-import { app, BrowserWindow, dialog, ipcMain } from 'electron';
+import { app, ipcMain } from 'electron';
 import { createAppWindow, createWelcomeScreenWindow } from './windows';
 import { IPC_LOAD_CATALOGUE_CHANNEL, IpcLoadCatalogueData } from './welcome-screen';
+import DialogService from './application/dialog-service';
+import AppService from './application/app-service';
 
 app.on('ready', async () => {
   const welcomeScreenWindow = await createWelcomeScreenWindow();
@@ -16,10 +18,5 @@ app.on('ready', async () => {
 
 app.on('window-all-closed', () => app.quit());
 
-ipcMain.handle('app-get-path', (_, name) => app.getPath(name));
-ipcMain.handle('app-get-app-path', () => app.getAppPath());
-ipcMain.handle('app-get-version', () => app.getVersion());
-ipcMain.handle('show-open-dialog', (_, options) => dialog.showOpenDialog(options));
-ipcMain.handle('show-error-box', (_, title, content) => dialog.showErrorBox(title, content));
-ipcMain.handle('show-current-window', (event) => BrowserWindow.fromWebContents(event.sender).show());
-ipcMain.handle('hide-current-window', (event) => BrowserWindow.fromWebContents(event.sender).hide());
+AppService.registerIpcInMainProcess();
+DialogService.registerIpcInMainProcess();
