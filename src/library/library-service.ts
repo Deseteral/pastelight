@@ -1,6 +1,6 @@
 import { MediaItem } from './media-item';
 import { generateThumbnail } from '../thumbnailer';
-import { LibraryRepository } from './library-repository';
+import LibraryRepository from './library-repository';
 import { AppContextPaths } from '../application/app-context';
 import { toRelativePath } from './path-converter';
 import * as MediaItemGrouper from './media-item-grouper';

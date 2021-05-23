@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Button, Text } from '../../elements';
+import Button from '../../elements/Button';
+import Text from '../../elements/Text';
 import RecentList from './RecentList';
 import { RecentLocation, getRecentLocationList } from '../services/recent-location-list';
 import { loadFromPath, loadFromPicker } from '../services/catalogue-picker';

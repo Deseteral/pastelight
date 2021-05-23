@@ -2,7 +2,7 @@ import React from 'react';
 import styled, { StyleSheetManager } from 'styled-components';
 import { ViewRouter, NavigationBar, NavigationProvider } from '../../navigation';
 import AppContextProvider from './AppContextProvider';
-import { LibraryProcessingNotification } from '../../library';
+import LibraryProcessingNotification from '../../library/components/LibraryProcessingNotification';
 
 const ContentContainer = styled.div`
   display: flex;

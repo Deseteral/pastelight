@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { MediaItemsGroup, MediaItemGroupPosition } from '../media-items-group';
 import ThumbnailCell from './ThumbnailCell';
-import { Text } from '../../elements';
+import Text from '../../elements/Text';
 
 const Container = styled.div`
   margin-bottom: 16px;

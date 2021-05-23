@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Notification } from '../../elements';
+import Notification from '../../elements/Notification';
 import { useAppContext } from '../../application/app-context';
 
 interface LibraryProcessingNotificationProps {}

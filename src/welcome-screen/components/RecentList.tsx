@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Text } from '../../elements';
+import Text from '../../elements/Text';
 import { RecentLocation } from '../services/recent-location-list';
 
 const EmptyListContainer = styled.div`

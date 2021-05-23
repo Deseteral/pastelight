@@ -75,4 +75,4 @@ class LibraryRepository {
   }
 }
 
-export { LibraryRepository };
+export default LibraryRepository;
