@@ -1,5 +1,5 @@
 import { MediaItem } from './media-item';
-import { generateThumbnail } from '../thumbnailer';
+import ThumbnailerService from '../thumbnailer/thumbnailer-service';
 import LibraryRepository from './library-repository';
 import { AppContextPaths } from '../application/app-context';
 import { toRelativePath } from './path-converter';
@@ -24,7 +24,7 @@ class LibraryService {
     if (itemAlreadyExists) return null;
 
     // Generate thumbnail
-    const thumbnail = await generateThumbnail(filePath, this.paths);
+    const thumbnail = await ThumbnailerService.generateThumbnail(filePath, this.paths);
 
     // Save item to database
     const item: MediaItem = {

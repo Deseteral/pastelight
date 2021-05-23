@@ -3,7 +3,7 @@ import path from 'path';
 
 const DEFAULT_GLOBAL_DATA_PATH = process.cwd();
 
-class Storage {
+class Storage { // TODO: Rename and move to application module
   static process: Storage = new Storage(DEFAULT_GLOBAL_DATA_PATH);
 
   private dataPath: string;

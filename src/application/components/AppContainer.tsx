@@ -1,8 +1,10 @@
 import React from 'react';
 import styled, { StyleSheetManager } from 'styled-components';
-import { ViewRouter, NavigationBar, NavigationProvider } from '../../navigation';
+import NavigationProvider from '../../navigation/state/NavigationProvider';
+import NavigationBar from '../../navigation/components/NavigationBar';
 import AppContextProvider from './AppContextProvider';
 import LibraryProcessingNotification from '../../library/components/LibraryProcessingNotification';
+import ViewRouter from '../../navigation/components/ViewRouter';
 
 const ContentContainer = styled.div`
   display: flex;
