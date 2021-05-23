@@ -72,4 +72,4 @@ class PastelogueClient {
   }
 }
 
-export { PastelogueClient };
+export default PastelogueClient;

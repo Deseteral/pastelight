@@ -5,7 +5,7 @@ import { AppContextPaths } from '../application/app-context';
 import { toRelativePath } from './path-converter';
 import * as MediaItemGrouper from './media-item-grouper';
 import { MediaItemsGroup } from './media-items-group';
-import { ProgressPayload } from '../pastelogue';
+import { ProgressPayload } from '../pastelogue/model';
 
 class LibraryService {
   private libraryRepository: LibraryRepository;

@@ -1,6 +1,6 @@
 import path from 'path';
 import { promises as fsp } from 'fs';
-import { PastelogueClient } from '../pastelogue';
+import PastelogueClient from '../pastelogue/pastelogue-client';
 import LibraryRepository from '../library/library-repository';
 import LibraryService from '../library/library-service';
 import Logger from './logger';

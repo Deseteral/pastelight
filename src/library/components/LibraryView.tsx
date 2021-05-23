@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { filter } from 'rxjs/operators';
 import { useAppContext } from '../../application/app-context';
-import * as Pastelogue from '../../pastelogue';
+import * as Pastelogue from '../../pastelogue/model';
 import { MediaItemsGroup, MediaItemGroupPosition } from '../media-items-group';
 import FullscreenItemView from './FullscreenItemView';
 import MediaItemGrid from './MediaItemGrid';
