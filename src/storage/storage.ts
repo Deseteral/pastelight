@@ -12,7 +12,7 @@ class Storage { // TODO: Rename and move to application module
     this.dataPath = dataPath;
   }
 
-  async get<T>(key: string, defaultValue: T) : Promise<T> {
+  async get<T>(key: string, defaultValue: T): Promise<T> {
     const filePath = this.getFilePath(key);
 
     // TODO: Sync function call - this might become a performance problem
@@ -25,28 +25,28 @@ class Storage { // TODO: Rename and move to application module
     return JSON.parse(data);
   }
 
-  async set<T>(key: string, value: T) : Promise<void> {
+  async set<T>(key: string, value: T): Promise<void> {
     const filePath = this.getFilePath(key);
     await fsp.writeFile(filePath, JSON.stringify(value), { encoding: 'utf8' });
   }
 
-  clear(key: string) : Promise<void> {
+  clear(key: string): Promise<void> {
     const filePath = this.getFilePath(key);
     return fs.existsSync(filePath)
       ? fsp.unlink(this.getFilePath(key))
       : Promise.resolve();
   }
 
-  async setAndCreateDataPath(nextDataPath: string) : Promise<void> {
+  async setAndCreateDataPath(nextDataPath: string): Promise<void> {
     await fsp.mkdir(nextDataPath, { recursive: true });
     this.dataPath = nextDataPath;
   }
 
-  getDataPath() : string {
+  getDataPath(): string {
     return this.dataPath;
   }
 
-  private getFilePath(key: string) : string { // TODO: Cache this lol
+  private getFilePath(key: string): string { // TODO: Cache this lol
     return path.resolve(this.dataPath, `${key}.json`);
   }
 }

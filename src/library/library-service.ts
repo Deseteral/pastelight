@@ -16,7 +16,7 @@ class LibraryService {
     this.paths = paths;
   }
 
-  async addMediaItemFromProgressPayload(payload: ProgressPayload) : Promise<MediaItem|null> {
+  async addMediaItemFromProgressPayload(payload: ProgressPayload): Promise<MediaItem|null> {
     // Check if item with this file path already exists in the database
     const filePath = payload.file.output.path;
     const relativePath = toRelativePath(filePath, this.paths);
@@ -37,11 +37,11 @@ class LibraryService {
     return item;
   }
 
-  async getAllMediaItems() : Promise<MediaItem[]> {
+  async getAllMediaItems(): Promise<MediaItem[]> {
     return this.libraryRepository.getAllItems();
   }
 
-  async getAllMediaItemsGrouped() : Promise<MediaItemsGroup[]> {
+  async getAllMediaItemsGrouped(): Promise<MediaItemsGroup[]> {
     const items = await this.getAllMediaItems();
     return MediaItemGrouper.groupMediaItems(items);
   }

@@ -340,10 +340,10 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@deseteral/eslint-config@4.1.0":
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/@deseteral/eslint-config/-/eslint-config-4.1.0.tgz#46295ccf34b81b63d7da9c7a40b895c9a7e1069b"
-  integrity sha512-sDCh/9nO8OuXK8iwVv5vkYOJHEA6enEeSQPL8oiNK3+MVMFGYedQQF9YbIjVBXMrPIICmkuQFPrA7tfVu3LqvQ==
+"@deseteral/eslint-config@5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@deseteral/eslint-config/-/eslint-config-5.0.0.tgz#435e7acf9d74fbc211bb91c05522b45ea5afa2b5"
+  integrity sha512-FDY/WwiUqeeQq869VqDOVVxBmFMRtASuVovsMpuGG2eijQ5ABH4bo64fyFHbI0EzdcFGglfkqs824y7+KJPLTw==
   dependencies:
     "@babel/core" "7.14.0"
     "@babel/eslint-parser" "7.13.14"

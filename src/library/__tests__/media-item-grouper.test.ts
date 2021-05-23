@@ -2,7 +2,7 @@ import * as MediaItemGrouper from '../media-item-grouper';
 import { MediaItem } from '../media-item';
 import { MediaItemsGroup } from '../media-items-group';
 
-function mockMediaItem(createdAtString: string) : MediaItem {
+function mockMediaItem(createdAtString: string): MediaItem {
   return {
     createdAt: new Date(createdAtString),
     relativePath: '',

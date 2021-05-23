@@ -10,7 +10,7 @@ interface ValidationResult {
   message?: string;
 }
 
-async function isValidPath(potentialPath: string) : Promise<ValidationResult> {
+async function isValidPath(potentialPath: string): Promise<ValidationResult> {
   try {
     const stats = await fsp.stat(potentialPath);
     return stats.isDirectory()
@@ -34,7 +34,7 @@ async function openCataloguePicker(): Promise<string | null> {
   return result.canceled ? null : result.filePaths[0];
 }
 
-async function loadFromPath(cataloguePath: string) : Promise<void> {
+async function loadFromPath(cataloguePath: string): Promise<void> {
   const validationResult = await isValidPath(cataloguePath);
 
   if (!validationResult.valid) {

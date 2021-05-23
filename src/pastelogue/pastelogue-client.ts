@@ -54,11 +54,11 @@ class PastelogueClient {
     Logger.info('Started processing');
   }
 
-  responses() : Observable<PastelogueResponse> {
+  responses(): Observable<PastelogueResponse> {
     return this.observable;
   }
 
-  processingProgress() : Observable<ProgressPayload> {
+  processingProgress(): Observable<ProgressPayload> {
     return this.observable
       .pipe(
         filter(isProcessingProgressResponse),

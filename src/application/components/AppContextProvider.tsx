@@ -25,7 +25,7 @@ function AppContextProvider(props: AppContextProviderProps): JSX.Element {
     : null;
 }
 
-function useAppContext() : AppContext {
+function useAppContext(): AppContext {
   const context = useContext(Context);
   if (!context) {
     throw new Error("Cannot use AppContext before it's initialization");

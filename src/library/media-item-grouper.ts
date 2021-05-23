@@ -3,7 +3,7 @@ import { MediaItem } from './media-item';
 
 const dateFormatter = new Intl.DateTimeFormat('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 
-function groupByDate(list: MediaItem[]) : Map<string, MediaItem[]> {
+function groupByDate(list: MediaItem[]): Map<string, MediaItem[]> {
   const map = new Map<string, MediaItem[]>();
   list.forEach((item) => {
     const key = item.createdAt.toISOString().slice(0, 10);
@@ -13,18 +13,18 @@ function groupByDate(list: MediaItem[]) : Map<string, MediaItem[]> {
   return map;
 }
 
-function byDateComparatorDescending(a: MediaItem, b: MediaItem) : (-1 | 0 | 1) {
+function byDateComparatorDescending(a: MediaItem, b: MediaItem): (-1 | 0 | 1) {
   if (a.createdAt > b.createdAt) return -1;
   if (a.createdAt < b.createdAt) return 1;
   return 0;
 }
 
-function sortItems(items: (MediaItem[] | undefined)) : MediaItem[] {
+function sortItems(items: (MediaItem[] | undefined)): MediaItem[] {
   return (items as MediaItem[]).sort(byDateComparatorDescending);
 }
 
 // TODO: Move this off the main thread
-function groupMediaItems(items: MediaItem[]) : MediaItemsGroup[] {
+function groupMediaItems(items: MediaItem[]): MediaItemsGroup[] {
   const map = groupByDate(items);
 
   return Array.from(map.keys())

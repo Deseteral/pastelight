@@ -19,7 +19,7 @@ interface AppContextPaths {
   thumbnails: string,
 }
 
-async function createAppContext(libraryPath: string) : Promise<AppContext> {
+async function createAppContext(libraryPath: string): Promise<AppContext> {
   Logger.info('Creating application context');
 
   // Create AppContextPaths

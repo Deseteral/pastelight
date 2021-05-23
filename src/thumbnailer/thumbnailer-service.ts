@@ -6,7 +6,7 @@ import { ThumbnailInfo } from '../library/media-item';
 import { AppContextPaths } from '../application/app-context';
 
 class ThumbnailerService {
-  static async generateThumbnail(filePath: string, paths: AppContextPaths) : Promise<ThumbnailInfo> {
+  static async generateThumbnail(filePath: string, paths: AppContextPaths): Promise<ThumbnailInfo> {
     const thumbnailPath = pathToThumbnailPath(filePath, paths);
 
     await fsp.mkdir(path.dirname(thumbnailPath), { recursive: true });
