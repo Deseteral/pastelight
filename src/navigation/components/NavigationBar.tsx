@@ -25,7 +25,7 @@ const Flex = styled.div`
   flex: 1;
 `;
 
-function NavigationBar() {
+function NavigationBar(): JSX.Element {
   const { currentView, changeView } = useNavigation();
   const extended = currentView !== View.MAP;
 

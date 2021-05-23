@@ -8,20 +8,20 @@ interface Log {
 }
 
 class Logger {
-  static info(message: string, group?: string) {
+  static info(message: string, group?: string): void {
     Logger.log('info', message, group);
   }
 
-  static warn(message: string, group?: string) {
+  static warn(message: string, group?: string): void {
     Logger.log('warn', message, group);
   }
 
-  static error(message: string, group?: string) {
+  static error(message: string, group?: string): void {
     Logger.log('error', message, group);
   }
 
-  private static printToConsole(l: Log) {
-    const color = (ck: string) => {
+  private static printToConsole(l: Log): void {
+    const color = (ck: string): string => {
       const c = (() => {
         switch (ck) {
           case 'date': return '#78909C';
@@ -69,7 +69,7 @@ class Logger {
       : 'anonymous';
   }
 
-  private static log(level: string, message: string, group?: string) {
+  private static log(level: string, message: string, group?: string): void {
     const l: Log = {
       datetime: new Date(),
       group: group ?? Logger.getFilenameOfCaller(),

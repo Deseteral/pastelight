@@ -5,7 +5,7 @@ declare const WELCOME_SCREEN_WINDOW_WEBPACK_ENTRY: any;
 
 let welcomeScreenWindow: (BrowserWindow | null);
 
-function createWelcomeScreenWindow() {
+async function createWelcomeScreenWindow(): Promise<BrowserWindow> {
   const framelessOptions: BrowserWindowConstructorOptions = (AppService.getPlatform() === 'mac')
     ? { titleBarStyle: 'hidden', vibrancy: 'under-window' }
     : { frame: false, transparent: true };

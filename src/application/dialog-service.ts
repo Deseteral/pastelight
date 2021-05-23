@@ -8,11 +8,11 @@ class DialogService {
     return ipcRenderer.invoke(SHOW_OPEN_DIALOG_CHANNEL, options);
   }
 
-  static showErrorBox(title: string, content: string) {
-    ipcRenderer.invoke(SHOW_ERROR_BOX_CHANNEL, title, content);
+  static async showErrorBox(title: string, content: string): Promise<void> {
+    await ipcRenderer.invoke(SHOW_ERROR_BOX_CHANNEL, title, content);
   }
 
-  static registerIpcInMainProcess() {
+  static registerIpcInMainProcess(): void {
     ipcMain.handle(SHOW_OPEN_DIALOG_CHANNEL, (_, options) => dialog.showOpenDialog(options));
     ipcMain.handle(SHOW_ERROR_BOX_CHANNEL, (_, title, content) => dialog.showErrorBox(title, content));
   }

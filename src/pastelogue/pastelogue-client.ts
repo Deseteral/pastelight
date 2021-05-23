@@ -43,7 +43,7 @@ class PastelogueClient {
     });
   }
 
-  startProcessing(cataloguePath: string) {
+  startProcessing(cataloguePath: string): void {
     const request: StartProcessingRequest = {
       action: 'START_PROCESSING',
       args: { path: cataloguePath },
@@ -66,7 +66,7 @@ class PastelogueClient {
       );
   }
 
-  private sendProcessRequest(req: PastelogueRequest) {
+  private sendProcessRequest(req: PastelogueRequest): void {
     this.serverProcess.stdin.write(JSON.stringify(req));
     this.serverProcess.stdin.end();
   }

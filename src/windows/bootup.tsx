@@ -6,23 +6,23 @@ import { Storage } from '../storage';
 import { WelcomeScreen } from '../welcome-screen';
 import AppContainer from '../application/components/AppContainer';
 
-function setPlatformDataAttribute() {
+function setPlatformDataAttribute(): void {
   document.body.dataset.platform = AppService.getPlatform();
 }
 
-async function setStoragePath() {
+async function setStoragePath(): Promise<void> {
   const userDataPath: string = await AppService.getPath('userData');
   await Storage.process.setAndCreateDataPath(path.join(userDataPath, 'storage'));
 }
 
-async function renderApp() {
+async function renderApp(): Promise<void> {
   await setStoragePath();
   setPlatformDataAttribute();
 
   ReactDOM.render(<AppContainer />, document.getElementById('root'));
 }
 
-async function renderWelcomeScreen() {
+async function renderWelcomeScreen(): Promise<void> {
   await setStoragePath();
   setPlatformDataAttribute();
 

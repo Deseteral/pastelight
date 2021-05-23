@@ -5,7 +5,7 @@ declare const APP_WINDOW_WEBPACK_ENTRY: any;
 
 let appWindow = null;
 
-async function createAppWindow() {
+async function createAppWindow(): Promise<BrowserWindow> {
   appWindow = new BrowserWindow({
     title: 'pastelight',
     width: 1280,

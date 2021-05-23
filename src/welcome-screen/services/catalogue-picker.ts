@@ -46,7 +46,7 @@ async function loadFromPath(cataloguePath: string) : Promise<void> {
   RecentLocationListService.addNewLocationFromPath(cataloguePath);
 }
 
-async function loadFromPicker() {
+async function loadFromPicker(): Promise<void> {
   const pickerPath = await openCataloguePicker();
   if (pickerPath) {
     await loadFromPath(pickerPath);

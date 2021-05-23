@@ -5,7 +5,7 @@ interface IpcLoadCatalogueData {
   path: string;
 }
 
-function ipcSendLoadCatalogue(path: string) {
+function ipcSendLoadCatalogue(path: string): void {
   const args: IpcLoadCatalogueData = { path };
   ipcRenderer.send(IPC_LOAD_CATALOGUE_CHANNEL, args);
 }

@@ -29,7 +29,7 @@ abstract class AppService {
     }
   }
 
-  static async getNativeBinaryPath(pathInsideNative: string[]) : Promise<string> {
+  static async getNativeBinaryPath(pathInsideNative: string[]): Promise<string> {
     const binaryPath = path.join(...pathInsideNative);
     const isRendererProcess = (process?.type === 'renderer');
     const appPath = isRendererProcess
@@ -51,15 +51,15 @@ abstract class AppService {
     return ipcRenderer.invoke(APP_GET_APP_PATH_CHANNEL);
   }
 
-  static async showCurrentWindow() {
-    return ipcRenderer.invoke(SHOW_CURRENT_WINDOW_CHANNEL);
+  static async showCurrentWindow(): Promise<void> {
+    await ipcRenderer.invoke(SHOW_CURRENT_WINDOW_CHANNEL);
   }
 
-  static async hideCurrentWindow() {
-    return ipcRenderer.invoke(HIDE_CURRENT_WINDOW_CHANNEL);
+  static async hideCurrentWindow(): Promise<void> {
+    await ipcRenderer.invoke(HIDE_CURRENT_WINDOW_CHANNEL);
   }
 
-  static registerIpcInMainProcess() {
+  static registerIpcInMainProcess(): void {
     ipcMain.handle(APP_GET_VERSION_CHANNEL, () => app.getVersion());
     ipcMain.handle(APP_GET_APP_PATH_CHANNEL, () => app.getAppPath());
     ipcMain.handle(APP_GET_PATH_CHANNEL, (_, name) => app.getPath(name));

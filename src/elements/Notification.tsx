@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React, { useState, useEffect } from 'react';
 
-const formatPercentage = (percent: number) => `${((percent * 100) | 0)}%`; // eslint-disable-line no-bitwise
+const formatPercentage = (percent: number): string => `${((percent * 100) | 0)}%`; // eslint-disable-line no-bitwise
 
 interface NotificationProps {
   progressPercent?: number,

@@ -4,7 +4,7 @@ import useNavigation from '../state/use-navigation';
 import { LibraryView } from '../../library';
 import { MapView } from '../../map';
 
-function ViewRouter() {
+function ViewRouter(): JSX.Element {
   const { currentView } = useNavigation();
 
   switch (currentView) {

@@ -15,7 +15,7 @@ const LibraryView: React.FunctionComponent<LibraryViewProps> = () => {
 
   const context = useAppContext();
 
-  const getItemsFromLibrary = async () => {
+  const getItemsFromLibrary = async (): Promise<void> => {
     const items: MediaItemsGroup[] = await context.libraryService.getAllMediaItemsGrouped();
     setItemGroups(items);
   };
@@ -35,7 +35,7 @@ const LibraryView: React.FunctionComponent<LibraryViewProps> = () => {
     if (event.key === 'Escape') setFullscreenActive(false);
   });
 
-  const onItemClick = (selectedPosition: MediaItemGroupPosition) => {
+  const onItemClick = (selectedPosition: MediaItemGroupPosition): void => {
     setFullscreenPosition(selectedPosition);
     setFullscreenActive(true);
   };

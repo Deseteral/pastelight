@@ -18,7 +18,7 @@ interface MediaItemGridProps {
 const MediaItemGrid: React.FunctionComponent<MediaItemGridProps> = ({ itemGroups, onItemClick }) => {
   const containerElement = React.useRef<HTMLDivElement>(null);
 
-  const onResize = () => {
+  const onResize = (): void => {
     if (!containerElement.current) return;
     const ITEMS_IN_ROW = 5;
     const nextGridSize = Math.floor(containerElement.current.clientWidth / ITEMS_IN_ROW);
