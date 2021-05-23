@@ -37,7 +37,7 @@ function FullscreenItemView({ itemGroups, visible, position }: FullscreenItemVie
 
   return (
     <Container visible={visible}>
-      <Image src={toFullPath(currentItem.relativePath, context.paths)} />
+      <Image src={`file://${toFullPath(currentItem.relativePath, context.paths)}`} />
     </Container>
   );
 }

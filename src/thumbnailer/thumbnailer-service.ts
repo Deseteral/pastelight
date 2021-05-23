@@ -1,6 +1,6 @@
 import path from 'path';
 import { promises as fsp } from 'fs';
-// import sharp from 'sharp'; // TODO: sharp requires native dependecy - replace it
+import jimp from 'jimp';
 import { pathToThumbnailPath } from '../library/path-converter';
 import { ThumbnailInfo } from '../library/media-item';
 import { AppContextPaths } from '../application/app-context';
@@ -11,12 +11,13 @@ class ThumbnailerService {
 
     await fsp.mkdir(path.dirname(thumbnailPath), { recursive: true });
 
-    // await sharp(filePath)
-    //   .resize({ width: 400 })
-    //   .toFile(thumbnailPath);
+    // TODO: This works, but jimp is incredibly slow
+    const image = await jimp.read(filePath);
+    await image.resize(400, jimp.AUTO);
+    await image.writeAsync(thumbnailPath);
 
     return {
-      relativePath: filePath, // thumbnailPath,
+      relativePath: thumbnailPath,
     };
   }
 }

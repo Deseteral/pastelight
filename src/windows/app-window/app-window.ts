@@ -17,6 +17,7 @@ async function createAppWindow(): Promise<BrowserWindow> {
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
+      webSecurity: false,
     },
   });
   appWindow.loadURL(APP_WINDOW_WEBPACK_ENTRY);

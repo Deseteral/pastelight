@@ -21,7 +21,7 @@ function ThumbnailCell({ item, onClick }: ThumbnailCellProps): JSX.Element {
   const path = relativeToThumbnailPath(item.relativePath, context.paths);
 
   return (
-    <Image src={path} onClick={onClick} />
+    <Image src={`file://${path}`} onClick={onClick} />
   );
 }
 

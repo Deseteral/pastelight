@@ -31,7 +31,7 @@ async function createWelcomeScreenWindow(): Promise<BrowserWindow> {
   // TODO: Make correct menu for this window
 
   if (AppService.isDevMode()) {
-    welcomeScreenWindow.webContents.openDevTools();
+    // welcomeScreenWindow.webContents.openDevTools();
   }
 
   welcomeScreenWindow.on('closed', () => {
