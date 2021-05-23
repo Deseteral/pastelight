@@ -84,9 +84,9 @@
         [
           "@electron-forge/plugin-webpack",
           {
-            "mainConfig": "./webpack.main.config.js",
+            "mainConfig": "./config/webpack/webpack.main.config.js",
             "renderer": {
-              "config": "./webpack.renderer.config.js",
+              "config": "./config/webpack/webpack.renderer.config.js",
               "entryPoints": [
                 {
                   "html": "./src/windows/app-window/app-window.html",
