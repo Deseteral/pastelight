@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Notification } from '../../elements';
-import { useAppContext } from '../../application';
+import { useAppContext } from '../../application/app-context';
 
 interface LibraryProcessingNotificationProps { }
 const LibraryProcessingNotification: React.FunctionComponent<LibraryProcessingNotificationProps> = () => {

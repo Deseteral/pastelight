@@ -2,7 +2,7 @@ import path from 'path';
 import { promises as fsp } from 'fs';
 // import sharp from 'sharp'; // TODO: sharp requires native dependecy - replace it
 import { ThumbnailInfo, pathToThumbnailPath } from '../library';
-import { AppContextPaths } from '../application';
+import { AppContextPaths } from '../application/app-context';
 
 async function generateThumbnail(filePath: string, paths: AppContextPaths) : Promise<ThumbnailInfo> {
   const thumbnailPath = pathToThumbnailPath(filePath, paths);

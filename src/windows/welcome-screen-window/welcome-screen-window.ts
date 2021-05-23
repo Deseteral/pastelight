@@ -1,12 +1,12 @@
 import { BrowserWindow, app, BrowserWindowConstructorOptions } from 'electron';
-import { isDevMode, getPlatform } from '../../application';
+import AppService from '../../application/app-service';
 
 declare const WELCOME_SCREEN_WINDOW_WEBPACK_ENTRY: any;
 
 let welcomeScreenWindow: (BrowserWindow | null);
 
 function createWelcomeScreenWindow() {
-  const framelessOptions: BrowserWindowConstructorOptions = (getPlatform() === 'mac')
+  const framelessOptions: BrowserWindowConstructorOptions = (AppService.getPlatform() === 'mac')
     ? { titleBarStyle: 'hidden', vibrancy: 'under-window' }
     : { frame: false, transparent: true };
 
@@ -21,7 +21,7 @@ function createWelcomeScreenWindow() {
     fullscreen: false,
     fullscreenable: false,
     ...framelessOptions,
-    webPreferences: { 
+    webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
     },
@@ -30,7 +30,7 @@ function createWelcomeScreenWindow() {
 
   // TODO: Make correct menu for this window
 
-  if (isDevMode()) {
+  if (AppService.isDevMode()) {
     welcomeScreenWindow.webContents.openDevTools();
   }
 

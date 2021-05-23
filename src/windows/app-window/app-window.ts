@@ -1,5 +1,5 @@
 import { BrowserWindow, app } from 'electron';
-import { isDevMode } from '../../application';
+import AppService from '../../application/app-service';
 
 declare const APP_WINDOW_WEBPACK_ENTRY: any;
 
@@ -14,14 +14,14 @@ async function createAppWindow() {
     center: true,
     minWidth: 640,
     minHeight: 480,
-    webPreferences: { 
+    webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
     },
   });
   appWindow.loadURL(APP_WINDOW_WEBPACK_ENTRY);
 
-  if (isDevMode()) {
+  if (AppService.isDevMode()) {
     appWindow.webContents.openDevTools();
   }
 

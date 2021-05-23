@@ -16,9 +16,9 @@ app.on('ready', async () => {
 
 app.on('window-all-closed', () => app.quit());
 
-ipcMain.handle('app-get-path', async (_, name) => app.getPath(name));
-ipcMain.handle('app-get-app-path', async () => app.getAppPath());
-ipcMain.handle('app-get-version', async () => app.getVersion());
+ipcMain.handle('app-get-path', (_, name) => app.getPath(name));
+ipcMain.handle('app-get-app-path', () => app.getAppPath());
+ipcMain.handle('app-get-version', () => app.getVersion());
 ipcMain.handle('show-open-dialog', (_, options) => dialog.showOpenDialog(options));
 ipcMain.handle('show-error-box', (_, title, content) => dialog.showErrorBox(title, content));
 ipcMain.handle('show-current-window', (event) => BrowserWindow.fromWebContents(event.sender).show());

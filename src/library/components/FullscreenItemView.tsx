@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { MediaItemsGroup, MediaItemGroupPosition } from '../media-items-group';
 import { MediaItem } from '../media-item';
-import { useAppContext } from '../../application';
+import { useAppContext } from '../../application/app-context';
 import { toFullPath } from '../path-converter';
 
 const Container = styled.div<{ visible: boolean }>`

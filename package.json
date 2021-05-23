@@ -14,9 +14,11 @@
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "test": "npm run unit && npm run lint",
-    "unit": "node ./config/run-unit-tests.js",
-    "lint": "eslint . --ext js,jsx,ts,tsx",
+    "test": "npm run test:type-check && npm run test:unit && npm run test:lint",
+    "test:unit": "node ./config/run-unit-tests.js",
+    "test:lint": "eslint . --ext js,jsx,ts,tsx",
+    "test:type-check": "tsc --noEmit",
+    "test:type-check:watch": "tsc --noEmit -w",
     "install": "node ./config/install-native-binaries.js"
   },
   "dependencies": {

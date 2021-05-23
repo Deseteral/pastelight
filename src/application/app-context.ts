@@ -3,7 +3,7 @@ import { promises as fsp } from 'fs';
 import { PastelogueClient } from '../pastelogue';
 import { LibraryRepository, LibraryService } from '../library';
 import * as Logger from '../logger';
-import getNativeBinaryPath from './get-native-binary-path';
+import AppService from './app-service';
 
 interface AppContext {
   paths: AppContextPaths,
@@ -38,7 +38,7 @@ async function createAppContext(libraryPath: string) : Promise<AppContext> {
   const libraryService = new LibraryService(libraryRepository, paths);
 
   // Create and spawn pastelogue client
-  const pastelogueServerPath = await getNativeBinaryPath(['pastelogue', 'pastelogue_server']);
+  const pastelogueServerPath = await AppService.getNativeBinaryPath(['pastelogue', 'pastelogue_server']);
   const pastelogue = new PastelogueClient(pastelogueServerPath);
 
   // Create app context
@@ -61,4 +61,5 @@ async function createAppContext(libraryPath: string) : Promise<AppContext> {
   return appContext;
 }
 
+export { useAppContext } from './components/AppContextProvider';
 export { AppContext, AppContextPaths, createAppContext };

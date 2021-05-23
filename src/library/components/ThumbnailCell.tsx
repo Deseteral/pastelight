@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { MediaItem } from '../media-item';
-import { useAppContext } from '../../application';
+import { useAppContext } from '../../application/app-context';
 import { relativeToThumbnailPath } from '../path-converter';
 
 const Image = styled.img`

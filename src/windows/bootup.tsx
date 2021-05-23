@@ -2,12 +2,13 @@ import path from 'path';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { ipcRenderer } from 'electron';
+import AppService from '../application/app-service';
 import { Storage } from '../storage';
-import { AppContainer, getAppVersion, getPlatform } from '../application';
 import { WelcomeScreen } from '../welcome-screen';
+import AppContainer from '../application/components/AppContainer';
 
 function setPlatformDataAttribute() {
-  document.body.dataset.platform = getPlatform();
+  document.body.dataset.platform = AppService.getPlatform();
 }
 
 async function setStoragePath() {
@@ -26,7 +27,7 @@ async function renderWelcomeScreen() {
   await setStoragePath();
   setPlatformDataAttribute();
 
-  const appVersion = await getAppVersion();
+  const appVersion = await AppService.getAppVersion();
   ReactDOM.render(<WelcomeScreen appVersion={appVersion} />, document.getElementById('root'));
 }
 

@@ -1,5 +1,5 @@
 import path from 'path';
-import { AppContextPaths } from '../application';
+import { AppContextPaths } from '../application/app-context';
 
 function toRelativePath(fullPath: string, paths: AppContextPaths) : string {
   return fullPath.substring(paths.libraryPath.length);

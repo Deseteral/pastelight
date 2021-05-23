@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { filter } from 'rxjs/operators';
-import { useAppContext } from '../../application';
+import { useAppContext } from '../../application/app-context';
 import * as Pastelogue from '../../pastelogue';
 import { MediaItemsGroup, MediaItemGroupPosition } from '../media-items-group';
 import FullscreenItemView from './FullscreenItemView';
