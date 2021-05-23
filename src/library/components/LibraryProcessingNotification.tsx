@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Notification } from '../../elements';
 import { useAppContext } from '../../application/app-context';
 
-interface LibraryProcessingNotificationProps { }
-const LibraryProcessingNotification: React.FunctionComponent<LibraryProcessingNotificationProps> = () => {
+interface LibraryProcessingNotificationProps {}
+
+function LibraryProcessingNotification(): JSX.Element {
   const context = useAppContext();
   const [visible, setVisible] = useState<boolean>(false);
   const [currentValue, setCurrentValue] = useState<number>(0);
@@ -26,7 +27,7 @@ const LibraryProcessingNotification: React.FunctionComponent<LibraryProcessingNo
       Processing photos {currentValue}/{totalValue}
     </Notification>
   );
-};
+}
 
 export default LibraryProcessingNotification;
 export { LibraryProcessingNotificationProps };

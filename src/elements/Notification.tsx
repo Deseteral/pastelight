@@ -1,12 +1,9 @@
 import styled from 'styled-components';
 import React, { useState, useEffect } from 'react';
 
+// TODO: Extract ⬇️this function into service
 const formatPercentage = (percent: number): string => `${((percent * 100) | 0)}%`; // eslint-disable-line no-bitwise
 
-interface NotificationProps {
-  progressPercent?: number,
-  visible: boolean,
-}
 const NotificationContainer = styled.div<NotificationProps>`
   display: flex;
   flex-direction: row;
@@ -35,7 +32,13 @@ const ProgressBar = styled.div<{progressPercent: number}>`
   background: var(--color-primary);
 `;
 
-const Notification: React.FunctionComponent<NotificationProps> = (props) => {
+interface NotificationProps {
+  progressPercent?: number,
+  visible: boolean,
+  children: React.ReactNode
+}
+
+function Notification(props: NotificationProps): JSX.Element {
   const [actualVisible, setActualVisible] = useState<boolean>(props.visible);
 
   useEffect(() => {
@@ -49,9 +52,13 @@ const Notification: React.FunctionComponent<NotificationProps> = (props) => {
   return (
     <NotificationContainer visible={actualVisible}>
       {props.children}
-      <ProgressBar progressPercent={props.progressPercent || 0} />
+      <ProgressBar progressPercent={props.progressPercent} />
     </NotificationContainer>
   );
+}
+
+Notification.defaultProps = {
+  progressPercent: 0,
 };
 
 export default Notification;

@@ -60,7 +60,7 @@ interface RecentListProps {
   onSelect: (selected: RecentLocation) => void;
 }
 
-const RecentList: React.FunctionComponent<RecentListProps> = ({ list, onSelect }) => {
+function RecentList({ list, onSelect }: RecentListProps): JSX.Element {
   if (list.length === 0) {
     return (
       <EmptyListContainer>
@@ -81,7 +81,7 @@ const RecentList: React.FunctionComponent<RecentListProps> = ({ list, onSelect }
       ))}
     </OrderedList>
   );
-};
+}
 
 export default RecentList;
 export { RecentListProps };

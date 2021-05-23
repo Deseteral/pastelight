@@ -7,7 +7,8 @@ import Logger from '../logger';
 const Context = React.createContext<AppContext|null>(null);
 
 interface AppContextProviderProps {}
-const AppContextProvider: React.FunctionComponent<AppContextProviderProps> = (props) => {
+
+function AppContextProvider(props: AppContextProviderProps): JSX.Element {
   const [context, setContext] = useState<AppContext|null>(null);
 
   useEffect(() => {
@@ -22,7 +23,7 @@ const AppContextProvider: React.FunctionComponent<AppContextProviderProps> = (pr
   return context
     ? <Context.Provider value={context} {...props} /> // eslint-disable-line react/jsx-props-no-spreading, max-len
     : null;
-};
+}
 
 function useAppContext() : AppContext {
   const context = useContext(Context);

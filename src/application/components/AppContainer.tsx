@@ -11,19 +11,22 @@ const ContentContainer = styled.div`
 `;
 
 interface AppContainerProps {}
-const AppContainer: React.FunctionComponent<AppContainerProps> = () => (
-  <StyleSheetManager disableVendorPrefixes>
-    <AppContextProvider>
-      <NavigationProvider>
-        <ContentContainer>
-          <NavigationBar />
-          <ViewRouter />
-        </ContentContainer>
-      </NavigationProvider>
-      <LibraryProcessingNotification />
-    </AppContextProvider>
-  </StyleSheetManager>
-);
+
+function AppContainer(): JSX.Element {
+  return (
+    <StyleSheetManager disableVendorPrefixes>
+      <AppContextProvider>
+        <NavigationProvider>
+          <ContentContainer>
+            <NavigationBar />
+            <ViewRouter />
+          </ContentContainer>
+        </NavigationProvider>
+        <LibraryProcessingNotification />
+      </AppContextProvider>
+    </StyleSheetManager>
+  );
+}
 
 export default AppContainer;
 export { AppContainerProps };

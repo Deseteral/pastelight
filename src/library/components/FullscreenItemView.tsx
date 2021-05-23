@@ -28,7 +28,8 @@ interface FullscreenItemViewProps {
   visible: boolean,
   position: MediaItemGroupPosition,
 }
-const FullscreenItemView: React.FunctionComponent<FullscreenItemViewProps> = ({ itemGroups, visible, position }) => {
+
+function FullscreenItemView({ itemGroups, visible, position }: FullscreenItemViewProps): JSX.Element {
   const context = useAppContext();
   const currentItem: MediaItem = itemGroups[position.groupIndex]?.items[position.itemIndex];
 
@@ -39,7 +40,7 @@ const FullscreenItemView: React.FunctionComponent<FullscreenItemViewProps> = ({ 
       <Image src={toFullPath(currentItem.relativePath, context.paths)} />
     </Container>
   );
-};
+}
 
 export default FullscreenItemView;
 export { FullscreenItemViewProps };

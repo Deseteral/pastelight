@@ -15,13 +15,15 @@ interface ThumbnailCellProps {
   item: MediaItem,
   onClick: () => void,
 }
-const ThumbnailCell: React.FunctionComponent<ThumbnailCellProps> = ({ item, onClick }) => {
+
+function ThumbnailCell({ item, onClick }: ThumbnailCellProps): JSX.Element {
   const context = useAppContext();
   const path = relativeToThumbnailPath(item.relativePath, context.paths);
+
   return (
     <Image src={path} onClick={onClick} />
   );
-};
+}
 
 export default ThumbnailCell;
 export { ThumbnailCellProps };

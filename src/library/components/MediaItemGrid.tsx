@@ -15,7 +15,8 @@ interface MediaItemGridProps {
   itemGroups: MediaItemsGroup[],
   onItemClick: (selectedPosition: MediaItemGroupPosition) => void,
 }
-const MediaItemGrid: React.FunctionComponent<MediaItemGridProps> = ({ itemGroups, onItemClick }) => {
+
+function MediaItemGrid({ itemGroups, onItemClick }: MediaItemGridProps): JSX.Element {
   const containerElement = React.useRef<HTMLDivElement>(null);
 
   const onResize = (): void => {
@@ -38,7 +39,7 @@ const MediaItemGrid: React.FunctionComponent<MediaItemGridProps> = ({ itemGroups
       </Container>
     </ContainerWrapper>
   );
-};
+}
 
 export default MediaItemGrid;
 export { MediaItemGridProps };

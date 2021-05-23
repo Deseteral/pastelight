@@ -8,7 +8,8 @@ import MediaItemGrid from './MediaItemGrid';
 import { useEventListener } from '../../utils';
 
 interface LibraryViewProps {}
-const LibraryView: React.FunctionComponent<LibraryViewProps> = () => {
+
+function LibraryView(): JSX.Element {
   const [itemGroups, setItemGroups] = React.useState<MediaItemsGroup[]>([]);
   const [fullscreenActive, setFullscreenActive] = React.useState<boolean>(false);
   const [fullscreenPosition, setFullscreenPosition] = React.useState<MediaItemGroupPosition>({ groupIndex: 0, itemIndex: 0 });
@@ -53,7 +54,7 @@ const LibraryView: React.FunctionComponent<LibraryViewProps> = () => {
       />
     </>
   );
-};
+}
 
 export default LibraryView;
 export { LibraryViewProps };

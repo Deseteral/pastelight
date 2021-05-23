@@ -67,7 +67,7 @@ interface WelcomeScreenProps {
   appVersion: string,
 }
 
-const WelcomeScreen: React.FunctionComponent<WelcomeScreenProps> = (props) => {
+function WelcomeScreen({ appVersion }: WelcomeScreenProps): JSX.Element {
   const [recentList, setRecentList] = React.useState<RecentLocation[]>([]);
 
   React.useEffect(() => {
@@ -80,7 +80,7 @@ const WelcomeScreen: React.FunctionComponent<WelcomeScreenProps> = (props) => {
         <Logo />
         <TitleContainer>
           <Text heading>pastelight</Text>
-          <Text secondary>Version {props.appVersion}</Text>
+          <Text secondary>Version {appVersion}</Text>
         </TitleContainer>
         <NoDrag>
           <Button onClick={loadFromPicker}>Open photo catalogue</Button>
@@ -93,7 +93,7 @@ const WelcomeScreen: React.FunctionComponent<WelcomeScreenProps> = (props) => {
       </RecentPane>
     </Container>
   );
-};
+}
 
 export default WelcomeScreen;
 export { WelcomeScreenProps };
