@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { Button, Text } from '../../elements';
-import { getAppVersion, getPlatform } from '../../application';
+import { getPlatform } from '../../application';
 import RecentList from './RecentList';
 import { RecentLocation, getRecentLocationList } from '../services/recent-location-list';
 import { loadFromPath, loadFromPicker } from '../services/catalogue-picker';
@@ -63,10 +63,11 @@ const TitleContainer = styled.div`
   margin-bottom: 32px;
 `;
 
-interface WelcomeScreenProps { }
+interface WelcomeScreenProps {
+  appVersion: string,
+}
 
-const WelcomeScreen: React.FunctionComponent<WelcomeScreenProps> = () => {
-  const appVersion = getAppVersion();
+const WelcomeScreen: React.FunctionComponent<WelcomeScreenProps> = (props) => {
   const [recentList, setRecentList] = React.useState<RecentLocation[]>([]);
 
   React.useEffect(() => {
@@ -79,7 +80,7 @@ const WelcomeScreen: React.FunctionComponent<WelcomeScreenProps> = () => {
         <Logo />
         <TitleContainer>
           <Text heading>pastelight</Text>
-          <Text secondary>Version {appVersion}</Text>
+          <Text secondary>Version {props.appVersion}</Text>
         </TitleContainer>
         <NoDrag>
           <Button onClick={loadFromPicker}>Open photo catalogue</Button>

@@ -1,4 +1,4 @@
-import { remote, OpenDialogOptions } from 'electron';
+import { ipcRenderer, OpenDialogOptions } from 'electron';
 import { promises as fsp } from 'fs';
 import * as RecentLocationListService from './recent-location-list';
 import { ipcSendLoadCatalogue } from './ipc-load-catalogue';
@@ -20,15 +20,14 @@ async function isValidPath(potentialPath: string) : Promise<ValidationResult> {
 }
 
 async function openCataloguePicker(): Promise<string | null> {
-  const { dialog } = remote;
   const options: OpenDialogOptions = {
     title: 'Pick photo catalogue',
     properties: ['openDirectory', 'createDirectory'],
   };
 
-  remote.getCurrentWindow().hide();
-  const result = await dialog.showOpenDialog(options);
-  remote.getCurrentWindow().show();
+  ipcRenderer.invoke('hide-current-window');
+  const result = await ipcRenderer.invoke('show-open-dialog', options);
+  ipcRenderer.invoke('show-current-window');
 
   return result.canceled ? null : result.filePaths[0];
 }
@@ -37,7 +36,8 @@ async function loadFromPath(cataloguePath: string) : Promise<void> {
   const validationResult = await isValidPath(cataloguePath);
 
   if (!validationResult.valid) {
-    remote.dialog.showErrorBox(
+    ipcRenderer.invoke(
+      'show-error-box',
       'Cannot open photo catalogue',
       validationResult.message as string,
     );

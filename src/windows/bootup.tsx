@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { ipcRenderer } from 'electron';
 import { Storage } from '../storage';
-import { AppContainer, getPlatform } from '../application';
+import { AppContainer, getAppVersion, getPlatform } from '../application';
 import { WelcomeScreen } from '../welcome-screen';
 
 function setPlatformDataAttribute() {
@@ -11,7 +11,7 @@ function setPlatformDataAttribute() {
 }
 
 async function setStoragePath() {
-  const userDataPath: string = await ipcRenderer.invoke('app-get-path', 'userData'); // TODO: Put this inside a IPC service 
+  const userDataPath: string = await ipcRenderer.invoke('app-get-path', 'userData'); // TODO: Put this inside a IPC service
   await Storage.process.setAndCreateDataPath(path.join(userDataPath, 'storage'));
 }
 
@@ -26,7 +26,8 @@ async function renderWelcomeScreen() {
   await setStoragePath();
   setPlatformDataAttribute();
 
-  ReactDOM.render(<WelcomeScreen />, document.getElementById('root'));
+  const appVersion = await getAppVersion();
+  ReactDOM.render(<WelcomeScreen appVersion={appVersion} />, document.getElementById('root'));
 }
 
 export {

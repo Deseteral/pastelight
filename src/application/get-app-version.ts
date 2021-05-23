@@ -1,10 +1,10 @@
-import { remote } from 'electron';
+import { ipcRenderer } from 'electron';
 import isDevMode from './is-dev-mode';
 
-function getAppVersion() {
+async function getAppVersion() {
   return isDevMode()
     ? require('../../package.json').version // eslint-disable-line global-require
-    : remote.app.getVersion();
+    : ipcRenderer.invoke('app-get-version');
 }
 
 export default getAppVersion;
