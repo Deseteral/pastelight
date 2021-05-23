@@ -1,6 +1,6 @@
 import { app, ipcMain } from 'electron';
 import { createAppWindow, createWelcomeScreenWindow } from './windows';
-import { IPC_LOAD_CATALOGUE_CHANNEL, IpcLoadCatalogueData } from './welcome-screen';
+import { IPC_LOAD_CATALOGUE_CHANNEL, IpcLoadCatalogueData } from './welcome-screen/services/ipc-load-catalogue';
 import DialogService from './application/dialog-service';
 import AppService from './application/app-service';
 

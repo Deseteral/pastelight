@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import AppService from '../application/app-service';
 import Storage from '../storage/storage';
-import { WelcomeScreen } from '../welcome-screen';
+import WelcomeScreen from '../welcome-screen/components/WelcomeScreen';
 import AppContainer from '../application/components/AppContainer';
 
 function setPlatformDataAttribute(): void {

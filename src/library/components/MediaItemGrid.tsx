@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import ItemsGroup from './ItemsGroup';
 import { MediaItemsGroup, MediaItemGroupPosition } from '../media-items-group';
-import { useEventListener } from '../../utils';
+import useEventListener from '../../utils/use-event-listener';
 
 const ContainerWrapper = styled.div`
   padding: 0 32px;

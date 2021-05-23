@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { ipcRenderer } from 'electron';
 import { AppContext, createAppContext } from '../app-context';
-import { IPC_LOAD_CATALOGUE_CHANNEL, IpcLoadCatalogueData } from '../../welcome-screen';
+import { IPC_LOAD_CATALOGUE_CHANNEL, IpcLoadCatalogueData } from '../../welcome-screen/services/ipc-load-catalogue';
 import Logger from '../logger';
 
 const Context = React.createContext<AppContext|null>(null);

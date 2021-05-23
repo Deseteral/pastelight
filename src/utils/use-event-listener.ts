@@ -25,4 +25,7 @@ function useEventListener<K extends keyof EventMap>(
   }, [eventName, element]);
 }
 
-export { useEventListener };
+export default useEventListener;
+export {
+  EventMap,
+};

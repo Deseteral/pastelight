@@ -5,7 +5,7 @@ import * as Pastelogue from '../../pastelogue/model';
 import { MediaItemsGroup, MediaItemGroupPosition } from '../media-items-group';
 import FullscreenItemView from './FullscreenItemView';
 import MediaItemGrid from './MediaItemGrid';
-import { useEventListener } from '../../utils';
+import useEventListener from '../../utils/use-event-listener';
 
 interface LibraryViewProps {}
 
