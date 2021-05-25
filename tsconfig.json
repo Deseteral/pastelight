@@ -11,12 +11,13 @@
     "noUnusedLocals": true,
     "noImplicitAny": true,
     "sourceMap": true,
-    "baseUrl": ".",
     "outDir": "dist",
     "moduleResolution": "node",
     "resolveJsonModule": true,
+    "baseUrl": "./",
     "paths": {
-      "*": ["node_modules/*"]
+      "@pastelight/*": ["./src/*"],
+      "*": ["node_modules/*"],
     },
     "jsx": "react",
     "target": "ES2019"

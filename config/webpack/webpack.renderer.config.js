@@ -1,17 +1,23 @@
-const rules = require('./webpack.rules');
-const plugins = require('./webpack.plugins');
-
-rules.push({
-  test: /\.css$/,
-  use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
-});
+const path = require('path');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 module.exports = {
   module: {
-    rules,
+    rules: [
+      ...require('./webpack.rules'), // eslint-disable-line global-require
+      {
+        test: /\.css$/,
+        use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
+      },
+    ],
   },
-  plugins,
+  plugins: [
+    new ForkTsCheckerWebpackPlugin(),
+  ],
   resolve: {
     extensions: ['.js', '.ts', '.jsx', '.tsx', '.css'],
+    alias: {
+      '@pastelight': path.join(__dirname, '..', '..', 'src'),
+    },
   },
 };

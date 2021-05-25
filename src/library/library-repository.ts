@@ -1,6 +1,6 @@
+import Logger from '@pastelight/application/logger';
 import Datastore from 'nedb';
 import { join as pathJoin } from 'path';
-import Logger from '../application/logger';
 import { MediaItem } from './media-item';
 
 // TODO: Move this function outside of this module
