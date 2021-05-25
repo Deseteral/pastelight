@@ -34,13 +34,13 @@ async function createAppContext(libraryPath: string): Promise<AppContext> {
   fsp.mkdir(paths.libraryWorkingDirectoryPath, { recursive: true });
   fsp.mkdir(paths.thumbnails, { recursive: true });
 
-  // Create library and library-service
-  const libraryRepository = new LibraryRepository(libraryWorkingDirectoryPath);
-  const libraryService = new LibraryService(libraryRepository, paths);
-
   // Create and spawn pastelogue client
   const pastelogueServerPath = await AppService.getNativeBinaryPath(['pastelogue', 'pastelogue_server']);
   const pastelogue = new PastelogueClient(pastelogueServerPath);
+
+  // Create library and library-service
+  const libraryRepository = new LibraryRepository(libraryWorkingDirectoryPath);
+  const libraryService = new LibraryService(libraryRepository, paths, pastelogue);
 
   // Create app context
   const appContext: AppContext = {
@@ -52,12 +52,6 @@ async function createAppContext(libraryPath: string): Promise<AppContext> {
 
   // Load library database
   await appContext.libraryRepository.load();
-
-  // Kick off initial processing
-  appContext.pastelogue.processingProgress().subscribe(async (progressInfo) => {
-    await appContext.libraryService.addMediaItemFromProgressPayload(progressInfo);
-  });
-  appContext.pastelogue.startProcessing(libraryPath);
 
   return appContext;
 }

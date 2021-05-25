@@ -40,12 +40,18 @@ interface NotificationProps {
 
 function Notification(props: NotificationProps): JSX.Element {
   const [actualVisible, setActualVisible] = useState<boolean>(props.visible);
+  const visibilityTimeout = React.useRef<(number | null)>(null);
 
   useEffect(() => {
+    if (visibilityTimeout.current) {
+      clearTimeout(visibilityTimeout.current);
+      visibilityTimeout.current = null;
+    }
+
     if (props.visible) {
       setActualVisible(true);
     } else {
-      setTimeout(() => setActualVisible(false), 4000);
+      visibilityTimeout.current = window.setTimeout(() => setActualVisible(false), 4000);
     }
   }, [props.visible]);
 
