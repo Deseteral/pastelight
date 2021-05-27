@@ -16,14 +16,14 @@ export interface ReadyResponse {
 export interface ReadyPayload {
   version: string,
 }
-export const isReadyResponse = (res: PastelogueResponse) : res is ReadyResponse => (res.id === 'READY');
+export const isReadyResponse = (res: PastelogueResponse): res is ReadyResponse => (res.id === 'READY');
 
 export interface ProcessingStartedResponse {
   id: 'PROCESSING_STARTED';
   payload: null;
 }
 export const isProcessingStartedResponse =
-  (res: PastelogueResponse) : res is ProcessingStartedResponse => (res.id === 'PROCESSING_STARTED');
+  (res: PastelogueResponse): res is ProcessingStartedResponse => (res.id === 'PROCESSING_STARTED');
 
 export interface ProgressPayload {
   progress: {
@@ -47,14 +47,14 @@ export interface ProcessingProgressResponse {
   payload: ProgressPayload;
 }
 export const isProcessingProgressResponse =
-  (res: PastelogueResponse) : res is ProcessingProgressResponse => (res.id === 'PROCESSING_PROGRESS');
+  (res: PastelogueResponse): res is ProcessingProgressResponse => (res.id === 'PROCESSING_PROGRESS');
 
 export interface ProcessingFinishedResponse {
   id: 'PROCESSING_FINISHED';
   payload: null;
 }
 export const isProcessingFinishedResponse =
-  (res: PastelogueResponse) : res is ProcessingFinishedResponse => (res.id === 'PROCESSING_FINISHED');
+  (res: PastelogueResponse): res is ProcessingFinishedResponse => (res.id === 'PROCESSING_FINISHED');
 
 export type PastelogueResponse = (
   ReadyResponse |

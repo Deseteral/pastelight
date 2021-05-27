@@ -1,10 +1,11 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Button, Text } from '../../elements';
-import { getAppVersion, getPlatform } from '../../application';
+import Button from '../../elements/Button';
+import Text from '../../elements/Text';
 import RecentList from './RecentList';
 import { RecentLocation, getRecentLocationList } from '../services/recent-location-list';
 import { loadFromPath, loadFromPicker } from '../services/catalogue-picker';
+import AppService from '../../application/app-service';
 
 const Container = styled.div`
   -webkit-app-region: drag;
@@ -26,7 +27,7 @@ const TitlePane = styled.div`
   align-items: center;
   background-color: var(--color-background);
 
-  ${(getPlatform() !== 'mac') && `
+  ${(AppService.getPlatform() !== 'mac') && `
     border: solid var(--color-primary);
     border-radius: 8px 0 0 8px;
     border-width: 2px 0 2px 2px;
@@ -35,10 +36,10 @@ const TitlePane = styled.div`
 
 const RecentPane = styled.div`
   width: 40%;
-  background-color: ${(getPlatform() === 'mac') ? 'transparent' : 'var(--color-background)'};
+  background-color: ${(AppService.getPlatform() === 'mac') ? 'transparent' : 'var(--color-background)'};
   overflow: hidden;
 
-  ${(getPlatform() !== 'mac') && `
+  ${(AppService.getPlatform() !== 'mac') && `
     border: solid var(--color-primary);
     border-radius: 0 8px 8px 0;
     border-width: 2px 2px 2px 0;
@@ -63,10 +64,11 @@ const TitleContainer = styled.div`
   margin-bottom: 32px;
 `;
 
-interface WelcomeScreenProps { }
+interface WelcomeScreenProps {
+  appVersion: string,
+}
 
-const WelcomeScreen: React.FunctionComponent<WelcomeScreenProps> = () => {
-  const appVersion = getAppVersion();
+function WelcomeScreen({ appVersion }: WelcomeScreenProps): JSX.Element {
   const [recentList, setRecentList] = React.useState<RecentLocation[]>([]);
 
   React.useEffect(() => {
@@ -92,7 +94,7 @@ const WelcomeScreen: React.FunctionComponent<WelcomeScreenProps> = () => {
       </RecentPane>
     </Container>
   );
-};
+}
 
 export default WelcomeScreen;
 export { WelcomeScreenProps };

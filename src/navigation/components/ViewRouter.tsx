@@ -1,10 +1,10 @@
 import React from 'react';
 import View from '../domain/view';
 import useNavigation from '../state/use-navigation';
-import { LibraryView } from '../../library';
-import { MapView } from '../../map';
+import LibraryView from '../../library/components/LibraryView';
+import MapView from '../../map/components/MapView';
 
-function ViewRouter() {
+function ViewRouter(): JSX.Element {
   const { currentView } = useNavigation();
 
   switch (currentView) {

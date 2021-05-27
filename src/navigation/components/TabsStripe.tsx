@@ -9,7 +9,7 @@ interface TabsStripeProps {
   onTabChange: (nextView: View) => void;
 }
 
-function TabsStripe({ currentView, extended = false, onTabChange }: TabsStripeProps) {
+function TabsStripe({ currentView, extended = false, onTabChange }: TabsStripeProps): JSX.Element {
   const tabs = [
     {
       name: 'library',

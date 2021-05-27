@@ -1,13 +1,14 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { ipcRenderer } from 'electron';
 import { AppContext, createAppContext } from '../app-context';
-import { IPC_LOAD_CATALOGUE_CHANNEL, IpcLoadCatalogueData } from '../../welcome-screen';
-import * as Logger from '../../logger';
+import { IPC_LOAD_CATALOGUE_CHANNEL, IpcLoadCatalogueData } from '../../welcome-screen/services/ipc-load-catalogue';
+import Logger from '../logger';
 
 const Context = React.createContext<AppContext|null>(null);
 
 interface AppContextProviderProps {}
-const AppContextProvider: React.FunctionComponent<AppContextProviderProps> = (props) => {
+
+function AppContextProvider(props: AppContextProviderProps): JSX.Element {
   const [context, setContext] = useState<AppContext|null>(null);
 
   useEffect(() => {
@@ -22,9 +23,9 @@ const AppContextProvider: React.FunctionComponent<AppContextProviderProps> = (pr
   return context
     ? <Context.Provider value={context} {...props} /> // eslint-disable-line react/jsx-props-no-spreading, max-len
     : null;
-};
+}
 
-function useAppContext() : AppContext {
+function useAppContext(): AppContext {
   const context = useContext(Context);
   if (!context) {
     throw new Error("Cannot use AppContext before it's initialization");

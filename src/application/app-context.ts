@@ -1,8 +1,10 @@
 import path from 'path';
 import { promises as fsp } from 'fs';
-import { PastelogueClient } from '../pastelogue';
-import { LibraryRepository, LibraryService } from '../library';
-import * as Logger from '../logger';
+import PastelogueClient from '../pastelogue/pastelogue-client';
+import LibraryRepository from '../library/library-repository';
+import LibraryService from '../library/library-service';
+import Logger from './logger';
+import AppService from './app-service';
 
 interface AppContext {
   paths: AppContextPaths,
@@ -17,7 +19,7 @@ interface AppContextPaths {
   thumbnails: string,
 }
 
-async function createAppContext(libraryPath: string) : Promise<AppContext> {
+async function createAppContext(libraryPath: string): Promise<AppContext> {
   Logger.info('Creating application context');
 
   // Create AppContextPaths
@@ -32,12 +34,13 @@ async function createAppContext(libraryPath: string) : Promise<AppContext> {
   fsp.mkdir(paths.libraryWorkingDirectoryPath, { recursive: true });
   fsp.mkdir(paths.thumbnails, { recursive: true });
 
+  // Create and spawn pastelogue client
+  const pastelogueServerPath = await AppService.getNativeBinaryPath(['pastelogue', 'pastelogue_server']);
+  const pastelogue = new PastelogueClient(pastelogueServerPath);
+
   // Create library and library-service
   const libraryRepository = new LibraryRepository(libraryWorkingDirectoryPath);
-  const libraryService = new LibraryService(libraryRepository, paths);
-
-  // Create and spawn pastelogue client
-  const pastelogue = new PastelogueClient();
+  const libraryService = new LibraryService(libraryRepository, paths, pastelogue);
 
   // Create app context
   const appContext: AppContext = {
@@ -50,13 +53,8 @@ async function createAppContext(libraryPath: string) : Promise<AppContext> {
   // Load library database
   await appContext.libraryRepository.load();
 
-  // Kick off initial processing
-  appContext.pastelogue.processingProgress().subscribe(async (progressInfo) => {
-    await appContext.libraryService.addMediaItemFromProgressPayload(progressInfo);
-  });
-  appContext.pastelogue.startProcessing(libraryPath);
-
   return appContext;
 }
 
+export { useAppContext } from './components/AppContextProvider';
 export { AppContext, AppContextPaths, createAppContext };

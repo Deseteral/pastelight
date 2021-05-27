@@ -1,41 +1,39 @@
 import * as React from 'react';
-import { filter } from 'rxjs/operators';
-import { useAppContext } from '../../application';
-import * as Pastelogue from '../../pastelogue';
+import { useAppContext } from '../../application/app-context';
 import { MediaItemsGroup, MediaItemGroupPosition } from '../media-items-group';
 import FullscreenItemView from './FullscreenItemView';
 import MediaItemGrid from './MediaItemGrid';
-import { useEventListener } from '../../utils';
+import useEventListener from '../../utils/use-event-listener';
 
 interface LibraryViewProps {}
-const LibraryView: React.FunctionComponent<LibraryViewProps> = () => {
+
+function LibraryView(): JSX.Element {
   const [itemGroups, setItemGroups] = React.useState<MediaItemsGroup[]>([]);
   const [fullscreenActive, setFullscreenActive] = React.useState<boolean>(false);
   const [fullscreenPosition, setFullscreenPosition] = React.useState<MediaItemGroupPosition>({ groupIndex: 0, itemIndex: 0 });
 
-  const context = useAppContext();
-
-  const getItemsFromLibrary = async () => {
-    const items: MediaItemsGroup[] = await context.libraryService.getAllMediaItemsGrouped();
-    setItemGroups(items);
-  };
+  const { libraryService } = useAppContext();
 
   React.useEffect(() => {
-    context.pastelogue.responses()
-      .pipe(filter(Pastelogue.isProcessingFinishedResponse))
-      .subscribe(() => getItemsFromLibrary());
-    // TODO: This thing above is actually not really good - it's going to fetch items after pastelogue finishes
-    //       processing - but that's too early. Instead it should do it after items are processed and added to library.
-    //       This is not a big deal right now and this mechanism will probably change sooner than later so 🤷‍♀️.
+    const getItemsFromLibrary = async (): Promise<void> => {
+      const items: MediaItemsGroup[] = await libraryService.getAllMediaItemsGrouped();
+      setItemGroups(items);
+    };
 
+    libraryService.onScanningFinished(() => getItemsFromLibrary());
+
+    // Kick off initial processing
+    setTimeout(() => { // TODO: "Selected" photos should live in a global app state, not here - setTimeout is a hack to overcome this
+      libraryService.startScanning();
+    }, 1000);
     getItemsFromLibrary();
-  }, []);
+  }, [libraryService]);
 
   useEventListener('keydown', (event) => {
     if (event.key === 'Escape') setFullscreenActive(false);
   });
 
-  const onItemClick = (selectedPosition: MediaItemGroupPosition) => {
+  const onItemClick = (selectedPosition: MediaItemGroupPosition): void => {
     setFullscreenPosition(selectedPosition);
     setFullscreenActive(true);
   };
@@ -53,7 +51,7 @@ const LibraryView: React.FunctionComponent<LibraryViewProps> = () => {
       />
     </>
   );
-};
+}
 
 export default LibraryView;
 export { LibraryViewProps };

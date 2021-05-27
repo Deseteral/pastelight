@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Text } from '../../elements';
+import Text from '../../elements/Text';
 import { RecentLocation } from '../services/recent-location-list';
 
 const EmptyListContainer = styled.div`
@@ -60,7 +60,7 @@ interface RecentListProps {
   onSelect: (selected: RecentLocation) => void;
 }
 
-const RecentList: React.FunctionComponent<RecentListProps> = ({ list, onSelect }) => {
+function RecentList({ list, onSelect }: RecentListProps): JSX.Element {
   if (list.length === 0) {
     return (
       <EmptyListContainer>
@@ -81,7 +81,7 @@ const RecentList: React.FunctionComponent<RecentListProps> = ({ list, onSelect }
       ))}
     </OrderedList>
   );
-};
+}
 
 export default RecentList;
 export { RecentListProps };

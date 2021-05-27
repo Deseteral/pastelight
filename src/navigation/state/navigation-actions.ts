@@ -5,14 +5,14 @@ interface NavigationAction {
   nextView: View;
 }
 
-function navigationReducer(state: View, action: NavigationAction) : View {
+function navigationReducer(state: View, action: NavigationAction): View {
   switch (action.type) {
     case 'VIEW_CHANGE': return action.nextView;
     default: return state;
   }
 }
 
-function viewChangeAction(nextView: View) : NavigationAction {
+function viewChangeAction(nextView: View): NavigationAction {
   return { type: 'VIEW_CHANGE', nextView };
 }
 

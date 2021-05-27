@@ -4,7 +4,8 @@ import mapboxgl from 'mapbox-gl';
 const MAPBOX_TOKEN = 'pk.eyJ1IjoiZGVzZXRlcmFsIiwiYSI6ImNrYmptOXJxbzBxcDYyeGw5ajN6bTM2cGMifQ.9Ysglm7PTSGLug9z5grXkQ';
 
 interface MapViewProps { }
-const MapView: React.FunctionComponent<MapViewProps> = () => {
+
+function MapView(): JSX.Element {
   const map = React.useRef<mapboxgl.Map | null>(null);
 
   React.useEffect(() => {
@@ -23,7 +24,7 @@ const MapView: React.FunctionComponent<MapViewProps> = () => {
       style={({ top: 0, bottom: 0, position: 'absolute', width: '100%' })}
     />
   );
-};
+}
 
 export default MapView;
 export { MapViewProps };

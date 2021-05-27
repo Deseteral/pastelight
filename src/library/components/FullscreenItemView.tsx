@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { MediaItemsGroup, MediaItemGroupPosition } from '../media-items-group';
 import { MediaItem } from '../media-item';
-import { useAppContext } from '../../application';
+import { useAppContext } from '../../application/app-context';
 import { toFullPath } from '../path-converter';
 
 const Container = styled.div<{ visible: boolean }>`
@@ -28,7 +28,8 @@ interface FullscreenItemViewProps {
   visible: boolean,
   position: MediaItemGroupPosition,
 }
-const FullscreenItemView: React.FunctionComponent<FullscreenItemViewProps> = ({ itemGroups, visible, position }) => {
+
+function FullscreenItemView({ itemGroups, visible, position }: FullscreenItemViewProps): JSX.Element {
   const context = useAppContext();
   const currentItem: MediaItem = itemGroups[position.groupIndex]?.items[position.itemIndex];
 
@@ -36,10 +37,10 @@ const FullscreenItemView: React.FunctionComponent<FullscreenItemViewProps> = ({ 
 
   return (
     <Container visible={visible}>
-      <Image src={toFullPath(currentItem.relativePath, context.paths)} />
+      <Image src={`file://${toFullPath(currentItem.relativePath, context.paths)}`} />
     </Container>
   );
-};
+}
 
 export default FullscreenItemView;
 export { FullscreenItemViewProps };

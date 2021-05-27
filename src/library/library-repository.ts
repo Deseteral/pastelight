@@ -1,10 +1,10 @@
+import Logger from '@pastelight/application/logger';
 import Datastore from 'nedb';
 import { join as pathJoin } from 'path';
-import * as Logger from '../logger';
 import { MediaItem } from './media-item';
 
 // TODO: Move this function outside of this module
-function guardError(err: Error, reject: (err: Error) => void) : boolean {
+function guardError(err: Error, reject: (err: Error) => void): boolean {
   if (err) {
     reject(err);
     return true;
@@ -22,7 +22,7 @@ class LibraryRepository {
     this.db = new Datastore<MediaItem>({ filename: databaseFilePath });
   }
 
-  load() : Promise<void> {
+  load(): Promise<void> {
     return new Promise((resolve, reject) => {
       this.db.loadDatabase((err) => {
         if (guardError(err, reject)) return; // TODO: Handle errors
@@ -31,7 +31,7 @@ class LibraryRepository {
     });
   }
 
-  async addNewItem(item: MediaItem) : Promise<void> {
+  async addNewItem(item: MediaItem): Promise<void> {
     const isItemSaved = await this.findItemByPath(item.relativePath);
     if (!isItemSaved) {
       await this.insert(item);
@@ -39,15 +39,15 @@ class LibraryRepository {
     }
   }
 
-  getAllItems() : Promise<MediaItem[]> {
+  getAllItems(): Promise<MediaItem[]> {
     return this.find({});
   }
 
-  findItemByPath(filePath: string) : Promise<MediaItem|null> {
+  findItemByPath(filePath: string): Promise<MediaItem|null> {
     return this.findOne({ relativePath: filePath });
   }
 
-  private insert(item: MediaItem) : Promise<void> {
+  private insert(item: MediaItem): Promise<void> {
     return new Promise((resolve, reject) => {
       this.db.insert(item, (err) => {
         if (guardError(err, reject)) return;
@@ -56,7 +56,7 @@ class LibraryRepository {
     });
   }
 
-  private find(query: any) : Promise<MediaItem[]> {
+  private find(query: any): Promise<MediaItem[]> {
     return new Promise((resolve, reject) => {
       this.db.find(query, (err: Error, items: MediaItem[]) => {
         if (guardError(err, reject)) return;
@@ -65,7 +65,7 @@ class LibraryRepository {
     });
   }
 
-  private findOne(query: any) : Promise<MediaItem|null> {
+  private findOne(query: any): Promise<MediaItem|null> {
     return new Promise((resolve, reject) => {
       this.db.findOne(query, (err: Error, item: (MediaItem|null)) => {
         if (guardError(err, reject)) return;
@@ -75,4 +75,4 @@ class LibraryRepository {
   }
 }
 
-export { LibraryRepository };
+export default LibraryRepository;

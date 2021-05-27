@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { MediaItem } from '../media-item';
-import { useAppContext } from '../../application';
+import { useAppContext } from '../../application/app-context';
 import { relativeToThumbnailPath } from '../path-converter';
 
 const Image = styled.img`
@@ -15,13 +15,15 @@ interface ThumbnailCellProps {
   item: MediaItem,
   onClick: () => void,
 }
-const ThumbnailCell: React.FunctionComponent<ThumbnailCellProps> = ({ item, onClick }) => {
+
+function ThumbnailCell({ item, onClick }: ThumbnailCellProps): JSX.Element {
   const context = useAppContext();
   const path = relativeToThumbnailPath(item.relativePath, context.paths);
+
   return (
-    <Image src={path} onClick={onClick} />
+    <Image src={`file://${path}`} onClick={onClick} />
   );
-};
+}
 
 export default ThumbnailCell;
 export { ThumbnailCellProps };

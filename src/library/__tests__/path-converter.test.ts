@@ -1,5 +1,5 @@
 import { toRelativePath, toFullPath, relativeToThumbnailPath, pathToThumbnailPath } from '../path-converter';
-import { AppContextPaths } from '../../application';
+import { AppContextPaths } from '../../application/app-context';
 
 describe('Library file path converter', () => {
   const paths: AppContextPaths = {

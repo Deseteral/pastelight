@@ -1,32 +1,31 @@
 import React, { useEffect, useState } from 'react';
-import { Notification } from '../../elements';
-import { useAppContext } from '../../application';
+import Notification from '../../elements/Notification';
+import { useAppContext } from '../../application/app-context';
 
-interface LibraryProcessingNotificationProps { }
-const LibraryProcessingNotification: React.FunctionComponent<LibraryProcessingNotificationProps> = () => {
-  const context = useAppContext();
+interface LibraryProcessingNotificationProps {}
+
+function LibraryProcessingNotification(): JSX.Element {
+  const { libraryService } = useAppContext();
   const [visible, setVisible] = useState<boolean>(false);
   const [currentValue, setCurrentValue] = useState<number>(0);
   const [totalValue, setTotalValue] = useState<number>(0);
 
   useEffect(() => {
-    context.pastelogue.responses().subscribe(async (response) => {
-      if (response.id === 'PROCESSING_STARTED') setVisible(true);
-      if (response.id === 'PROCESSING_FINISHED') setVisible(false);
-      if (response.id === 'PROCESSING_PROGRESS') {
-        const { current, total } = response.payload.progress;
-        setCurrentValue(current);
-        setTotalValue(total);
-      }
+    libraryService.onScanningStarted(() => setVisible(true));
+    libraryService.onScanningItemAdded((progress) => {
+      const { current, total } = progress;
+      setCurrentValue(current);
+      setTotalValue(total);
     });
-  }, []);
+    libraryService.onScanningFinished(() => setVisible(false));
+  }, [libraryService]);
 
   return (
     <Notification visible={visible} progressPercent={(currentValue / totalValue)}>
       Processing photos {currentValue}/{totalValue}
     </Notification>
   );
-};
+}
 
 export default LibraryProcessingNotification;
 export { LibraryProcessingNotificationProps };

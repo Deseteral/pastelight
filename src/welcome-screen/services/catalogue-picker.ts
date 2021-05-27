@@ -1,14 +1,16 @@
-import { remote, OpenDialogOptions } from 'electron';
+import { OpenDialogOptions } from 'electron';
 import { promises as fsp } from 'fs';
+import AppService from '../../application/app-service';
 import * as RecentLocationListService from './recent-location-list';
 import { ipcSendLoadCatalogue } from './ipc-load-catalogue';
+import DialogService from '../../application/dialog-service';
 
 interface ValidationResult {
   valid: boolean;
   message?: string;
 }
 
-async function isValidPath(potentialPath: string) : Promise<ValidationResult> {
+async function isValidPath(potentialPath: string): Promise<ValidationResult> {
   try {
     const stats = await fsp.stat(potentialPath);
     return stats.isDirectory()
@@ -20,27 +22,23 @@ async function isValidPath(potentialPath: string) : Promise<ValidationResult> {
 }
 
 async function openCataloguePicker(): Promise<string | null> {
-  const { dialog } = remote;
   const options: OpenDialogOptions = {
     title: 'Pick photo catalogue',
     properties: ['openDirectory', 'createDirectory'],
   };
 
-  remote.getCurrentWindow().hide();
-  const result = await dialog.showOpenDialog(options);
-  remote.getCurrentWindow().show();
+  AppService.hideCurrentWindow();
+  const result = await DialogService.showOpenDialog(options);
+  AppService.showCurrentWindow();
 
   return result.canceled ? null : result.filePaths[0];
 }
 
-async function loadFromPath(cataloguePath: string) : Promise<void> {
+async function loadFromPath(cataloguePath: string): Promise<void> {
   const validationResult = await isValidPath(cataloguePath);
 
   if (!validationResult.valid) {
-    remote.dialog.showErrorBox(
-      'Cannot open photo catalogue',
-      validationResult.message as string,
-    );
+    DialogService.showErrorBox('Cannot open photo catalogue', validationResult.message as string);
     return;
   }
 
@@ -48,7 +46,7 @@ async function loadFromPath(cataloguePath: string) : Promise<void> {
   RecentLocationListService.addNewLocationFromPath(cataloguePath);
 }
 
-async function loadFromPicker() {
+async function loadFromPicker(): Promise<void> {
   const pickerPath = await openCataloguePicker();
   if (pickerPath) {
     await loadFromPath(pickerPath);

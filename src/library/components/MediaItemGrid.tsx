@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import ItemsGroup from './ItemsGroup';
 import { MediaItemsGroup, MediaItemGroupPosition } from '../media-items-group';
-import { useEventListener } from '../../utils';
+import useEventListener from '../../utils/use-event-listener';
 
 const ContainerWrapper = styled.div`
   padding: 0 32px;
@@ -15,10 +15,11 @@ interface MediaItemGridProps {
   itemGroups: MediaItemsGroup[],
   onItemClick: (selectedPosition: MediaItemGroupPosition) => void,
 }
-const MediaItemGrid: React.FunctionComponent<MediaItemGridProps> = ({ itemGroups, onItemClick }) => {
+
+function MediaItemGrid({ itemGroups, onItemClick }: MediaItemGridProps): JSX.Element {
   const containerElement = React.useRef<HTMLDivElement>(null);
 
-  const onResize = () => {
+  const onResize = (): void => {
     if (!containerElement.current) return;
     const ITEMS_IN_ROW = 5;
     const nextGridSize = Math.floor(containerElement.current.clientWidth / ITEMS_IN_ROW);
@@ -38,7 +39,7 @@ const MediaItemGrid: React.FunctionComponent<MediaItemGridProps> = ({ itemGroups
       </Container>
     </ContainerWrapper>
   );
-};
+}
 
 export default MediaItemGrid;
 export { MediaItemGridProps };
