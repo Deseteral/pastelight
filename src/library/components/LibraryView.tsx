@@ -23,9 +23,10 @@ function LibraryView(): JSX.Element {
     libraryService.onScanningFinished(() => getItemsFromLibrary());
 
     // Kick off initial processing
-    setTimeout(() => { // TODO: "Selected" photos should live in a global app state, not here - setTimeout is a hack to overcome this
-      libraryService.startScanning();
-    }, 1000);
+    // TODO: Fix library processing!
+    // setTimeout(() => { // TODO: "Selected" photos should live in a global app state, not here - setTimeout is a hack to overcome this
+    //   libraryService.startScanning();
+    // }, 1000);
     getItemsFromLibrary();
   }, [libraryService]);
 
