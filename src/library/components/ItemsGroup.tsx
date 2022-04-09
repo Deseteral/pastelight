@@ -1,8 +1,8 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { MediaItemsGroup, MediaItemGroupPosition } from '../media-items-group';
-import ThumbnailCell from './ThumbnailCell';
-import Text from '../../elements/Text';
+import { ThumbnailCell } from './ThumbnailCell';
+import { Text } from '../../elements/Text';
 
 const Container = styled.div`
   margin-bottom: 16px;
@@ -37,5 +37,4 @@ function ItemsGroup({ group, groupIndex, onItemClick }: ItemsGroupProps): JSX.El
   );
 }
 
-export default ItemsGroup;
-export { ItemsGroupProps };
+export { ItemsGroup, ItemsGroupProps };

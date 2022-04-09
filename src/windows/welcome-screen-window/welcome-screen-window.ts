@@ -1,5 +1,5 @@
 import { BrowserWindow, app, BrowserWindowConstructorOptions } from 'electron';
-import AppService from '../../application/app-service';
+import { AppService } from '../../application/app-service';
 
 declare const WELCOME_SCREEN_WINDOW_WEBPACK_ENTRY: any;
 
@@ -46,4 +46,4 @@ async function createWelcomeScreenWindow(): Promise<BrowserWindow> {
   return welcomeScreenWindow;
 }
 
-export default createWelcomeScreenWindow;
+export { createWelcomeScreenWindow };

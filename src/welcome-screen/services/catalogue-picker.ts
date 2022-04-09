@@ -1,9 +1,9 @@
 import { OpenDialogOptions } from 'electron';
 import { promises as fsp } from 'fs';
-import AppService from '../../application/app-service';
+import { AppService } from '../../application/app-service';
 import * as RecentLocationListService from './recent-location-list';
 import { ipcSendLoadCatalogue } from './ipc-load-catalogue';
-import DialogService from '../../application/dialog-service';
+import { DialogService } from '../../application/dialog-service';
 
 interface ValidationResult {
   valid: boolean;

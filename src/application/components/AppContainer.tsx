@@ -1,11 +1,11 @@
 import 'mapbox-gl/dist/mapbox-gl.css';
 import React from 'react';
 import styled, { StyleSheetManager } from 'styled-components';
-import NavigationProvider from '../../navigation/state/NavigationProvider';
-import NavigationBar from '../../navigation/components/NavigationBar';
-import AppContextProvider from './AppContextProvider';
-import LibraryProcessingNotification from '../../library/components/LibraryProcessingNotification';
-import ViewRouter from '../../navigation/components/ViewRouter';
+import { NavigationProvider } from '../../navigation/state/NavigationProvider';
+import { NavigationBar } from '../../navigation/components/NavigationBar';
+import { AppContextProvider } from './AppContextProvider';
+import { LibraryProcessingNotification } from '../../library/components/LibraryProcessingNotification';
+import { ViewRouter } from '../../navigation/components/ViewRouter';
 
 const ContentContainer = styled.div`
   display: flex;
@@ -31,5 +31,4 @@ function AppContainer(): JSX.Element {
   );
 }
 
-export default AppContainer;
-export { AppContainerProps };
+export { AppContainer, AppContainerProps };

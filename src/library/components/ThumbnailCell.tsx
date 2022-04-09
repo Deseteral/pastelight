@@ -25,5 +25,4 @@ function ThumbnailCell({ item, onClick }: ThumbnailCellProps): JSX.Element {
   );
 }
 
-export default ThumbnailCell;
-export { ThumbnailCellProps };
+export { ThumbnailCell, ThumbnailCellProps };

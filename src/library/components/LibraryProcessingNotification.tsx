@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Notification from '../../elements/Notification';
+import { Notification } from '../../elements/Notification';
 import { useAppContext } from '../../application/app-context';
 
 interface LibraryProcessingNotificationProps {}
@@ -27,5 +27,4 @@ function LibraryProcessingNotification(): JSX.Element {
   );
 }
 
-export default LibraryProcessingNotification;
-export { LibraryProcessingNotificationProps };
+export { LibraryProcessingNotification, LibraryProcessingNotificationProps };

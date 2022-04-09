@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import TabsStripe from './TabsStripe';
-import View from '../domain/view';
-import useNavigation from '../state/use-navigation';
+import { TabsStripe } from './TabsStripe';
+import { View } from '../domain/view';
+import { useNavigation } from '../state/use-navigation';
 
 interface PanelContainerProps {
   extended: boolean;
@@ -37,4 +37,4 @@ function NavigationBar(): JSX.Element {
   );
 }
 
-export default NavigationBar;
+export { NavigationBar };

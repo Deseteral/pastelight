@@ -1,9 +1,9 @@
 import { app, ipcMain } from 'electron';
-import createAppWindow from './windows/app-window/app-window';
-import createWelcomeScreenWindow from './windows/welcome-screen-window/welcome-screen-window';
+import { createAppWindow } from './windows/app-window/app-window';
+import { createWelcomeScreenWindow } from './windows/welcome-screen-window/welcome-screen-window';
 import { IPC_LOAD_CATALOGUE_CHANNEL, IpcLoadCatalogueData } from './welcome-screen/services/ipc-load-catalogue';
-import DialogService from './application/dialog-service';
-import AppService from './application/app-service';
+import { DialogService } from './application/dialog-service';
+import { AppService } from './application/app-service';
 
 app.on('ready', async () => {
   const welcomeScreenWindow = await createWelcomeScreenWindow();

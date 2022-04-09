@@ -68,7 +68,7 @@ abstract class AppService {
   }
 }
 
-export default AppService;
 export {
+  AppService,
   Platform,
 };

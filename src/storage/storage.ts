@@ -51,4 +51,4 @@ class Storage { // TODO: Rename and move to application module
   }
 }
 
-export default Storage;
+export { Storage };

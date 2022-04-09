@@ -7,4 +7,4 @@ const TabsStripeContainer = styled.div`
   border-radius: 4px;
 `;
 
-export default TabsStripeContainer;
+export { TabsStripeContainer };

@@ -2,7 +2,7 @@ import os from 'os';
 import fs from 'fs';
 import path from 'path';
 import rimraf from 'rimraf';
-import Storage from '../storage';
+import { Storage } from '../storage';
 
 describe('Storage', () => {
   const storagePath = path.resolve(os.tmpdir());

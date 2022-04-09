@@ -1,4 +1,4 @@
-import Logger from '@pastelight/application/logger';
+import { Logger } from '@pastelight/application/logger';
 import Datastore from 'nedb';
 import { join as pathJoin } from 'path';
 import { MediaItem } from './media-item';
@@ -75,4 +75,4 @@ class LibraryRepository {
   }
 }
 
-export default LibraryRepository;
+export { LibraryRepository };

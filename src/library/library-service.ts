@@ -1,13 +1,13 @@
 import EventEmitter from 'events';
 import { MediaItem } from './media-item';
-import ThumbnailerService from '../thumbnailer/thumbnailer-service';
-import LibraryRepository from './library-repository';
+import { ThumbnailerService } from '../thumbnailer/thumbnailer-service';
+import { LibraryRepository } from './library-repository';
 import { AppContextPaths } from '../application/app-context';
 import { toRelativePath } from './path-converter';
 import * as MediaItemGrouper from './media-item-grouper';
 import { MediaItemsGroup } from './media-items-group';
 import { ProgressPayload } from '../pastelogue/model';
-import PastelogueClient from '../pastelogue/pastelogue-client';
+import { PastelogueClient } from '../pastelogue/pastelogue-client';
 
 const SCANNING_STARTED_EVENT = 'SCANNING_STARTED';
 const SCANNING_FINISHED_EVENT = 'SCANNING_FINISHED';
@@ -91,4 +91,4 @@ class LibraryService {
   }
 }
 
-export default LibraryService;
+export { LibraryService };

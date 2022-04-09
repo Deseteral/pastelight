@@ -1,5 +1,5 @@
 import path from 'path';
-import Storage from '../../storage/storage';
+import { Storage } from '../../storage/storage';
 
 const DATA_KEY = 'recentLocations';
 

@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { useAppContext } from '../../application/app-context';
 import { MediaItemsGroup, MediaItemGroupPosition } from '../media-items-group';
-import FullscreenItemView from './FullscreenItemView';
-import MediaItemGrid from './MediaItemGrid';
-import useEventListener from '../../utils/use-event-listener';
+import { FullscreenItemView } from './FullscreenItemView';
+import { MediaItemGrid } from './MediaItemGrid';
+import { useEventListener } from '../../utils/use-event-listener';
 
 interface LibraryViewProps {}
 
@@ -54,5 +54,4 @@ function LibraryView(): JSX.Element {
   );
 }
 
-export default LibraryView;
-export { LibraryViewProps };
+export { LibraryView, LibraryViewProps };
