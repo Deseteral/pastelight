@@ -1,10 +1,10 @@
 import path from 'path';
 import { promises as fsp } from 'fs';
-import PastelogueClient from '../pastelogue/pastelogue-client';
-import LibraryRepository from '../library/library-repository';
-import LibraryService from '../library/library-service';
-import Logger from './logger';
-import AppService from './app-service';
+import { PastelogueClient } from '../pastelogue/pastelogue-client';
+import { LibraryRepository } from '../library/library-repository';
+import { LibraryService } from '../library/library-service';
+import { Logger } from './logger';
+import { AppService } from './app-service';
 
 interface AppContext {
   paths: AppContextPaths,

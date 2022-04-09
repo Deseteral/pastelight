@@ -17,5 +17,4 @@ const Text = styled.div<TextProps>`
   transition: color .3s ease-in-out;
 `;
 
-export default Text;
-export { TextProps };
+export { Text, TextProps };

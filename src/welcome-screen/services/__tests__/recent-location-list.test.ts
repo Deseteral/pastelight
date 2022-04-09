@@ -1,5 +1,5 @@
 import os from 'os';
-import Storage from '../../../storage/storage';
+import { Storage } from '../../../storage/storage';
 import * as RecentLocationListService from '../recent-location-list';
 
 describe('Recent location list service', () => {

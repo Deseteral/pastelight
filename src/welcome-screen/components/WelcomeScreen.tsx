@@ -1,11 +1,11 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import Button from '../../elements/Button';
-import Text from '../../elements/Text';
-import RecentList from './RecentList';
+import { Button } from '../../elements/Button';
+import { Text } from '../../elements/Text';
+import { RecentList } from './RecentList';
 import { RecentLocation, getRecentLocationList } from '../services/recent-location-list';
 import { loadFromPath, loadFromPicker } from '../services/catalogue-picker';
-import AppService from '../../application/app-service';
+import { AppService } from '../../application/app-service';
 
 const Container = styled.div`
   -webkit-app-region: drag;
@@ -96,5 +96,4 @@ function WelcomeScreen({ appVersion }: WelcomeScreenProps): JSX.Element {
   );
 }
 
-export default WelcomeScreen;
-export { WelcomeScreenProps };
+export { WelcomeScreen, WelcomeScreenProps };

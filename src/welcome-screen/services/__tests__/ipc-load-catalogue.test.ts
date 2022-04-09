@@ -12,7 +12,8 @@ describe('IPC load catalogue service', () => {
     // then
     expect(electron.ipcRenderer.send).toHaveBeenCalledTimes(1);
     expect(electron.ipcRenderer.send).toHaveBeenCalledWith(
-      'welcome-screen/load-catalogue', { path },
+      'welcome-screen/load-catalogue',
+      { path },
     );
   });
 });

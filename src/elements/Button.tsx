@@ -35,5 +35,4 @@ const Button = styled.button.attrs((props: ButtonProps) => ({
   }
 `;
 
-export default Button;
-export { ButtonProps };
+export { Button, ButtonProps };

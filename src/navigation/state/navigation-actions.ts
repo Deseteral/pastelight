@@ -1,4 +1,4 @@
-import View from '../domain/view';
+import { View } from '../domain/view';
 
 interface NavigationAction {
   type: string;

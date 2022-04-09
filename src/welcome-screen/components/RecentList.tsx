@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import Text from '../../elements/Text';
+import { Text } from '../../elements/Text';
 import { RecentLocation } from '../services/recent-location-list';
 
 const EmptyListContainer = styled.div`
@@ -83,5 +83,4 @@ function RecentList({ list, onSelect }: RecentListProps): JSX.Element {
   );
 }
 
-export default RecentList;
-export { RecentListProps };
+export { RecentList, RecentListProps };

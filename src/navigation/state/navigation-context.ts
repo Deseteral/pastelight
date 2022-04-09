@@ -1,5 +1,5 @@
 import React, { Dispatch } from 'react';
-import View from '../domain/view';
+import { View } from '../domain/view';
 import { NavigationAction } from './navigation-actions';
 
 const INITIAL_STATE = View.LIBRARY;
@@ -14,5 +14,4 @@ const NavigationContext = React.createContext<NavigationContextT>({
   dispatch: (_: NavigationAction) => {},
 });
 
-export default NavigationContext;
-export { INITIAL_STATE };
+export { INITIAL_STATE, NavigationContext };

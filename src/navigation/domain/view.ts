@@ -3,4 +3,4 @@ enum View {
   MAP = 'MAP',
 }
 
-export default View;
+export { View };

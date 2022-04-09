@@ -26,5 +26,4 @@ function MapView(): JSX.Element {
   );
 }
 
-export default MapView;
-export { MapViewProps };
+export { MapView, MapViewProps };

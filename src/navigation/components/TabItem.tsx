@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import TabsStripeContainer from './TabsStripeContainer';
+import { TabsStripeContainer } from './TabsStripeContainer';
 
 interface TabItemProps {
   active: boolean;
@@ -25,7 +25,7 @@ const TabItem = styled.div`
   }
 `;
 
-export default TabItem;
 export {
+  TabItem,
   TabItemProps,
 };

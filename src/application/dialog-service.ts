@@ -18,4 +18,4 @@ class DialogService {
   }
 }
 
-export default DialogService;
+export { DialogService };

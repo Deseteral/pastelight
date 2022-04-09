@@ -22,4 +22,4 @@ class ThumbnailerService {
   }
 }
 
-export default ThumbnailerService;
+export { ThumbnailerService };

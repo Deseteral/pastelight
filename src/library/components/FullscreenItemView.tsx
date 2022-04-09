@@ -42,5 +42,4 @@ function FullscreenItemView({ itemGroups, visible, position }: FullscreenItemVie
   );
 }
 
-export default FullscreenItemView;
-export { FullscreenItemViewProps };
+export { FullscreenItemView, FullscreenItemViewProps };

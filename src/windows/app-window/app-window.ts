@@ -1,5 +1,5 @@
 import { BrowserWindow, app } from 'electron';
-import AppService from '../../application/app-service';
+import { AppService } from '../../application/app-service';
 
 declare const APP_WINDOW_WEBPACK_ENTRY: any;
 
@@ -34,4 +34,4 @@ async function createAppWindow(): Promise<BrowserWindow> {
   return appWindow;
 }
 
-export default createAppWindow;
+export { createAppWindow };

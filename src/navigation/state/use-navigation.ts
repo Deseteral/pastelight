@@ -1,7 +1,7 @@
 import React from 'react';
-import View from '../domain/view';
+import { View } from '../domain/view';
 import { viewChangeAction } from './navigation-actions';
-import NavigationContext from './navigation-context';
+import { NavigationContext } from './navigation-context';
 
 type UseNavigationReturnType = ({ currentView: View, changeView: (view: View) => void });
 
@@ -18,4 +18,4 @@ function useNavigation(): UseNavigationReturnType {
   };
 }
 
-export default useNavigation;
+export { useNavigation };

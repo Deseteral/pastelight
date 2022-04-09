@@ -1,7 +1,7 @@
 import React from 'react';
-import TabItem from './TabItem';
-import View from '../domain/view';
-import TabsStripeContainer from './TabsStripeContainer';
+import { TabItem } from './TabItem';
+import { View } from '../domain/view';
+import { TabsStripeContainer } from './TabsStripeContainer';
 
 interface TabsStripeProps {
   extended: boolean;
@@ -36,4 +36,4 @@ function TabsStripe({ currentView, extended = false, onTabChange }: TabsStripePr
   );
 }
 
-export default TabsStripe;
+export { TabsStripe };

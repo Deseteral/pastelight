@@ -67,5 +67,4 @@ Notification.defaultProps = {
   progressPercent: 0,
 };
 
-export default Notification;
-export { NotificationProps };
+export { Notification, NotificationProps };
