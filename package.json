@@ -18,10 +18,10 @@
     "test:unit": "node ./config/run-unit-tests.js",
     "test:lint": "eslint . --ext js,jsx,ts,tsx",
     "test:type-check": "tsc --noEmit",
-    "test:type-check:watch": "tsc --noEmit -w",
-    "install": "node ./config/install-native-binaries.js"
+    "test:type-check:watch": "tsc --noEmit -w"
   },
   "dependencies": {
+    "@mcmics/dist-exiftool": "12.40.0",
     "jimp": "0.16.1",
     "mapbox-gl": "1.11.0",
     "nedb": "1.8.0",
@@ -59,9 +59,6 @@
     "ts-jest": "27.1.4",
     "ts-loader": "9.2.8",
     "typescript": "4.6.3"
-  },
-  "nativeDependencies": {
-    "pastelogue": "0.5.0"
   },
   "config": {
     "forge": {
