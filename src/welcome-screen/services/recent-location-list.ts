@@ -38,5 +38,4 @@ async function addNewLocationFromPath(nextPath: string): Promise<void> {
   await setRecentLocationList(newList);
 }
 
-export { getRecentLocationList, addNewLocationFromPath };
-export { RecentLocation };
+export { RecentLocation, getRecentLocationList, addNewLocationFromPath };
